@@ -1,0 +1,3 @@
+before(async () => {
+    // global before
+});

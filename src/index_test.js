@@ -1,0 +1,6 @@
+"use strict";
+require('./test_helpers/global_before');
+require('./test_helpers/global_after');
+var testsContext = require.context(".", true, /\.test$/);
+testsContext.keys().forEach(testsContext);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXhfdGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImluZGV4X3Rlc3QudHN4Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLENBQUMsOEJBQThCLENBQUMsQ0FBQztBQUN4QyxPQUFPLENBQUMsNkJBQTZCLENBQUMsQ0FBQztBQUV2QyxJQUFNLFlBQVksR0FBRyxPQUFPLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxJQUFJLEVBQUUsU0FBUyxDQUFDLENBQUM7QUFDM0QsWUFBWSxDQUFDLElBQUksRUFBRSxDQUFDLE9BQU8sQ0FBQyxZQUFZLENBQUMsQ0FBQyJ9
