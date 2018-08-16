@@ -1,0 +1,11 @@
+/* HeaderComponent.scss */
+@import "../../../static/styles/variables";
+
+.HeaderComponent {
+    margin-bottom: 48px;
+
+    h1 {
+        text-align: center;
+        color: $yellow;
+    }
+}

@@ -1,6 +1,7 @@
 require('./IndexRoute.css');
 
 import * as React from 'react';
+import { HeaderComponent } from '../../components/header/HeaderComponent';
 
 import { IndexRouteProps } from './IndexRouteProps';
 import { IndexRouteState } from './IndexRouteState';
@@ -15,9 +16,7 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
     public render() {
         return (
             <div className='container IndexRoute'>
-                <div className='header'>
-                    <h1>Star Wars API Explorer</h1>
-                </div>
+                <HeaderComponent />
 
                 <div className='main'>
                     <div className='row'>
@@ -52,10 +51,6 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div className='footer'>
-
                 </div>
             </div>
         );

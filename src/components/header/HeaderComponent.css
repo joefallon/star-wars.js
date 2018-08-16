@@ -1,0 +1,10 @@
+/* HeaderComponent.scss */
+/* _variables.scss */
+.HeaderComponent {
+    margin-bottom: 48px;
+}
+
+.HeaderComponent h1 {
+    text-align: center;
+    color: #F0E31E;
+}
