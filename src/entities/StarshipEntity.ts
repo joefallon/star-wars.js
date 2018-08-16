@@ -1,0 +1,1 @@
+/* StarshipEntity.ts */

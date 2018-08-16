@@ -1,0 +1,1 @@
+/* SpeciesEntity.ts */
