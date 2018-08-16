@@ -1,0 +1,14 @@
+/* IndexRoute.scss */
+/* _variables.scss */
+.IndexRoute .header {
+    margin-bottom: 48px;
+}
+
+.IndexRoute .header h1 {
+    text-align: center;
+    color: #F0E31E;
+}
+
+.IndexRoute .footer {
+    margin-bottom: 300px;
+}

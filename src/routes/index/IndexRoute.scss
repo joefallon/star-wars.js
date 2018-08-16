@@ -1,0 +1,17 @@
+/* IndexRoute.scss */
+@import "../../../static/styles/variables";
+
+.IndexRoute {
+    .header {
+        margin-bottom: 48px;
+
+        h1 {
+            text-align: center;
+            color: $yellow;
+        }
+    }
+
+    .footer {
+        margin-bottom: 300px;
+    }
+}

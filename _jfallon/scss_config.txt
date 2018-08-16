@@ -1,0 +1,1 @@
+--output-style expanded --indent-type space --indent-width 4 $FileName$ $FileNameWithoutExtension$.css

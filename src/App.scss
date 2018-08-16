@@ -1,0 +1,40 @@
+/* App.scss */
+@import "../static/styles/vendor/joestrap";
+@import "../static/styles/variables";
+
+body {
+    background-color: $black;
+}
+
+h1 {
+    color: $yellow;
+}
+
+.card {
+    border: 1px solid $black;
+    border-radius: 10px;
+    background-color: white;
+    padding: 16px;
+
+    h2 {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+}
+
+.card-header {
+    margin-bottom: 16px;
+}
+
+.card-body {
+
+}
+
+.card-actions {
+
+}
+
+.card-footer {
+
+}
