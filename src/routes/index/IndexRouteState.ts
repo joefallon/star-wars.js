@@ -1,3 +1,6 @@
+import { FilmEntity } from '../../entities/FilmEntity';
+
 export interface IndexRouteState {
-    isLoading: boolean
+    isLoading: boolean,
+    films:     FilmEntity[]
 }

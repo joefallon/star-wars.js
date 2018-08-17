@@ -3,23 +3,35 @@ require('./IndexRoute.css');
 import * as React from 'react';
 import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
+import { FilmEntity } from '../../entities/FilmEntity';
+import { IndexModel } from '../../models/IndexModel';
+import { IndexModelFactory } from '../../models/IndexModelFactory';
 
 import { IndexRouteProps } from './IndexRouteProps';
 import { IndexRouteState } from './IndexRouteState';
 
 class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
+    private _model: IndexModel;
 
     public constructor(props: IndexRouteProps) {
         super(props);
         this.state = {
-            isLoading: true
+            isLoading: true,
+            films:     []
         };
 
-        setTimeout(this.displayContent, 2000);
+        this._model = IndexModelFactory.create();
     }
 
-    public displayContent = () => {
-        this.setState({isLoading: false});
+    public async componentDidMount() {
+        try {
+            const films = await this._model.getFilms();
+            this.setState({isLoading: false, films: films});
+        }
+        catch(e) {
+            const err: Error = e;
+            console.log(err);
+        }
     };
 
     public render() {
@@ -45,24 +57,12 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
                                     <table className='table table-condensed'>
                                         <thead>
                                             <tr>
+                                                <th className='text-center'>Episode</th>
                                                 <th>Name</th>
-                                                <th>Year</th>
+                                                <th className='text-center'>Year</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><a href='#'>A New Hope</a></td>
-                                                <td>1979</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href='#'>A New Hope</a></td>
-                                                <td>1979</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href='#'>A New Hope</a></td>
-                                                <td>1979</td>
-                                            </tr>
-                                        </tbody>
+                                        <tbody>{ this.getEpisodes() }</tbody>
                                     </table>
                                 </div>
                             </div>
@@ -72,6 +72,27 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
             </div>
         );
     }
+
+    private getEpisodes = () => {
+        const films = this.state.films;
+
+        return (
+            films.map((film: FilmEntity) => {
+                const episodeId   = film.getEpisodeId();
+                const title       = film.getTitle();
+                const releaseDate = new Date(Date.parse(film.getReleaseDate()));
+                const year = releaseDate.getFullYear();
+
+                return (
+                    <tr>
+                        <td className='text-center'>{episodeId}</td>
+                        <td><a href='#'>{title}</a></td>
+                        <td className='text-center'>{year}</td>
+                    </tr>
+                );
+            })
+        );
+    };
 }
 
 export default IndexRoute;

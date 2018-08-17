@@ -9,7 +9,7 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         app: './src/index.js',
-        vendor: ['react', 'react-dom', 'react-router-dom']
+        vendor: ['react', 'react-dom', 'react-router-dom', 'react-table']
     },
     output: {
         path: path.resolve(__dirname, 'public'),

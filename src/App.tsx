@@ -3,6 +3,7 @@ require('./App.css');
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import Loadable  from 'react-loadable';
+import { IndexModelFactory } from './models/IndexModelFactory';
 
 // import { IndexRouteProps } from './routes/index/IndexRouteProps';
 // import { Route1Props } from './routes/route-1/Route1Props';
