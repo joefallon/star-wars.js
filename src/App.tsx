@@ -33,7 +33,7 @@ export class App extends React.Component {
     private renderIndex = (props: IndexRouteProps): JSX.Element => {
         const LoadableIndexRoute = Loadable({
             loader: () => import(/* webpackChunkName: "index-route" */'./routes/index/IndexRoute'),
-            loading: () => { return <div>Loading...</div>; },
+            loading: () => { return null; },
             delay: 300,
             timeout: 10000
         });

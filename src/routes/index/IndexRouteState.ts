@@ -1,1 +1,3 @@
-export interface IndexRouteState {}
+export interface IndexRouteState {
+    isLoading: boolean
+}

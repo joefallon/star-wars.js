@@ -1,7 +1,8 @@
 require('./IndexRoute.css');
 
 import * as React from 'react';
-import { HeaderComponent } from '../../components/header/HeaderComponent';
+import { Header } from '../../components/header/Header';
+import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 
 import { IndexRouteProps } from './IndexRouteProps';
 import { IndexRouteState } from './IndexRouteState';
@@ -10,13 +11,27 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
 
     public constructor(props: IndexRouteProps) {
         super(props);
-        this.state = {};
+        this.state = {
+            isLoading: true
+        };
+
+        setTimeout(this.displayContent, 2000);
     }
 
+    public displayContent = () => {
+        this.setState({isLoading: false});
+    };
+
     public render() {
+        if(this.state.isLoading) {
+            return (
+                <SpinLoader/>
+            );
+        }
+
         return (
             <div className='container IndexRoute'>
-                <HeaderComponent />
+                <Header />
 
                 <div className='main'>
                     <div className='row'>
@@ -29,8 +44,10 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
                                 <div className='table-responsive'>
                                     <table className='table table-condensed'>
                                         <thead>
-                                            <th>Name</th>
-                                            <th>Year</th>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Year</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
