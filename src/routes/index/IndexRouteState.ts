@@ -2,5 +2,6 @@ import { FilmEntity } from '../../entities/FilmEntity';
 
 export interface IndexRouteState {
     isLoading: boolean,
-    films:     FilmEntity[]
+    films:     FilmEntity[],
+    tableData: any[]
 }

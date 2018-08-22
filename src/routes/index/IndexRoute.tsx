@@ -1,6 +1,9 @@
 require('./IndexRoute.css');
+import 'react-table/react-table.css'
 
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+import ReactTable, { Column } from 'react-table';
 import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 import { FilmEntity } from '../../entities/FilmEntity';
@@ -17,7 +20,8 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
         super(props);
         this.state = {
             isLoading: true,
-            films:     []
+            films:     [],
+            tableData: []
         };
 
         this._model = IndexModelFactory.create();
@@ -25,8 +29,10 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
 
     public async componentDidMount() {
         try {
-            const films = await this._model.getFilms();
-            this.setState({isLoading: false, films: films});
+            const films     = await this._model.getFilms();
+            const tableData = this.makeTableData(films);
+            this.setState({isLoading: false, films: films, tableData: tableData});
+            console.log(tableData);
         }
         catch(e) {
             const err: Error = e;
@@ -34,12 +40,48 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
         }
     };
 
+    private makeTableData(films: FilmEntity[]): any[] {
+        const data = [];
+
+        films.map((film: FilmEntity) => {
+            const episodeId   = film.getEpisodeId();
+            const title       = film.getTitle();
+            const releaseDate = new Date(Date.parse(film.getReleaseDate()));
+            const year        = releaseDate.getFullYear();
+
+            data.push({
+                'episodeId': episodeId,
+                'title':     title,
+                'year':      year,
+                'filmUrl':   film.getUrl()
+            });
+        });
+
+        return data;
+    }
+
     public render() {
         if(this.state.isLoading) {
             return (
                 <SpinLoader/>
             );
         }
+
+        const columns: Column[]  = [
+            {
+                Header:   'Episode',
+                accessor: 'episodeId',
+                className: 'text-center'
+            }, {
+                Header:   'Title',
+                accessor: 'title',
+                Cell:     row => (<Link to={'/film/' + row['original']['episodeId']}>{row['value']}</Link>)
+            }, {
+                Header:   'Year',
+                accessor: 'year',
+                className: 'text-center'
+            }
+        ];
 
         return (
             <div className='container IndexRoute'>
@@ -53,18 +95,13 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
                             </div>
 
                             <div className='card-body'>
-                                <div className='table-responsive'>
-                                    <table className='table table-condensed'>
-                                        <thead>
-                                            <tr>
-                                                <th className='text-center'>Episode</th>
-                                                <th>Name</th>
-                                                <th className='text-center'>Year</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>{ this.getEpisodes() }</tbody>
-                                    </table>
-                                </div>
+                                <ReactTable data={this.state.tableData}
+                                            columns={columns}
+                                            showPagination={false}
+                                            minRows={0}
+                                            multiSort={false}
+                                            resizable={false}
+                                            className={'-striped -highlight'}/>
                             </div>
                         </div>
                     </div>
@@ -73,26 +110,6 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
         );
     }
 
-    private getEpisodes = () => {
-        const films = this.state.films;
-
-        return (
-            films.map((film: FilmEntity) => {
-                const episodeId   = film.getEpisodeId();
-                const title       = film.getTitle();
-                const releaseDate = new Date(Date.parse(film.getReleaseDate()));
-                const year = releaseDate.getFullYear();
-
-                return (
-                    <tr>
-                        <td className='text-center'>{episodeId}</td>
-                        <td><a href='#'>{title}</a></td>
-                        <td className='text-center'>{year}</td>
-                    </tr>
-                );
-            })
-        );
-    };
 }
 
 export default IndexRoute;

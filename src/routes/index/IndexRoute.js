@@ -44,7 +44,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 require('./IndexRoute.css');
+import 'react-table/react-table.css';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+import ReactTable from 'react-table';
 import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 import { IndexModelFactory } from '../../models/IndexModelFactory';
@@ -52,30 +55,17 @@ var IndexRoute = /** @class */ (function (_super) {
     __extends(IndexRoute, _super);
     function IndexRoute(props) {
         var _this = _super.call(this, props) || this;
-        _this.getEpisodes = function () {
-            var films = _this.state.films;
-            return (films.map(function (film) {
-                var episodeId = film.getEpisodeId();
-                var title = film.getTitle();
-                var releaseDate = new Date(Date.parse(film.getReleaseDate()));
-                var year = releaseDate.getFullYear();
-                return (React.createElement("tr", null,
-                    React.createElement("td", { className: 'text-center' }, episodeId),
-                    React.createElement("td", null,
-                        React.createElement("a", { href: '#' }, title)),
-                    React.createElement("td", { className: 'text-center' }, year)));
-            }));
-        };
         _this.state = {
             isLoading: true,
-            films: []
+            films: [],
+            tableData: []
         };
         _this._model = IndexModelFactory.create();
         return _this;
     }
     IndexRoute.prototype.componentDidMount = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var films, e_1, err;
+            var films, tableData, e_1, err;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -83,7 +73,9 @@ var IndexRoute = /** @class */ (function (_super) {
                         return [4 /*yield*/, this._model.getFilms()];
                     case 1:
                         films = _a.sent();
-                        this.setState({ isLoading: false, films: films });
+                        tableData = this.makeTableData(films);
+                        this.setState({ isLoading: false, films: films, tableData: tableData });
+                        console.log(tableData);
                         return [3 /*break*/, 3];
                     case 2:
                         e_1 = _a.sent();
@@ -96,10 +88,41 @@ var IndexRoute = /** @class */ (function (_super) {
         });
     };
     ;
+    IndexRoute.prototype.makeTableData = function (films) {
+        var data = [];
+        films.map(function (film) {
+            var episodeId = film.getEpisodeId();
+            var title = film.getTitle();
+            var releaseDate = new Date(Date.parse(film.getReleaseDate()));
+            var year = releaseDate.getFullYear();
+            data.push({
+                'episodeId': episodeId,
+                'title': title,
+                'year': year,
+                'filmUrl': film.getUrl()
+            });
+        });
+        return data;
+    };
     IndexRoute.prototype.render = function () {
         if (this.state.isLoading) {
             return (React.createElement(SpinLoader, null));
         }
+        var columns = [
+            {
+                Header: 'Episode',
+                accessor: 'episodeId',
+                className: 'text-center'
+            }, {
+                Header: 'Title',
+                accessor: 'title',
+                Cell: function (row) { return (React.createElement(Link, { to: '/film/' + row['original']['episodeId'] }, row['value'])); }
+            }, {
+                Header: 'Year',
+                accessor: 'year',
+                className: 'text-center'
+            }
+        ];
         return (React.createElement("div", { className: 'container IndexRoute' },
             React.createElement(Header, null),
             React.createElement("div", { className: 'main' },
@@ -108,16 +131,9 @@ var IndexRoute = /** @class */ (function (_super) {
                         React.createElement("div", { className: 'card-header' },
                             React.createElement("h2", null, "Films")),
                         React.createElement("div", { className: 'card-body' },
-                            React.createElement("div", { className: 'table-responsive' },
-                                React.createElement("table", { className: 'table table-condensed' },
-                                    React.createElement("thead", null,
-                                        React.createElement("tr", null,
-                                            React.createElement("th", { className: 'text-center' }, "Episode"),
-                                            React.createElement("th", null, "Name"),
-                                            React.createElement("th", { className: 'text-center' }, "Year"))),
-                                    React.createElement("tbody", null, this.getEpisodes())))))))));
+                            React.createElement(ReactTable, { data: this.state.tableData, columns: columns, showPagination: false, minRows: 0, multiSort: false, resizable: false, className: '-striped -highlight' })))))));
     };
     return IndexRoute;
 }(React.Component));
 export default IndexRoute;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSW5kZXhSb3V0ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkluZGV4Um91dGUudHN4Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLE9BQU8sQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDO0FBRTVCLE9BQU8sS0FBSyxLQUFLLE1BQU0sT0FBTyxDQUFDO0FBQy9CLE9BQU8sRUFBRSxNQUFNLEVBQUUsTUFBTSxnQ0FBZ0MsQ0FBQztBQUN4RCxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0seUNBQXlDLENBQUM7QUFHckUsT0FBTyxFQUFFLGlCQUFpQixFQUFFLE1BQU0sZ0NBQWdDLENBQUM7QUFLbkU7SUFBeUIsOEJBQWlEO0lBR3RFLG9CQUFtQixLQUFzQjtRQUF6QyxZQUNJLGtCQUFNLEtBQUssQ0FBQyxTQU9mO1FBb0RPLGlCQUFXLEdBQUc7WUFDbEIsSUFBTSxLQUFLLEdBQUcsS0FBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUM7WUFFL0IsT0FBTyxDQUNILEtBQUssQ0FBQyxHQUFHLENBQUMsVUFBQyxJQUFnQjtnQkFDdkIsSUFBTSxTQUFTLEdBQUssSUFBSSxDQUFDLFlBQVksRUFBRSxDQUFDO2dCQUN4QyxJQUFNLEtBQUssR0FBUyxJQUFJLENBQUMsUUFBUSxFQUFFLENBQUM7Z0JBQ3BDLElBQU0sV0FBVyxHQUFHLElBQUksSUFBSSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLGNBQWMsRUFBRSxDQUFDLENBQUMsQ0FBQztnQkFDaEUsSUFBTSxJQUFJLEdBQUcsV0FBVyxDQUFDLFdBQVcsRUFBRSxDQUFDO2dCQUV2QyxPQUFPLENBQ0g7b0JBQ0ksNEJBQUksU0FBUyxFQUFDLGFBQWEsSUFBRSxTQUFTLENBQU07b0JBQzVDO3dCQUFJLDJCQUFHLElBQUksRUFBQyxHQUFHLElBQUUsS0FBSyxDQUFLLENBQUs7b0JBQ2hDLDRCQUFJLFNBQVMsRUFBQyxhQUFhLElBQUUsSUFBSSxDQUFNLENBQ3RDLENBQ1IsQ0FBQztZQUNOLENBQUMsQ0FBQyxDQUNMLENBQUM7UUFDTixDQUFDLENBQUM7UUE3RUUsS0FBSSxDQUFDLEtBQUssR0FBRztZQUNULFNBQVMsRUFBRSxJQUFJO1lBQ2YsS0FBSyxFQUFNLEVBQUU7U0FDaEIsQ0FBQztRQUVGLEtBQUksQ0FBQyxNQUFNLEdBQUcsaUJBQWlCLENBQUMsTUFBTSxFQUFFLENBQUM7O0lBQzdDLENBQUM7SUFFWSxzQ0FBaUIsR0FBOUI7Ozs7Ozs7d0JBRXNCLHFCQUFNLElBQUksQ0FBQyxNQUFNLENBQUMsUUFBUSxFQUFFLEVBQUE7O3dCQUFwQyxLQUFLLEdBQUcsU0FBNEI7d0JBQzFDLElBQUksQ0FBQyxRQUFRLENBQUMsRUFBQyxTQUFTLEVBQUUsS0FBSyxFQUFFLEtBQUssRUFBRSxLQUFLLEVBQUMsQ0FBQyxDQUFDOzs7O3dCQUcxQyxHQUFHLEdBQVUsR0FBQyxDQUFDO3dCQUNyQixPQUFPLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFDOzs7Ozs7S0FFeEI7SUFBQSxDQUFDO0lBRUssMkJBQU0sR0FBYjtRQUNJLElBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxTQUFTLEVBQUU7WUFDckIsT0FBTyxDQUNILG9CQUFDLFVBQVUsT0FBRSxDQUNoQixDQUFDO1NBQ0w7UUFFRCxPQUFPLENBQ0gsNkJBQUssU0FBUyxFQUFDLHNCQUFzQjtZQUNqQyxvQkFBQyxNQUFNLE9BQUc7WUFFViw2QkFBSyxTQUFTLEVBQUMsTUFBTTtnQkFDakIsNkJBQUssU0FBUyxFQUFDLEtBQUs7b0JBQ2hCLDZCQUFLLFNBQVMsRUFBQyx1QkFBdUI7d0JBQ2xDLDZCQUFLLFNBQVMsRUFBQyxhQUFhOzRCQUN4Qix3Q0FBYyxDQUNaO3dCQUVOLDZCQUFLLFNBQVMsRUFBQyxXQUFXOzRCQUN0Qiw2QkFBSyxTQUFTLEVBQUMsa0JBQWtCO2dDQUM3QiwrQkFBTyxTQUFTLEVBQUMsdUJBQXVCO29DQUNwQzt3Q0FDSTs0Q0FDSSw0QkFBSSxTQUFTLEVBQUMsYUFBYSxjQUFhOzRDQUN4Qyx1Q0FBYTs0Q0FDYiw0QkFBSSxTQUFTLEVBQUMsYUFBYSxXQUFVLENBQ3BDLENBQ0Q7b0NBQ1IsbUNBQVMsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFVLENBQ2pDLENBQ04sQ0FDSixDQUNKLENBQ0osQ0FDSixDQUNKLENBQ1QsQ0FBQztJQUNOLENBQUM7SUFzQkwsaUJBQUM7QUFBRCxDQUFDLEFBbkZELENBQXlCLEtBQUssQ0FBQyxTQUFTLEdBbUZ2QztBQUVELGVBQWUsVUFBVSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSW5kZXhSb3V0ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkluZGV4Um91dGUudHN4Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLE9BQU8sQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDO0FBQzVCLE9BQU8sNkJBQTZCLENBQUE7QUFFcEMsT0FBTyxLQUFLLEtBQUssTUFBTSxPQUFPLENBQUM7QUFDL0IsT0FBTyxFQUFFLElBQUksRUFBRSxNQUFNLGtCQUFrQixDQUFDO0FBQ3hDLE9BQU8sVUFBc0IsTUFBTSxhQUFhLENBQUM7QUFDakQsT0FBTyxFQUFFLE1BQU0sRUFBRSxNQUFNLGdDQUFnQyxDQUFDO0FBQ3hELE9BQU8sRUFBRSxVQUFVLEVBQUUsTUFBTSx5Q0FBeUMsQ0FBQztBQUdyRSxPQUFPLEVBQUUsaUJBQWlCLEVBQUUsTUFBTSxnQ0FBZ0MsQ0FBQztBQUtuRTtJQUF5Qiw4QkFBaUQ7SUFHdEUsb0JBQW1CLEtBQXNCO1FBQXpDLFlBQ0ksa0JBQU0sS0FBSyxDQUFDLFNBUWY7UUFQRyxLQUFJLENBQUMsS0FBSyxHQUFHO1lBQ1QsU0FBUyxFQUFFLElBQUk7WUFDZixLQUFLLEVBQU0sRUFBRTtZQUNiLFNBQVMsRUFBRSxFQUFFO1NBQ2hCLENBQUM7UUFFRixLQUFJLENBQUMsTUFBTSxHQUFHLGlCQUFpQixDQUFDLE1BQU0sRUFBRSxDQUFDOztJQUM3QyxDQUFDO0lBRVksc0NBQWlCLEdBQTlCOzs7Ozs7O3dCQUUwQixxQkFBTSxJQUFJLENBQUMsTUFBTSxDQUFDLFFBQVEsRUFBRSxFQUFBOzt3QkFBeEMsS0FBSyxHQUFPLFNBQTRCO3dCQUN4QyxTQUFTLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyxLQUFLLENBQUMsQ0FBQzt3QkFDNUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxFQUFDLFNBQVMsRUFBRSxLQUFLLEVBQUUsS0FBSyxFQUFFLEtBQUssRUFBRSxTQUFT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
