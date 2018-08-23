@@ -45,6 +45,31 @@ export class FilmsGateway {
     }
 
     public retrieveFilm(filmUrl: string): Promise<FilmEntity> {
-        return null;
+        return new Promise(async (resolve, reject) => {
+            const response = await axios.get(filmUrl, this._axiosConfig);
+            const filmData = <any[]>response.data;
+            const film = FilmsGateway.importFilmData(filmData);
+            resolve(film);
+        });
+    }
+
+    private static importFilmData(filmData: any[]): FilmEntity {
+        const film = new FilmEntity();
+        film.setCharacterUrls(filmData['characters']);
+        film.setCreated(filmData['created']);
+        film.setDirector(filmData['director']);
+        film.setEpisodeId(filmData['episode_id']);
+        film.setOpeningCrawl(filmData['opening_crawl']);
+        film.setPlanetUrls(filmData['planets']);
+        film.setProducer(filmData['producer']);
+        film.setReleaseDate(filmData['release_date']);
+        film.setSpeciesUrls(filmData['species']);
+        film.setStarshipUrls(filmData['starships']);
+        film.setTitle(filmData['title']);
+        film.setUpdated(filmData['edited']);
+        film.setUrl(filmData['url']);
+        film.setVehicleUrls(filmData['vehicles']);
+
+        return film;
     }
 }
