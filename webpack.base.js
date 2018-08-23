@@ -75,6 +75,9 @@ module.exports = {
         new CopyWebpackPlugin([ {from:'static/img',to:'img'} ]),
         new CopyWebpackPlugin([ {from:'static/fonts',to:'fonts'} ]),
         new HtmlWebpackPlugin({ template: './static/index.html' }),
-        new webpack.ProvidePlugin({Promise: 'es6-promise'})
+        new webpack.ProvidePlugin({
+            'Object.assign': 'object-assign',
+            Promise: 'es6-promise-promise'
+        })
     ]
 };

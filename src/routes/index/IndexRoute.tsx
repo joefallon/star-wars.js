@@ -24,6 +24,8 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
             tableData: []
         };
 
+        document.title = 'API Explorer | Films';
+
         this._model = IndexModelFactory.create();
     }
 
