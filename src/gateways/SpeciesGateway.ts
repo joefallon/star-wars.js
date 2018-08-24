@@ -1,17 +1,24 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import * as LRU from 'lru-cache';
 import { SpeciesEntity } from '../entities/SpeciesEntity';
 
 export class SpeciesGateway {
     private _api: string;
     private readonly _axiosConfig: AxiosRequestConfig;
+    private _cache: LRU.Cache<string, any>;
 
-    public constructor(baseApi: string) {
+    public constructor(baseApi: string, cache: LRU.Cache<string, any>) {
         this._api = baseApi + 'species/';
         this._axiosConfig = { timeout: 5000 };
+        this._cache = cache;
     }
 
     public retrieveSpecies(url: string): Promise<SpeciesEntity> {
         return new Promise(async (resolve, reject) => {
+            if(this._cache.has(url)) {
+                return resolve(this._cache.get(url));
+            }
+
             const response = await axios.get(url, this._axiosConfig);
             const data     = response.data;
 
@@ -33,6 +40,7 @@ export class SpeciesGateway {
 
             // todo: add language to entity
 
+            this._cache.set(url, species);
             resolve(species);
         });
     }

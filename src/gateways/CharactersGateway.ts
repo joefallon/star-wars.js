@@ -1,19 +1,25 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import * as LRU from 'lru-cache';
 import { CharacterEntity } from '../entities/CharacterEntity';
 
 export class CharactersGateway {
     private readonly _api: string;
     private readonly _axiosConfig: AxiosRequestConfig;
+    private _cache: LRU.Cache<string, any>;
 
-    public constructor(baseApi: string) {
+    public constructor(baseApi: string, cache: LRU.Cache<string, any>) {
         this._api = baseApi + 'characters/';
         this._axiosConfig = { timeout: 5000 };
-        console.log(this._api);
+        this._cache = cache;
     }
 
 
     public retrieveCharacter(url: string): Promise<CharacterEntity> {
         return new Promise(async (resolve, reject) => {
+            if(this._cache.has(url)) {
+                return resolve(this._cache.get(url));
+            }
+
             const response = await axios.get(url, this._axiosConfig);
             const data = response['data'];
 
@@ -35,6 +41,7 @@ export class CharactersGateway {
             character.setUrl(data['url']);
             character.setVehicleUrls(data['vehicles']);
 
+            this._cache.set(url, character);
             resolve(character);
         });
     }

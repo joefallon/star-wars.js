@@ -1,18 +1,24 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import * as LRU from 'lru-cache';
 import { FilmEntity } from '../entities/FilmEntity';
 
 
 export class FilmsGateway {
     private readonly _api: string;
     private readonly _axiosConfig: AxiosRequestConfig;
+    private _cache: LRU.Cache<string, any>;
 
-    public constructor(baseApi: string) {
+    public constructor(baseApi: string, cache: LRU.Cache<string, any>) {
         this._api = baseApi + 'films/';
         this._axiosConfig = { timeout: 5000 };
-        console.log(this._api);
+        this._cache = cache;
     }
 
     public async retrieveAllFilms(): Promise<FilmEntity[]> {
+        if(this._cache.has(this._api)) {
+            return this._cache.get(this._api);
+        }
+
         const response = await axios.get(this._api, this._axiosConfig);
         const filmData = <any[]>response.data['results'];
         const films    = <FilmEntity[]>[];
@@ -39,16 +45,22 @@ export class FilmsGateway {
             films.push(film);
         });
 
-        console.log(films);
+        this._cache.set(this._api, films);
 
         return films;
     }
 
     public retrieveFilm(filmUrl: string): Promise<FilmEntity> {
         return new Promise(async (resolve, reject) => {
+            if(this._cache.has(filmUrl)) {
+                return resolve(this._cache.get(filmUrl));
+            }
+
             const response = await axios.get(filmUrl, this._axiosConfig);
             const filmData = <any[]>response.data;
             const film = FilmsGateway.mapToFilmEntity(filmData);
+
+            this._cache.set(filmUrl, film);
             resolve(film);
         });
     }

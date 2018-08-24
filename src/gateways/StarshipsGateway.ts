@@ -1,17 +1,24 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import * as LRU from 'lru-cache';
 import { StarshipEntity } from '../entities/StarshipEntity';
 
 export class StarshipsGateway {
     private _api: string;
     private readonly _axiosConfig: AxiosRequestConfig;
+    private _cache: LRU.Cache<string, any>;
 
-    public constructor(baseApi: string) {
+    public constructor(baseApi: string, cache: LRU.Cache<string, any>) {
         this._api = baseApi + 'starships/';
         this._axiosConfig = { timeout: 5000 };
+        this._cache = cache;
     }
 
     public retrieveStarship(url: string): Promise<StarshipEntity> {
         return new Promise(async (resolve, reject) => {
+            if(this._cache.has(url)) {
+                return resolve(this._cache.get(url));
+            }
+
             const response = await axios.get(url, this._axiosConfig);
             const data = response.data;
 
@@ -35,6 +42,7 @@ export class StarshipsGateway {
             starship.setUpdated(data['edited']);
             starship.setUrl(data['url']);
 
+            this._cache.set(url, starship);
             resolve(starship);
         });
     }
