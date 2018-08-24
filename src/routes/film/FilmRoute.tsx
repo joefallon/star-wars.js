@@ -1,12 +1,18 @@
 require('./FilmRoute.css');
-import { ReactNode } from 'react';
 import * as React from 'react';
+import { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
+import { PlanetEntity } from '../../entities/PlanetEntity';
+import { SpeciesEntity } from '../../entities/SpeciesEntity';
+import { StarshipEntity } from '../../entities/StarshipEntity';
+import { VehicleEntity } from '../../entities/VehicleEntity';
 
 import { FilmRouteProps } from './FilmRouteProps';
 import { FilmRouteState } from './FilmRouteState';
 import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 import { FilmModelFactory } from '../../models/FilmModelFactory';
+import { CharacterEntity } from '../../entities/CharacterEntity';
 
 class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
 
@@ -80,10 +86,19 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
                                 <p>{film.getOpeningCrawl()}</p>
 
                                 <h3>Characters</h3>
+                                <div>{this.getCharacters()}</div>
 
-                                <div>
-                                    {this.getCharacters()}
-                                </div>
+                                <h3>Planets</h3>
+                                <div>{this.getPlanets()}</div>
+
+                                <h3>Starships</h3>
+                                <div>{this.getStarships()}</div>
+
+                                <h3>Vehicles</h3>
+                                <div>{this.getVehicles()}</div>
+
+                                <h3>Species</h3>
+                                <div>{this.getSpecies()}</div>
                             </div>
                         </div>
                     </div>
@@ -97,10 +112,94 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
 
         return (
               <ul>
+                  {characters.map((character: CharacterEntity) => {
+                      const url = character.getUrl();
+                      const id  = FilmRoute.getIdFromUrl(url);
 
+                      return (
+                          <li key={id}>
+                              <Link to={'/character/' + id}>{character.getName()}</Link>
+                          </li>
+                      );
+                  })}
               </ul>
         );
     };
+
+    private getPlanets(): ReactNode {
+        const planets = this.state.planets;
+
+        return (
+            <ul>
+                {planets.map((planet: PlanetEntity) => {
+                    const url = planet.getUrl();
+                    const id  = FilmRoute.getIdFromUrl(url);
+
+                    return (
+                        <li key={id}><Link to={'/planet/' + id}>{planet.getName()}</Link></li>
+                    );
+                })}
+            </ul>
+        );
+    }
+
+    private getStarships(): ReactNode {
+        const starships = this.state.starships;
+
+        return (
+            <ul>
+                {starships.map((starship: StarshipEntity) => {
+                    const url = starship.getUrl();
+                    const id  = FilmRoute.getIdFromUrl(url);
+
+                    return (
+                        <li key={id}><Link to={'/starship/' + id}>{starship.getName()}</Link></li>
+                    );
+                })}
+            </ul>
+        );
+    }
+
+    private getVehicles(): ReactNode {
+        const vehicles = this.state.vehicles;
+
+        return (
+            <ul>
+                {vehicles.map((vehicle: VehicleEntity) => {
+                    const url = vehicle.getUrl();
+                    const id  = FilmRoute.getIdFromUrl(url);
+
+                    return (
+                        <li key={id}><Link to={'/vehicle/' + id}>{vehicle.getName()}</Link></li>
+                    );
+                })}
+            </ul>
+        );
+    }
+
+    private getSpecies(): ReactNode {
+        const species = this.state.species;
+
+        return (
+            <ul>
+                {species.map((singleSpecies: SpeciesEntity) => {
+                    const url = singleSpecies.getUrl();
+                    const id  = FilmRoute.getIdFromUrl(url);
+
+                    return (
+                        <li key={id}><Link to={'/species/' + id}>{singleSpecies.getName()}</Link></li>
+                    );
+                })}
+            </ul>
+        );
+    }
+
+    private static getIdFromUrl(url: string): string {
+        const parts = url.split('/');
+        const id    = parts[parts.length - 2];
+
+        return id;
+    }
 }
 
 export default FilmRoute;

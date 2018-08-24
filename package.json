@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:dev": "npm run clean && npm run webpack -- --config webpack.dev.js",
-    "build:karma": "npm run clean && npm run webpack -- --config webpack.karma.js --watch",
+    "build:karma": "npm run clean && npm run webpack -- --config webpack.karma.js -w --watch-aggregate-timeout 1500 --watch-poll",
     "build:prod": "npm run clean && npm run webpack -- --config webpack.prod.js",
     "clean": "rm -rf public",
     "karma:run": "karma run",

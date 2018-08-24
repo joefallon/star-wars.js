@@ -48,12 +48,12 @@ export class FilmsGateway {
         return new Promise(async (resolve, reject) => {
             const response = await axios.get(filmUrl, this._axiosConfig);
             const filmData = <any[]>response.data;
-            const film = FilmsGateway.importFilmData(filmData);
+            const film = FilmsGateway.mapToFilmEntity(filmData);
             resolve(film);
         });
     }
 
-    private static importFilmData(filmData: any[]): FilmEntity {
+    private static mapToFilmEntity(filmData: any[]): FilmEntity {
         const film = new FilmEntity();
         film.setCharacterUrls(filmData['characters']);
         film.setCreated(filmData['created']);

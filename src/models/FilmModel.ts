@@ -1,13 +1,13 @@
-import { SpeciesEntity } from '../entities/SpeciesEntity';
-import { Gateways } from '../gateways/Gateways';
 import { CharacterEntity } from '../entities/CharacterEntity';
 import { FilmEntity } from '../entities/FilmEntity';
 import { PlanetEntity } from '../entities/PlanetEntity';
+import { SpeciesEntity } from '../entities/SpeciesEntity';
 import { StarshipEntity } from '../entities/StarshipEntity';
 import { VehicleEntity } from '../entities/VehicleEntity';
+import { Gateways } from '../gateways/Gateways';
 
 export class FilmModel {
-    private _gateways:   Gateways;
+    private readonly _gateways:   Gateways;
     private _film:       FilmEntity;
     private _characters: CharacterEntity[];
     private _planets:    PlanetEntity[];
@@ -72,24 +72,76 @@ export class FilmModel {
 
     private loadCharacters(): Promise<CharacterEntity[]> {
         return new Promise(async (resolve, reject) => {
-            const gateways = this._gateways;
-            const charactersGateway = gateways.charactersGateway;
+            const charactersGateway = this._gateways.charactersGateway;
+            const characterPromises: Promise<CharacterEntity>[] = [];
+
+            this._film.getCharacterUrls().map((url) => {
+                const promise = charactersGateway.retrieveCharacter(url);
+                characterPromises.push(promise);
+            });
+
+            const characters: CharacterEntity[] = await Promise.all(characterPromises);
+            resolve(characters);
         });
     }
 
     private loadPlanets(): Promise<PlanetEntity[]> {
-        return null;
+        return new Promise(async (resolve, reject) => {
+            const planetsGateway = this._gateways.planetsGateway;
+            const planetPromises = [];
+
+            this._film.getPlanetUrls().map((url: string) => {
+                const promise = planetsGateway.retrievePlanet(url);
+                planetPromises.push(promise);
+            });
+
+            const planets: PlanetEntity[] = await Promise.all(planetPromises);
+            resolve(planets);
+        });
     }
 
     private loadStarships(): Promise<StarshipEntity[]> {
-        return null;
+        return new Promise(async (resolve, reject) => {
+            const starshipsGateway = this._gateways.starshipsGateway;
+            const starshipPromises = [];
+
+            this._film.getStarshipUrls().map((url: string) => {
+                const promise = starshipsGateway.retrieveStarship(url);
+                starshipPromises.push(promise);
+            });
+
+            const starships: StarshipEntity[] = await Promise.all(starshipPromises);
+            resolve(starships);
+        });
     }
 
     private loadVehicles(): Promise<VehicleEntity[]> {
-        return null;
+        return new Promise(async (resolve, reject) => {
+            const vehiclesGateway = this._gateways.vehiclesGateway;
+            const vehiclePromises = [];
+
+            this._film.getVehicleUrls().map((url: string) => {
+                const promise = vehiclesGateway.retrieveVehicle(url);
+                vehiclePromises.push(promise);
+            });
+
+            const vehicles: VehicleEntity[] = await Promise.all(vehiclePromises);
+            resolve(vehicles);
+        });
     }
 
     private loadSpecies(): Promise<SpeciesEntity[]> {
-        return null;
+        return new Promise(async (resolve, reject) => {
+            const speciesGateway  = this._gateways.speciesGateway;
+            const speciesPromises = [];
+
+            this._film.getSpeciesUrls().map((url: string) => {
+                const promise = speciesGateway.retrieveSpecies(url);
+                speciesPromises.push(promise);
+            });
+
+            const species: SpeciesEntity[] = await Promise.all(speciesPromises);
+            resolve(species);
+        });
     }
 }
