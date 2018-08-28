@@ -2,9 +2,9 @@ import * as assert from 'assert';
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { MemoryRouter, Route, Switch } from 'react-router';
-import sinon from 'sinon';
-import { FilmEntity } from '../../entities/FilmEntity';
 
+import { FilmEntity } from '../../entities/FilmEntity';
+import sinon from 'sinon';
 import { FilmsGateway } from '../../gateways/FilmsGateway';
 import { Gateways } from '../../gateways/Gateways';
 import { IndexModel } from '../../models/IndexModel';
@@ -38,7 +38,7 @@ describe('IndexRoute', () => {
 
                 const films: FilmEntity[] = [ film ];
 
-                const retrieveAllFilmsStub = sinon.stub();
+                var retrieveAllFilmsStub = sinon.stub();
                 // retrieveAllFilmsStub.returns(films);
                 // const filmsGateway = {} as FilmsGateway;
                 // filmsGateway.retrieveAllFilms = retrieveAllFilmsStub;
