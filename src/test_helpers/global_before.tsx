@@ -1,3 +1,6 @@
+import { configure } from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
+
 before(async () => {
-    // global before
+    configure({ adapter: new Adapter() });
 });

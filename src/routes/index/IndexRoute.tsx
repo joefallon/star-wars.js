@@ -8,7 +8,6 @@ import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 import { FilmEntity } from '../../entities/FilmEntity';
 import { IndexModel } from '../../models/IndexModel';
-import { IndexModelFactory } from '../../models/IndexModelFactory';
 
 import { IndexRouteProps } from './IndexRouteProps';
 import { IndexRouteState } from './IndexRouteState';
@@ -26,7 +25,7 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
 
         document.title = 'API Explorer | Films';
 
-        this._model = IndexModelFactory.create();
+        this._model = props.model;
     }
 
     public async componentDidMount() {

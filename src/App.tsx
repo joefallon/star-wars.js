@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import Loadable  from 'react-loadable';
 
+import { IndexModelFactory } from './models/IndexModelFactory';
 import { IndexRouteProps } from './routes/index/IndexRouteProps';
 import { FilmRouteProps } from './routes/film/FilmRouteProps';
 
@@ -27,6 +28,8 @@ export class App extends React.Component {
     }
 
     private renderIndex = (props: IndexRouteProps): JSX.Element => {
+        props.model = IndexModelFactory.create();
+
         const LoadableIndexRoute = Loadable({
             loader: () => import(/* webpackChunkName: "index-route" */'./routes/index/IndexRoute'),
             loading: () => { return null; },
