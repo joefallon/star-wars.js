@@ -7,6 +7,7 @@ import sinon from 'sinon';
 import { FilmEntity } from '../../entities/FilmEntity';
 import { FilmsGateway } from '../../gateways/FilmsGateway';
 import { Gateways } from '../../gateways/Gateways';
+import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
 import { IndexModel } from '../../models/IndexModel';
 import IndexRoute from './IndexRoute';
 import { IndexRouteProps } from './IndexRouteProps';
@@ -42,11 +43,8 @@ describe('IndexRoute', () => {
                 var retrieveAllFilmsStub = sinon.stub();
                 retrieveAllFilmsStub.returns(films);
 
-                const filmsGateway = {} as FilmsGateway;
-                filmsGateway.retrieveAllFilms = retrieveAllFilmsStub;
-
-                const gateways = {} as Gateways;
-                gateways.filmsGateway = filmsGateway;
+                const gateways = GatewaysTestFactory.create();
+                gateways.filmsGateway.retrieveAllFilms = retrieveAllFilmsStub;
 
                 props.model = new IndexModel(gateways);
 
