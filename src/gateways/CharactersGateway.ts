@@ -9,7 +9,7 @@ export class CharactersGateway {
 
     public constructor(baseApi: string, cache: LRU.Cache<string, any>) {
         this._api = baseApi + 'characters/';
-        this._axiosConfig = { timeout: 5000 };
+        this._axiosConfig = { timeout: 15000 };
         this._cache = cache;
     }
 
