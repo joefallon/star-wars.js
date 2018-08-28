@@ -1,13 +1,14 @@
 import * as assert from 'assert';
-import * as React from 'react';
 import { mount } from 'enzyme';
+import * as React from 'react';
 import { MemoryRouter, Route, Switch } from 'react-router';
+import sinon from 'sinon';
 
 import { FilmEntity } from '../../entities/FilmEntity';
-import sinon from 'sinon';
 import { FilmsGateway } from '../../gateways/FilmsGateway';
 import { Gateways } from '../../gateways/Gateways';
 import { IndexModel } from '../../models/IndexModel';
+import IndexRoute from './IndexRoute';
 import { IndexRouteProps } from './IndexRouteProps';
 
 
@@ -17,7 +18,7 @@ describe('IndexRoute', () => {
     });
 
     context('on initial display', () => {
-        it('displays the list of films', async () => {
+        it('displays the list of films', (done) => {
 
             function renderRoute(props: IndexRouteProps) {
                 const film = new FilmEntity();
@@ -39,24 +40,40 @@ describe('IndexRoute', () => {
                 const films: FilmEntity[] = [ film ];
 
                 var retrieveAllFilmsStub = sinon.stub();
-                // retrieveAllFilmsStub.returns(films);
-                // const filmsGateway = {} as FilmsGateway;
-                // filmsGateway.retrieveAllFilms = retrieveAllFilmsStub;
-                // const gateways = {} as Gateways;
-                // gateways.filmsGateway = filmsGateway;
-                //
-                // const model = new IndexModel(gateways);
+                retrieveAllFilmsStub.returns(films);
+
+                const filmsGateway = {} as FilmsGateway;
+                filmsGateway.retrieveAllFilms = retrieveAllFilmsStub;
+
+                const gateways = {} as Gateways;
+                gateways.filmsGateway = filmsGateway;
+
+                props.model = new IndexModel(gateways);
+
+                return (<IndexRoute {...props}/>);
             }
 
-            // const wrapper = mount(
-            //     <MemoryRouter initialEntries={['/']} initialIndex={0}>
-            //         <Switch>
-            //             <Route exact path='/' render={(props) => renderRoute(props)}/>
-            //         </Switch>
-            //     </MemoryRouter>
-            // );
+            const wrapper = mount(
+                <MemoryRouter initialEntries={['/']} initialIndex={0}>
+                    <Switch>
+                        <Route exact path='/' render={(props) => renderRoute(props)}/>
+                    </Switch>
+                </MemoryRouter>
+            );
 
-            assert.ok(1);
+            assert.strictEqual(document.title, 'API Explorer | Films');
+
+            setTimeout(() => {
+                wrapper.update();
+
+                const row = wrapper.find('IndexRoute').instance().state['tableData'][0];
+                assert.strictEqual(row['episodeId'], 1);
+                assert.strictEqual(row['title'],     'title');
+                assert.strictEqual(row['year'],      2012);
+                assert.strictEqual(row['filmUrl'],   'url');
+
+                done();
+            }, 0);
         });
     });
 });

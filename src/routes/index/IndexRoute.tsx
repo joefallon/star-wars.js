@@ -33,7 +33,6 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
             const films     = await this._model.getFilms();
             const tableData = this.makeTableData(films);
             this.setState({isLoading: false, films: films, tableData: tableData});
-            console.log(tableData);
         }
         catch(e) {
             const err: Error = e;
@@ -72,7 +71,7 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
             {
                 Header:   'Episode',
                 accessor: 'episodeId',
-                className: 'text-center'
+                className: 'text-center episodeId'
             }, {
                 Header:   'Title',
                 accessor: 'title',
