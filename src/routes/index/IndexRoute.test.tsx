@@ -5,8 +5,6 @@ import { MemoryRouter, Route, Switch } from 'react-router';
 import sinon from 'sinon';
 
 import { FilmEntity } from '../../entities/FilmEntity';
-import { FilmsGateway } from '../../gateways/FilmsGateway';
-import { Gateways } from '../../gateways/Gateways';
 import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
 import { IndexModel } from '../../models/IndexModel';
 import IndexRoute from './IndexRoute';
