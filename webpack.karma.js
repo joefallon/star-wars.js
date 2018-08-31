@@ -48,6 +48,6 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin({ filename: "styles/[name].[hash:6].css" }),
         new webpack.DefinePlugin({__API__: __API__}),
-        new webpack.ProvidePlugin({Promise: 'es6-promise'})
+        // new webpack.ProvidePlugin({Promise: 'es6-promise'})
     ]
 };

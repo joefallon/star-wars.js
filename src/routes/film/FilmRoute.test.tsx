@@ -1,7 +1,16 @@
 import * as assert from 'assert';
+import sinon from 'sinon';
 import { mount } from 'enzyme';
 import * as React from 'react';
 import { MemoryRouter, Route, Switch } from 'react-router';
+import { CharacterEntity } from '../../entities/CharacterEntity';
+import { FilmEntity } from '../../entities/FilmEntity';
+import { PlanetEntity } from '../../entities/PlanetEntity';
+import { SpeciesEntity } from '../../entities/SpeciesEntity';
+import { VehicleEntity } from '../../entities/VehicleEntity';
+import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
+import { FilmModel } from '../../models/FilmModel';
+import FilmRoute from './FilmRoute';
 
 import { FilmRouteProps } from './FilmRouteProps';
 
@@ -10,10 +19,65 @@ describe('FilmRoute', () => {
         document.title = '';
     });
 
-    it('displays the film information', async () => {
+    it('displays the film information', (done) => {
 
         function renderRoute(props: FilmRouteProps) {
-            return (null);
+            const film = new FilmEntity();
+            film.setCharacterUrls(['character1']);
+            film.setCreated('2012-12-12T12:12:12');
+            film.setDirector('director');
+            film.setUpdated('2012-12-12T11:11:11');
+            film.setEpisodeId(1);
+            film.setOpeningCrawl('opening crawl');
+            film.setPlanetUrls(['planet1']);
+            film.setProducer('producer');
+            film.setReleaseDate('2012-12-12');
+            film.setSpeciesUrls(['species1']);
+            film.setStarshipUrls(['starship1']);
+            film.setTitle('test title');
+            film.setUrl('url');
+            film.setVehicleUrls(['vehicle1']);
+
+            const retrieveFilmStub = sinon.stub();
+            retrieveFilmStub.returns(film);
+
+            const character = new CharacterEntity();
+            character.setUrl('url/1/');
+            character.setName('test char name');
+            const retrieveCharacterStub = sinon.stub();
+            retrieveCharacterStub.returns(character);
+
+            const planet = new PlanetEntity();
+            planet.setUrl('url/1/');
+            const retrievePlanetStub = sinon.stub();
+            retrievePlanetStub.returns(planet);
+
+            const starship = new SpeciesEntity();
+            starship.setUrl('url/1/');
+            const retrieveStarshipStub = sinon.stub();
+            retrieveStarshipStub.returns(starship);
+
+            const vehicle = new VehicleEntity();
+            vehicle.setUrl('url/1/');
+            const retrieveVehicleStub = sinon.stub();
+            retrieveVehicleStub.returns(vehicle);
+
+            const species = new SpeciesEntity();
+            species.setUrl('url/1/');
+            const retrieveSpeciesStub = sinon.stub();
+            retrieveSpeciesStub.returns(species);
+
+            const gateways = GatewaysTestFactory.create();
+            gateways.filmsGateway.retrieveFilm           = retrieveFilmStub;
+            gateways.charactersGateway.retrieveCharacter = retrieveCharacterStub;
+            gateways.planetsGateway.retrievePlanet       = retrievePlanetStub;
+            gateways.starshipsGateway.retrieveStarship   = retrieveStarshipStub;
+            gateways.vehiclesGateway.retrieveVehicle     = retrieveVehicleStub;
+            gateways.speciesGateway.retrieveSpecies      = retrieveSpeciesStub;
+
+            props.model = new FilmModel(gateways);
+
+            return (<FilmRoute {...props}/>);
         }
 
         const wrapper = mount(
@@ -24,6 +88,34 @@ describe('FilmRoute', () => {
             </MemoryRouter>
         );
 
-        assert.fail('not implemented');
+        setTimeout(() => {
+            wrapper.update();
+
+            const h2 = wrapper.find('h2');
+            assert.strictEqual(h2.text(), 'test title');
+
+            const episodeId = wrapper.find('.episode-id');
+            assert.strictEqual(episodeId.text(), '1');
+
+            const releaseDate = wrapper.find('.release-date');
+            assert.strictEqual(releaseDate.text(), '2012-12-12');
+
+            const director = wrapper.find('.director');
+            assert.strictEqual(director.text(), 'director');
+
+            const producer = wrapper.find('.producer');
+            assert.strictEqual(producer.text(), 'producer');
+
+            const openingCrawl = wrapper.find('.opening-crawl');
+            assert.strictEqual(openingCrawl.text(), 'opening crawl');
+
+            const characters = wrapper.find('.characters');
+            const firstCharacter = characters.childAt(0);
+            assert.strictEqual(firstCharacter.props()['to'], '/character/1');
+            assert.strictEqual(firstCharacter.text(), 'test char name');
+
+            assert.fail('not implemented');
+            done();
+        }, 0);
     });
 });

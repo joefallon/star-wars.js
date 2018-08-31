@@ -24,8 +24,6 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
             episodeId: props.match.params['episodeId'],
             model:     props.model ? props.model : FilmModelFactory.create()
         };
-
-        console.log(this.state);
     }
 
     public async componentDidMount() {
@@ -72,18 +70,29 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
                     <div className='md-offset-3 md-6'>
                         <div className='card'>
                             <div className='card-header'>
-                                <h2>Film Name Here</h2>
+                                <h2>{film.getTitle()}</h2>
                             </div>
                             <div className='card-body'>
-                                <div><strong>Title:</strong> {film.getTitle()}</div>
-                                <div><strong>Episode:</strong> {film.getEpisodeId()}</div>
-                                <div><strong>Release Date:</strong> {film.getReleaseDate()}</div>
-                                <div><strong>Director:</strong> {film.getDirector()}</div>
-                                <div><strong>Producer:</strong> {film.getProducer()}</div>
+                                <div>
+                                    <strong>Episode:</strong>
+                                    <span className='episode-id'>{film.getEpisodeId()}</span>
+                                </div>
+                                <div>
+                                    <strong>Release Date:</strong>
+                                    <span className='release-date'>{film.getReleaseDate()}</span>
+                                </div>
+                                <div>
+                                    <strong>Director:</strong>
+                                    <span className='director'>{film.getDirector()}</span>
+                                </div>
+                                <div>
+                                    <strong>Producer:</strong>
+                                    <span className='producer'>{film.getProducer()}</span>
+                                </div>
 
                                 <h3>Opening</h3>
 
-                                <p>{film.getOpeningCrawl()}</p>
+                                <p className='opening-crawl'>{film.getOpeningCrawl()}</p>
 
                                 <h3>Characters</h3>
                                 <div>{this.getCharacters()}</div>
@@ -117,7 +126,7 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
                       const id  = FilmRoute.getIdFromUrl(url);
 
                       return (
-                          <li key={id}>
+                          <li key={id} className='characters'>
                               <Link to={'/character/' + id}>{character.getName()}</Link>
                           </li>
                       );
