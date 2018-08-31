@@ -13,7 +13,6 @@ describe('FilmRoute', () => {
     it('displays the film information', async () => {
 
         function renderRoute(props: FilmRouteProps) {
-
             return (null);
         }
 

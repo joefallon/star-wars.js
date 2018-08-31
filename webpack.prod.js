@@ -27,7 +27,7 @@ module.exports = merge(common, {
     },
 
     plugins: [
-        new UglifyJSPlugin({ }),
+        new UglifyJSPlugin(),
         new webpack.DefinePlugin(NODE_ENV),
         new webpack.DefinePlugin({__API__: __API__})
     ]

@@ -9,7 +9,7 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         app: './src/index.js',
-        vendor: ['react', 'react-dom', 'react-router-dom', 'react-table']
+        vendor: ['react', 'react-router', 'react-router-dom']
     },
     output: {
         path: path.resolve(__dirname, 'public'),
@@ -57,7 +57,7 @@ module.exports = {
                 },
                 common: {
                     name: 'common',
-                    chunks: 'initial',  // or 'all' or 'initial'
+                    chunks: 'all',  // or 'all' or 'initial'
                     minChunks: 2,
                     minSize: 0
                 },
