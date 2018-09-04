@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:dev": "npm run clean && npm run webpack -- --config webpack.dev.js",
-    "build:karma": "npm run clean && npm run webpack -- --config webpack.karma.js -w --watch-aggregate-timeout 500 --watch-poll",
+    "build:karma": "npm run clean && npm run webpack -- --config webpack.karma.js -w --watch-aggregate-timeout 500 --watch-poll --cache",
     "build:prod": "npm run clean && npm run webpack -- --config webpack.prod.js",
     "clean": "rm -rf public",
     "karma:run": "karma run",
@@ -56,7 +56,6 @@
     "worker-loader": "^2.0.0"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
     "@types/lru-cache": "^4.1.1",
     "@types/react": "^16.4.12",
     "@types/react-loadable": "^5.4.1",
@@ -64,6 +63,7 @@
     "@types/react-router-dom": "^4.3.0",
     "@types/react-table": "^6.7.12",
     "axios": "^0.18.0",
+    "core-js": "^2.5.7",
     "lru-cache": "^4.1.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

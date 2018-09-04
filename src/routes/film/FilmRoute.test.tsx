@@ -7,6 +7,7 @@ import { CharacterEntity } from '../../entities/CharacterEntity';
 import { FilmEntity } from '../../entities/FilmEntity';
 import { PlanetEntity } from '../../entities/PlanetEntity';
 import { SpeciesEntity } from '../../entities/SpeciesEntity';
+import { StarshipEntity } from '../../entities/StarshipEntity';
 import { VehicleEntity } from '../../entities/VehicleEntity';
 import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
 import { FilmModel } from '../../models/FilmModel';
@@ -42,28 +43,32 @@ describe('FilmRoute', () => {
             retrieveFilmStub.returns(film);
 
             const character = new CharacterEntity();
-            character.setUrl('url/1/');
+            character.setUrl('char-url/1/');
             character.setName('test char name');
             const retrieveCharacterStub = sinon.stub();
             retrieveCharacterStub.returns(character);
 
             const planet = new PlanetEntity();
-            planet.setUrl('url/1/');
+            planet.setUrl('planet-url/1/');
+            planet.setName('test planet name');
             const retrievePlanetStub = sinon.stub();
             retrievePlanetStub.returns(planet);
 
-            const starship = new SpeciesEntity();
-            starship.setUrl('url/1/');
+            const starship = new StarshipEntity();
+            starship.setUrl('starship-url/1/');
+            starship.setName('test starship name');
             const retrieveStarshipStub = sinon.stub();
             retrieveStarshipStub.returns(starship);
 
             const vehicle = new VehicleEntity();
-            vehicle.setUrl('url/1/');
+            vehicle.setUrl('vehicle-url/1/');
+            vehicle.setName('test vehicle name');
             const retrieveVehicleStub = sinon.stub();
             retrieveVehicleStub.returns(vehicle);
 
             const species = new SpeciesEntity();
-            species.setUrl('url/1/');
+            species.setUrl('species-url/1/');
+            species.setName('test species name');
             const retrieveSpeciesStub = sinon.stub();
             retrieveSpeciesStub.returns(species);
 
@@ -114,7 +119,27 @@ describe('FilmRoute', () => {
             assert.strictEqual(firstCharacter.props()['to'], '/character/1');
             assert.strictEqual(firstCharacter.text(), 'test char name');
 
-            assert.fail('not implemented');
+            const planets = wrapper.find('.planets');
+            const firstPlanet = planets.childAt(0);
+            assert.strictEqual(firstPlanet.props()['to'], '/planet/1');
+            assert.strictEqual(firstPlanet.text(), 'test planet name');
+
+            const starships = wrapper.find('.starships');
+            const firstStarship = starships.childAt(0);
+            assert.strictEqual(firstStarship.props()['to'], '/starship/1');
+            assert.strictEqual(firstStarship.text(), 'test starship name');
+
+            const vehicles = wrapper.find('.vehicles');
+            const firstVehicle = vehicles.childAt(0);
+            assert.strictEqual(firstVehicle.props()['to'], '/vehicle/1');
+            assert.strictEqual(firstVehicle.text(), 'test vehicle name');
+
+
+            const species = wrapper.find('.species');
+            const firstSpecies = species.childAt(0);
+            assert.strictEqual(firstSpecies.props()['to'], '/species/1');
+            assert.strictEqual(firstSpecies.text(), 'test species name');
+
             done();
         }, 0);
     });

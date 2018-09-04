@@ -145,7 +145,9 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
                     const id  = FilmRoute.getIdFromUrl(url);
 
                     return (
-                        <li key={id}><Link to={'/planet/' + id}>{planet.getName()}</Link></li>
+                        <li key={id} className='planets'>
+                            <Link to={'/planet/' + id}>{planet.getName()}</Link>
+                        </li>
                     );
                 })}
             </ul>
@@ -162,7 +164,9 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
                     const id  = FilmRoute.getIdFromUrl(url);
 
                     return (
-                        <li key={id}><Link to={'/starship/' + id}>{starship.getName()}</Link></li>
+                        <li key={id} className='starships'>
+                            <Link to={'/starship/' + id}>{starship.getName()}</Link>
+                        </li>
                     );
                 })}
             </ul>
@@ -179,7 +183,9 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
                     const id  = FilmRoute.getIdFromUrl(url);
 
                     return (
-                        <li key={id}><Link to={'/vehicle/' + id}>{vehicle.getName()}</Link></li>
+                        <li key={id} className='vehicles'>
+                            <Link to={'/vehicle/' + id}>{vehicle.getName()}</Link>
+                        </li>
                     );
                 })}
             </ul>
@@ -196,7 +202,9 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
                     const id  = FilmRoute.getIdFromUrl(url);
 
                     return (
-                        <li key={id}><Link to={'/species/' + id}>{singleSpecies.getName()}</Link></li>
+                        <li key={id} className='species'>
+                            <Link to={'/species/' + id}>{singleSpecies.getName()}</Link>
+                        </li>
                     );
                 })}
             </ul>
