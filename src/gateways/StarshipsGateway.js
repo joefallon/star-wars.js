@@ -36,52 +36,58 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import axios from 'axios';
 import { StarshipEntity } from '../entities/StarshipEntity';
 var StarshipsGateway = /** @class */ (function () {
-    function StarshipsGateway(baseApi, cache) {
-        this._api = baseApi + 'starships/';
-        this._axiosConfig = { timeout: 15000 };
+    function StarshipsGateway(baseApi, cache, timeout) {
+        this._api = baseApi + StarshipsGateway.API_SEGMENT;
+        this._axiosConfig = { timeout: timeout };
         this._cache = cache;
     }
     StarshipsGateway.prototype.retrieveStarship = function (url) {
-        var _this = this;
-        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var response, data, starship;
+        return __awaiter(this, void 0, void 0, function () {
+            var cache, starship_1, config, response, data, starship;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (this._cache.has(url)) {
-                            return [2 /*return*/, resolve(this._cache.get(url))];
+                        cache = this._cache;
+                        if (cache.has(url)) {
+                            starship_1 = cache.get(url);
+                            return [2 /*return*/, starship_1];
                         }
-                        return [4 /*yield*/, axios.get(url, this._axiosConfig)];
+                        config = this._axiosConfig;
+                        return [4 /*yield*/, axios.get(url, config)];
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        starship = new StarshipEntity();
-                        starship.setCargoCapacityInKilograms(parseFloat(data['cargo_capacity']));
-                        starship.setConsumables(data['consumables']);
-                        starship.setCostInCredits(parseInt(data['cost_in_credits'], 10));
-                        starship.setCreated(data['created']);
-                        starship.setCrewCount(parseInt(data['crew'], 10));
-                        starship.setFilmUrls(data['films']);
-                        starship.setHyperdriveRating(data['hyperdrive_rating']);
-                        starship.setLengthInMeters(parseFloat(data['length']));
-                        starship.setManufacturer(data['manufacturer']);
-                        starship.setMaxAtmospheringSpeedInKPH(parseFloat(data['max_atmosphering_speed']));
-                        starship.setMegalightSpeed(data['MGLT']);
-                        starship.setModel(data['model']);
-                        starship.setName(data['name']);
-                        starship.setPassengerCount(parseInt(data['passengers'], 10));
-                        starship.setPilotCharacterUrls(data['pilots']);
-                        starship.setStarshipClass(data['starship_class']);
-                        starship.setUpdated(data['edited']);
-                        starship.setUrl(data['url']);
-                        this._cache.set(url, starship);
-                        resolve(starship);
-                        return [2 /*return*/];
+                        starship = StarshipsGateway.mapResponseDataToStarship(data);
+                        cache.set(url, starship);
+                        return [2 /*return*/, starship];
                 }
             });
-        }); });
+        });
     };
+    StarshipsGateway.mapResponseDataToStarship = function (data) {
+        var starship = new StarshipEntity();
+        starship.setCargoCapacityInKilograms(parseFloat(data['cargo_capacity']));
+        starship.setConsumables(data['consumables']);
+        starship.setCostInCredits(parseInt(data['cost_in_credits'], 10));
+        starship.setCreated(data['created']);
+        starship.setCrewCount(parseInt(data['crew'], 10));
+        starship.setFilmUrls(data['films']);
+        starship.setHyperdriveRating(data['hyperdrive_rating']);
+        starship.setLengthInMeters(parseFloat(data['length']));
+        starship.setManufacturer(data['manufacturer']);
+        starship.setMaxAtmospheringSpeedInKPH(parseFloat(data['max_atmosphering_speed']));
+        starship.setMegalightSpeed(data['MGLT']);
+        starship.setModel(data['model']);
+        starship.setName(data['name']);
+        starship.setPassengerCount(parseInt(data['passengers'], 10));
+        starship.setPilotCharacterUrls(data['pilots']);
+        starship.setStarshipClass(data['starship_class']);
+        starship.setUpdated(data['edited']);
+        starship.setUrl(data['url']);
+        return starship;
+    };
+    StarshipsGateway.API_SEGMENT = 'starships/';
     return StarshipsGateway;
 }());
 export { StarshipsGateway };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU3RhcnNoaXBzR2F0ZXdheS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlN0YXJzaGlwc0dhdGV3YXkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxPQUFPLEtBQTZCLE1BQU0sT0FBTyxDQUFDO0FBRWxELE9BQU8sRUFBRSxjQUFjLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQUU1RDtJQUtJLDBCQUFtQixPQUFlLEVBQUUsS0FBNkI7UUFDN0QsSUFBSSxDQUFDLElBQUksR0FBRyxPQUFPLEdBQUcsWUFBWSxDQUFDO1FBQ25DLElBQUksQ0FBQyxZQUFZLEdBQUcsRUFBRSxPQUFPLEVBQUUsS0FBSyxFQUFFLENBQUM7UUFDdkMsSUFBSSxDQUFDLE1BQU0sR0FBRyxLQUFLLENBQUM7SUFDeEIsQ0FBQztJQUVNLDJDQUFnQixHQUF2QixVQUF3QixHQUFXO1FBQW5DLGlCQWdDQztRQS9CRyxPQUFPLElBQUksT0FBTyxDQUFDLFVBQU8sT0FBTyxFQUFFLE1BQU07Ozs7O3dCQUNyQyxJQUFHLElBQUksQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxFQUFFOzRCQUNyQixzQkFBTyxPQUFPLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLENBQUMsRUFBQzt5QkFDeEM7d0JBRWdCLHFCQUFNLEtBQUssQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxZQUFZLENBQUMsRUFBQTs7d0JBQWxELFFBQVEsR0FBRyxTQUF1Qzt3QkFDbEQsSUFBSSxHQUFHLFFBQVEsQ0FBQyxJQUFJLENBQUM7d0JBRXJCLFFBQVEsR0FBRyxJQUFJLGNBQWMsRUFBRSxDQUFDO3dCQUN0QyxRQUFRLENBQUMsMkJBQTJCLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDLENBQUMsQ0FBQzt3QkFDekUsUUFBUSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDLENBQUMsQ0FBQzt3QkFDN0MsUUFBUSxDQUFDLGdCQUFnQixDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDO3dCQUNqRSxRQUFRLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDO3dCQUNyQyxRQUFRLENBQUMsWUFBWSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQzt3QkFDbEQsUUFBUSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQzt3QkFDcEMsUUFBUSxDQUFDLG1CQUFtQixDQUFDLElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxDQUFDLENBQUM7d0JBQ3hELFFBQVEsQ0FBQyxpQkFBaUIsQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsQ0FBQzt3QkFDdkQsUUFBUSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLENBQUMsQ0FBQzt3QkFDL0MsUUFBUSxDQUFDLDRCQUE0QixDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsd0JBQXdCLENBQUMsQ0FBQyxDQUFDLENBQUM7d0JBQ2xGLFFBQVEsQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQzt3QkFDekMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQzt3QkFDakMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQzt3QkFDL0IsUUFBUSxDQUFDLGlCQUFpQixDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQzt3QkFDN0QsUUFBUSxDQUFDLHFCQUFxQixDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO3dCQUMvQyxRQUFRLENBQUMsZ0JBQWdCLENBQUMsSUFBSSxDQUFDLGdCQUFnQixDQUFDLENBQUMsQ0FBQzt3QkFDbEQsUUFBUSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQzt3QkFDcEMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQzt3QkFFN0IsSUFBSSxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLFFBQVEsQ0FBQyxDQUFDO3dCQUMvQixPQUFPLENBQUMsUUFBUSxDQUFDLENBQUM7Ozs7YUFDckIsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUNMLHVCQUFDO0FBQUQsQ0FBQyxBQTVDRCxJQTRDQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU3RhcnNoaXBzR2F0ZXdheS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlN0YXJzaGlwc0dhdGV3YXkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxPQUFPLEtBQTZCLE1BQU0sT0FBTyxDQUFDO0FBRWxELE9BQU8sRUFBRSxjQUFjLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQUU1RDtJQU9JLDBCQUFtQixPQUFlLEVBQUUsS0FBNkIsRUFBRSxPQUFlO1FBQzlFLElBQUksQ0FBQyxJQUFJLEdBQVcsT0FBTyxHQUFHLGdCQUFnQixDQUFDLFdBQVcsQ0FBQztRQUMzRCxJQUFJLENBQUMsWUFBWSxHQUFHLEVBQUUsT0FBTyxFQUFFLE9BQU8sRUFBRSxDQUFDO1FBQ3pDLElBQUksQ0FBQyxNQUFNLEdBQVMsS0FBSyxDQUFDO0lBQzlCLENBQUM7SUFFWSwyQ0FBZ0IsR0FBN0IsVUFBOEIsR0FBVzs7Ozs7O3dCQUMvQixLQUFLLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQzt3QkFFMUIsSUFBRyxLQUFLLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxFQUFFOzRCQUNULGFBQVcsS0FBSyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsQ0FBQzs0QkFDaEMsc0JBQU8sVUFBUSxFQUFDO3lCQUNuQjt3QkFFSyxNQUFNLEdBQUssSUFBSSxDQUFDLFlBQVksQ0FBQzt3QkFDbEIscUJBQU0sS0FBSyxDQUFDLEdBQUcsQ0FBQyxHQUFHLEVBQUUsTUFBTSxDQUFDLEVBQUE7O3dCQUF2QyxRQUFRLEdBQUcsU0FBNEI7d0JBQ3ZDLElBQUksR0FBTyxRQUFRLENBQUMsSUFBSSxDQUFDO3dCQUN6QixRQUFRLEdBQUcsZ0JBQWdCLENBQUMseUJBQXlCLENBQUMsSUFBSSxDQUFDLENBQUM7d0JBQ2xFLEtBQUssQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLFFBQVEsQ0FBQyxDQUFDO3dCQUV6QixzQkFBTyxRQUFRLEVBQUM7Ozs7S0FDbkI7SUFFYywwQ0FBeUIsR0FBeEMsVUFBeUMsSUFBUztRQUM5QyxJQUFNLFFBQVEsR0FBRyxJQUFJLGNBQWMsRUFBRSxDQUFDO1FBRXRDLFFBQVEsQ0FBQywyQkFBMkIsQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLGdCQUFnQixDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3pFLFFBQVEsQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxDQUFDLENBQUM7UUFDN0MsUUFBUSxDQUFDLGdCQUFnQixDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDO1FBQ2pFLFFBQVEsQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUM7UUFDckMsUUFBUSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDbEQsUUFBUSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQztRQUNwQyxRQUFRLENBQUMsbUJBQW1CLENBQUMsSUFBSSxDQUFDLG1CQUFtQixDQUFDLENBQUMsQ0FBQztRQUN4RCxRQUFRLENBQUMsaUJBQWlCLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDdkQsUUFBUSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLENBQUMsQ0FBQztRQUMvQyxRQUFRLENBQUMsNEJBQTRCLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyx3QkFBd0IsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNsRixRQUFRLENBQUMsaUJBQWlCLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUM7UUFDekMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQztRQUNqQyxRQUFRLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDO1FBQy9CLFFBQVEsQ0FBQyxpQkFBaUIsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDN0QsUUFBUSxDQUFDLHFCQUFxQixDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO1FBQy9DLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsQ0FBQyxDQUFDO1FBQ2xELFFBQVEsQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUM7UUFDcEMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQztRQUU3QixPQUFPLFFBQVEsQ0FBQztJQUNwQixDQUFDO0lBcER1Qiw0QkFBVyxHQUFHLFlBQVksQ0FBQztJQXFEdkQsdUJBQUM7Q0FBQSxBQXRERCxJQXNEQztTQXREWSxnQkFBZ0IifQ==

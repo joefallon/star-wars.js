@@ -12,6 +12,7 @@ export class SpeciesEntity {
     private _eyeColor:                   string;
     private _averageLifespanInYears:     number;
     private _homePlanetUrl:              string;
+    private _language:                   string;
     private _characterUrls:              string[];
     private _filmUrls:                   string[];
     
@@ -26,6 +27,7 @@ export class SpeciesEntity {
         this._filmUrls                   = [];
         this._hairColor                  = '';
         this._homePlanetUrl              = '';
+        this._language                   = '';
         this._name                       = '';
         this._skinColor                  = '';
         this._updated                    = '';
@@ -126,6 +128,14 @@ export class SpeciesEntity {
 
     public setHomePlanetUrl(value: string) {
         this._homePlanetUrl = value;
+    }
+
+    public getLanguage(): string {
+        return this._language;
+    }
+
+    public setLanguage(value: string) {
+        this._language = value;
     }
 
     public getCharacterUrls(): string[] {

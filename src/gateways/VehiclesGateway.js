@@ -36,50 +36,55 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import axios from 'axios';
 import { VehicleEntity } from '../entities/VehicleEntity';
 var VehiclesGateway = /** @class */ (function () {
-    function VehiclesGateway(baseApi, cache) {
-        this._api = baseApi + 'vehicles/';
-        this._axiosConfig = { timeout: 15000 };
+    function VehiclesGateway(baseApi, cache, timeout) {
+        this._api = baseApi + VehiclesGateway.API_SEGMENT;
+        this._axiosConfig = { timeout: timeout };
         this._cache = cache;
     }
     VehiclesGateway.prototype.retrieveVehicle = function (url) {
-        var _this = this;
-        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var response, data, vehicle;
+        return __awaiter(this, void 0, void 0, function () {
+            var cache, config, response, data, vehicle;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (this._cache.has(url)) {
-                            return [2 /*return*/, resolve(this._cache.get(url))];
+                        cache = this._cache;
+                        if (cache.has(url)) {
+                            return [2 /*return*/, cache.get(url)];
                         }
-                        return [4 /*yield*/, axios.get(url, this._axiosConfig)];
+                        config = this._axiosConfig;
+                        return [4 /*yield*/, axios.get(url, config)];
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        vehicle = new VehicleEntity();
-                        vehicle.setCargoCapacityInKilograms(parseInt(data['cargo_capacity']));
-                        vehicle.setConsumables(data['consumables']);
-                        vehicle.setCostInCredits(parseInt(data['cost_in_credits'], 10));
-                        vehicle.setCreated(data['created']);
-                        vehicle.setCrewCount(parseInt(data['crew'], 10));
-                        vehicle.setFilmUrls(data['films']);
-                        vehicle.setLengthInMeters(parseFloat(data['length']));
-                        vehicle.setManufacturer(data['manufacturer']);
-                        vehicle.setMaxAtmospheringSpeedInKPH(parseFloat(data['max_atmosphering_speed']));
-                        vehicle.setModel(data['model']);
-                        vehicle.setName(data['name']);
-                        vehicle.setPassengerCount(parseInt(data['passengers'], 10));
-                        vehicle.setPilotCharacterUrls(data['pilots']);
-                        vehicle.setUpdated(data['edited']);
-                        vehicle.setUrl(data['url']);
-                        vehicle.setVehicleClass(data['vehicle_class']);
-                        this._cache.set(url, vehicle);
-                        resolve(vehicle);
-                        return [2 /*return*/];
+                        vehicle = VehiclesGateway.mapResponseDataToVehicle(data);
+                        cache.set(url, vehicle);
+                        return [2 /*return*/, vehicle];
                 }
             });
-        }); });
+        });
     };
+    VehiclesGateway.mapResponseDataToVehicle = function (data) {
+        var vehicle = new VehicleEntity();
+        vehicle.setCargoCapacityInKilograms(parseInt(data['cargo_capacity']));
+        vehicle.setConsumables(data['consumables']);
+        vehicle.setCostInCredits(parseInt(data['cost_in_credits'], 10));
+        vehicle.setCreated(data['created']);
+        vehicle.setCrewCount(parseInt(data['crew'], 10));
+        vehicle.setFilmUrls(data['films']);
+        vehicle.setLengthInMeters(parseFloat(data['length']));
+        vehicle.setManufacturer(data['manufacturer']);
+        vehicle.setMaxAtmospheringSpeedInKPH(parseFloat(data['max_atmosphering_speed']));
+        vehicle.setModel(data['model']);
+        vehicle.setName(data['name']);
+        vehicle.setPassengerCount(parseInt(data['passengers'], 10));
+        vehicle.setPilotCharacterUrls(data['pilots']);
+        vehicle.setUpdated(data['edited']);
+        vehicle.setUrl(data['url']);
+        vehicle.setVehicleClass(data['vehicle_class']);
+        return vehicle;
+    };
+    VehiclesGateway.API_SEGMENT = 'vehicles/';
     return VehiclesGateway;
 }());
 export { VehiclesGateway };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVmVoaWNsZXNHYXRld2F5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVmVoaWNsZXNHYXRld2F5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsT0FBTyxLQUE2QixNQUFNLE9BQU8sQ0FBQztBQUVsRCxPQUFPLEVBQUUsYUFBYSxFQUFFLE1BQU0sMkJBQTJCLENBQUM7QUFFMUQ7SUFLSSx5QkFBbUIsT0FBZSxFQUFFLEtBQTZCO1FBQzdELElBQUksQ0FBQyxJQUFJLEdBQUcsT0FBTyxHQUFHLFdBQVcsQ0FBQztRQUNsQyxJQUFJLENBQUMsWUFBWSxHQUFHLEVBQUUsT0FBTyxFQUFFLEtBQU0sRUFBRSxDQUFDO1FBQ3hDLElBQUksQ0FBQyxNQUFNLEdBQUcsS0FBSyxDQUFDO0lBQ3hCLENBQUM7SUFFTSx5Q0FBZSxHQUF0QixVQUF1QixHQUFXO1FBQWxDLGlCQStCQztRQTlCRyxPQUFPLElBQUksT0FBTyxDQUFDLFVBQU8sT0FBTyxFQUFFLE1BQU07Ozs7O3dCQUNyQyxJQUFHLElBQUksQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxFQUFFOzRCQUNyQixzQkFBTyxPQUFPLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLENBQUMsRUFBQzt5QkFDeEM7d0JBRWdCLHFCQUFNLEtBQUssQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxZQUFZLENBQUMsRUFBQTs7d0JBQWxELFFBQVEsR0FBRyxTQUF1Qzt3QkFDbEQsSUFBSSxHQUFPLFFBQVEsQ0FBQyxJQUFJLENBQUM7d0JBRXpCLE9BQU8sR0FBRyxJQUFJLGFBQWEsRUFBRSxDQUFDO3dCQUNwQyxPQUFPLENBQUMsMkJBQTJCLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDLENBQUMsQ0FBQzt3QkFDdEUsT0FBTyxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDLENBQUMsQ0FBQzt3QkFDNUMsT0FBTyxDQUFDLGdCQUFnQixDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDO3dCQUNoRSxPQUFPLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDO3dCQUNwQyxPQUFPLENBQUMsWUFBWSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQzt3QkFDakQsT0FBTyxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQzt3QkFDbkMsT0FBTyxDQUFDLGlCQUFpQixDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO3dCQUN0RCxPQUFPLENBQUMsZUFBZSxDQUFDLElBQUksQ0FBQyxjQUFjLENBQUMsQ0FBQyxDQUFDO3dCQUM5QyxPQUFPLENBQUMsNEJBQTRCLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyx3QkFBd0IsQ0FBQyxDQUFDLENBQUMsQ0FBQzt3QkFDakYsT0FBTyxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQzt3QkFDaEMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQzt3QkFDOUIsT0FBTyxDQUFDLGlCQUFpQixDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQzt3QkFDNUQsT0FBTyxDQUFDLHFCQUFxQixDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO3dCQUM5QyxPQUFPLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO3dCQUNuQyxPQUFPLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO3dCQUM1QixPQUFPLENBQUMsZUFBZSxDQUFDLElBQUksQ0FBQyxlQUFlLENBQUMsQ0FBQyxDQUFDO3dCQUUvQyxJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxHQUFHLEVBQUUsT0FBTyxDQUFDLENBQUM7d0JBRTlCLE9BQU8sQ0FBQyxPQUFPLENBQUMsQ0FBQzs7OzthQUNwQixDQUFDLENBQUM7SUFDUCxDQUFDO0lBQ0wsc0JBQUM7QUFBRCxDQUFDLEFBM0NELElBMkNDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVmVoaWNsZXNHYXRld2F5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVmVoaWNsZXNHYXRld2F5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsT0FBTyxLQUE2QixNQUFNLE9BQU8sQ0FBQztBQUdsRCxPQUFPLEVBQUUsYUFBYSxFQUFFLE1BQU0sMkJBQTJCLENBQUM7QUFFMUQ7SUFPSSx5QkFBbUIsT0FBZSxFQUFFLEtBQTZCLEVBQUUsT0FBZTtRQUM5RSxJQUFJLENBQUMsSUFBSSxHQUFXLE9BQU8sR0FBRyxlQUFlLENBQUMsV0FBVyxDQUFDO1FBQzFELElBQUksQ0FBQyxZQUFZLEdBQUcsRUFBRSxPQUFPLEVBQUUsT0FBTyxFQUFFLENBQUM7UUFDekMsSUFBSSxDQUFDLE1BQU0sR0FBUyxLQUFLLENBQUM7SUFDOUIsQ0FBQztJQUVZLHlDQUFlLEdBQTVCLFVBQTZCLEdBQVc7Ozs7Ozt3QkFDOUIsS0FBSyxHQUFHLElBQUksQ0FBQyxNQUFNLENBQUM7d0JBRTFCLElBQUcsS0FBSyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsRUFBRTs0QkFDZixzQkFBTyxLQUFLLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxFQUFDO3lCQUN6Qjt3QkFFSyxNQUFNLEdBQUssSUFBSSxDQUFDLFlBQVksQ0FBQzt3QkFDbEIscUJBQU0sS0FBSyxDQUFDLEdBQUcsQ0FBQyxHQUFHLEVBQUUsTUFBTSxDQUFDLEVBQUE7O3dCQUF2QyxRQUFRLEdBQUcsU0FBNEI7d0JBQ3ZDLElBQUksR0FBTyxRQUFRLENBQUMsSUFBSSxDQUFDO3dCQUN6QixPQUFPLEdBQUksZUFBZSxDQUFDLHdCQUF3QixDQUFDLElBQUksQ0FBQyxDQUFDO3dCQUNoRSxLQUFLLENBQUMsR0FBRyxDQUFDLEdBQUcsRUFBRSxPQUFPLENBQUMsQ0FBQzt3QkFFeEIsc0JBQU8sT0FBTyxFQUFDOzs7O0tBQ2xCO0lBRWMsd0NBQXdCLEdBQXZDLFVBQXdDLElBQVM7UUFDN0MsSUFBTSxPQUFPLEdBQUcsSUFBSSxhQUFhLEVBQUUsQ0FBQztRQUVwQyxPQUFPLENBQUMsMkJBQTJCLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUN0RSxPQUFPLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsQ0FBQyxDQUFDO1FBQzVDLE9BQU8sQ0FBQyxnQkFBZ0IsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLGlCQUFpQixDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQztRQUNoRSxPQUFPLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDO1FBQ3BDLE9BQU8sQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDO1FBQ2pELE9BQU8sQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUM7UUFDbkMsT0FBTyxDQUFDLGlCQUFpQixDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3RELE9BQU8sQ0FBQyxlQUFlLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxDQUFDLENBQUM7UUFDOUMsT0FBTyxDQUFDLDRCQUE0QixDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsd0JBQXdCLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDakYsT0FBTyxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQztRQUNoQyxPQUFPLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDO1FBQzlCLE9BQU8sQ0FBQyxpQkFBaUIsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDNUQsT0FBTyxDQUFDLHFCQUFxQixDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO1FBQzlDLE9BQU8sQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUM7UUFDbkMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQztRQUM1QixPQUFPLENBQUMsZUFBZSxDQUFDLElBQUksQ0FBQyxlQUFlLENBQUMsQ0FBQyxDQUFDO1FBRS9DLE9BQU8sT0FBTyxDQUFDO0lBQ25CLENBQUM7SUFqRHVCLDJCQUFXLEdBQUcsV0FBVyxDQUFDO0lBa0R0RCxzQkFBQztDQUFBLEFBbkRELElBbURDO1NBbkRZLGVBQWUifQ==

@@ -14,6 +14,7 @@ describe('SpeciesEntity', () => {
         species.setEyeColor('brown');
         species.setFilmUrls(['film1']);
         species.setHairColor('green');
+        species.setLanguage('english');
         species.setHomePlanetUrl('planet1');
         species.setName('name');
         species.setSkinColor('tan');
@@ -30,6 +31,7 @@ describe('SpeciesEntity', () => {
         assert.strictEqual(species.getFilmUrls()[0], 'film1');
         assert.strictEqual(species.getHairColor(), 'green');
         assert.strictEqual(species.getHomePlanetUrl(), 'planet1');
+        assert.strictEqual(species.getLanguage(), 'english');
         assert.strictEqual(species.getName(), 'name');
         assert.strictEqual(species.getSkinColor(), 'tan');
         assert.strictEqual(species.getUpdated(), '2012-12-12 11:11:11');
@@ -49,6 +51,7 @@ describe('SpeciesEntity', () => {
         assert.strictEqual(species.getFilmUrls().length, 0);
         assert.strictEqual(species.getHairColor(), '');
         assert.strictEqual(species.getHomePlanetUrl(), '');
+        assert.strictEqual(species.getLanguage(), '');
         assert.strictEqual(species.getName(), '');
         assert.strictEqual(species.getSkinColor(), '');
         assert.strictEqual(species.getUpdated(), '');
