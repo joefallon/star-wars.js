@@ -1,17 +1,18 @@
 import * as assert from 'assert';
-import sinon from 'sinon';
 import { mount } from 'enzyme';
 import * as React from 'react';
+import sinon from 'sinon';
 import { MemoryRouter, Route, Switch } from 'react-router';
+
 import { CharacterEntity } from '../../entities/CharacterEntity';
 import { FilmEntity } from '../../entities/FilmEntity';
+import { FilmModel } from '../../models/FilmModel';
+import FilmRoute from './FilmRoute';
+import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
+import { VehicleEntity } from '../../entities/VehicleEntity';
 import { PlanetEntity } from '../../entities/PlanetEntity';
 import { SpeciesEntity } from '../../entities/SpeciesEntity';
 import { StarshipEntity } from '../../entities/StarshipEntity';
-import { VehicleEntity } from '../../entities/VehicleEntity';
-import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
-import { FilmModel } from '../../models/FilmModel';
-import FilmRoute from './FilmRoute';
 
 import { FilmRouteProps } from './FilmRouteProps';
 

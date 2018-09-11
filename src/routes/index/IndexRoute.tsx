@@ -4,6 +4,7 @@ import 'react-table/react-table.css'
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import ReactTable, { Column } from 'react-table';
+
 import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 import { FilmEntity } from '../../entities/FilmEntity';

@@ -3,16 +3,16 @@ import * as React from 'react';
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
+import { CharacterEntity } from '../../entities/CharacterEntity';
 import { FilmModelFactory } from '../../models/FilmModelFactory';
 import { FilmRouteProps } from './FilmRouteProps';
 import { FilmRouteState } from './FilmRouteState';
 import { Header } from '../../components/header/Header';
-import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 import { PlanetEntity } from '../../entities/PlanetEntity';
 import { SpeciesEntity } from '../../entities/SpeciesEntity';
+import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 import { StarshipEntity } from '../../entities/StarshipEntity';
 import { VehicleEntity } from '../../entities/VehicleEntity';
-import { CharacterEntity } from '../../entities/CharacterEntity';
 
 class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
 
@@ -21,7 +21,7 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
 
         this.state = {
             isLoading: true,
-            episodeId: props.match.params['episodeId'],
+            episodeId: props.match.params['id'],
             model:     props.model ? props.model : FilmModelFactory.create()
         };
     }
@@ -63,7 +63,7 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
         const film = this.state.film;
 
         return (
-            <div className={'container FilmRoute'}>
+            <div className='container FilmRoute'>
                 <Header />
 
                 <div className='row'>
