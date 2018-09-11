@@ -4,14 +4,16 @@ import { FilmEntity } from '../entities/FilmEntity';
 
 
 export class FilmsGateway {
-    private readonly _api: string;
-    private readonly _axiosConfig: AxiosRequestConfig;
-    private _cache: LRU.Cache<string, any>;
+    private static readonly API_SEGMENT = 'films/';
 
-    public constructor(baseApi: string, cache: LRU.Cache<string, any>) {
-        this._api = baseApi + 'films/';
-        this._axiosConfig = { timeout: 15000 };
-        this._cache = cache;
+    private readonly _api:         string;
+    private readonly _axiosConfig: AxiosRequestConfig;
+    private readonly _cache:       LRU.Cache<string, any>;
+
+    public constructor(baseApi: string, cache: LRU.Cache<string, any>, timeout: number) {
+        this._api         = baseApi + FilmsGateway.API_SEGMENT;
+        this._axiosConfig = { timeout: timeout };
+        this._cache       = cache;
     }
 
     public async retrieveAllFilms(): Promise<FilmEntity[]> {
@@ -24,24 +26,7 @@ export class FilmsGateway {
         const films    = <FilmEntity[]>[];
 
         filmData.map((item) => {
-            const episodeId = parseInt(item['episode_id'], 10);
-
-            const film = new FilmEntity();
-            film.setCharacterUrls(item['characters']);
-            film.setCreated(item['created']);
-            film.setDirector(item['director']);
-            film.setEpisodeId(episodeId);
-            film.setOpeningCrawl(item['opening_crawl']);
-            film.setPlanetUrls(item['planets']);
-            film.setProducer(item['producer']);
-            film.setReleaseDate(item['release_date']);
-            film.setSpeciesUrls(item['species']);
-            film.setStarshipUrls(item['starships']);
-            film.setTitle(item['title']);
-            film.setUpdated(item['edited']);
-            film.setUrl(item['url']);
-            film.setVehicleUrls(item['vehicles']);
-
+            const film = FilmsGateway.mapToFilmEntity(item);
             films.push(film);
         });
 
@@ -52,21 +37,26 @@ export class FilmsGateway {
 
     public retrieveFilm(filmUrl: string): Promise<FilmEntity> {
         return new Promise(async (resolve, reject) => {
-            if(this._cache.has(filmUrl)) {
-                return resolve(this._cache.get(filmUrl));
+            const cache = this._cache;
+
+            if(cache.has(filmUrl)) {
+                const film = cache.get(filmUrl);
+                return resolve(film);
             }
 
-            const response = await axios.get(filmUrl, this._axiosConfig);
+            const config   = this._axiosConfig;
+            const response = await axios.get(filmUrl, config);
             const filmData = <any[]>response.data;
-            const film = FilmsGateway.mapToFilmEntity(filmData);
+            const film     = FilmsGateway.mapToFilmEntity(filmData);
 
-            this._cache.set(filmUrl, film);
+            cache.set(filmUrl, film);
             resolve(film);
         });
     }
 
     private static mapToFilmEntity(filmData: any[]): FilmEntity {
         const film = new FilmEntity();
+
         film.setCharacterUrls(filmData['characters']);
         film.setCreated(filmData['created']);
         film.setDirector(filmData['director']);

@@ -36,48 +36,56 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import axios from 'axios';
 import { PlanetEntity } from '../entities/PlanetEntity';
 var PlanetsGateway = /** @class */ (function () {
-    function PlanetsGateway(baseApi, cache) {
-        this._api = baseApi + 'planets/';
-        this._axiosConfig = { timeout: 15000 };
+    function PlanetsGateway(baseApi, cache, timeout) {
+        this._api = baseApi + PlanetsGateway.API_SEGMENT;
+        this._axiosConfig = { timeout: timeout };
         this._cache = cache;
     }
     PlanetsGateway.prototype.retrievePlanet = function (url) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var response, data, planet;
+            var cache, planet_1, config, response, data, planet;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (this._cache.has(url)) {
-                            return [2 /*return*/, resolve(this._cache.get(url))];
+                        cache = this._cache;
+                        if (cache.has(url)) {
+                            planet_1 = cache.get(url);
+                            return [2 /*return*/, resolve(planet_1)];
                         }
-                        return [4 /*yield*/, axios.get(url, this._axiosConfig)];
+                        config = this._axiosConfig;
+                        return [4 /*yield*/, axios.get(url, config)];
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        planet = new PlanetEntity();
-                        planet.setClimate(data['climate']);
-                        planet.setCreated(data['created']);
-                        planet.setDiameterInKilometers(parseInt(data['diameter'], 10));
-                        planet.setFilmUrls(data['films']);
-                        planet.setGravity(data['gravity']);
-                        planet.setName(data['name']);
-                        planet.setOrbitalPeriodInDays(parseInt(data['orbital_period'], 10));
-                        planet.setPopulation(data['population']);
-                        planet.setResidentCharacterUrls(data['residents']);
-                        planet.setRotationPeriodInDays(parseInt(data['rotation_period'], 10));
-                        planet.setSurfaceWaterPercent(parseFloat(data['surface_water']));
-                        planet.setTerrain(data['terrain']);
-                        planet.setUpdated(data['edited']);
-                        planet.setUrl(data['url']);
-                        this._cache.set(url, planet);
+                        planet = PlanetsGateway.mapResponseDataToEntity(data);
+                        cache.set(url, planet);
                         resolve(planet);
                         return [2 /*return*/];
                 }
             });
         }); });
     };
+    PlanetsGateway.mapResponseDataToEntity = function (data) {
+        var planet = new PlanetEntity();
+        planet.setClimate(data['climate']);
+        planet.setCreated(data['created']);
+        planet.setDiameterInKilometers(parseInt(data['diameter'], 10));
+        planet.setFilmUrls(data['films']);
+        planet.setGravity(data['gravity']);
+        planet.setName(data['name']);
+        planet.setOrbitalPeriodInDays(parseInt(data['orbital_period'], 10));
+        planet.setPopulation(data['population']);
+        planet.setResidentCharacterUrls(data['residents']);
+        planet.setRotationPeriodInDays(parseInt(data['rotation_period'], 10));
+        planet.setSurfaceWaterPercent(parseFloat(data['surface_water']));
+        planet.setTerrain(data['terrain']);
+        planet.setUpdated(data['edited']);
+        planet.setUrl(data['url']);
+        return planet;
+    };
+    PlanetsGateway.API_SEGMENT = 'planets/';
     return PlanetsGateway;
 }());
 export { PlanetsGateway };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGxhbmV0c0dhdGV3YXkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJQbGFuZXRzR2F0ZXdheS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLE9BQU8sS0FBNkIsTUFBTSxPQUFPLENBQUM7QUFFbEQsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLDBCQUEwQixDQUFDO0FBRXhEO0lBS0ksd0JBQW1CLE9BQWUsRUFBRSxLQUE2QjtRQUM3RCxJQUFJLENBQUMsSUFBSSxHQUFHLE9BQU8sR0FBRyxVQUFVLENBQUM7UUFDakMsSUFBSSxDQUFDLFlBQVksR0FBRyxFQUFFLE9BQU8sRUFBRSxLQUFLLEVBQUUsQ0FBQztRQUN2QyxJQUFJLENBQUMsTUFBTSxHQUFHLEtBQUssQ0FBQztJQUN4QixDQUFDO0lBRU0sdUNBQWMsR0FBckIsVUFBc0IsR0FBVztRQUFqQyxpQkE0QkM7UUEzQkcsT0FBTyxJQUFJLE9BQU8sQ0FBQyxVQUFPLE9BQU8sRUFBRSxNQUFNOzs7Ozt3QkFDckMsSUFBRyxJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsRUFBRTs0QkFDckIsc0JBQU8sT0FBTyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEVBQUM7eUJBQ3hDO3dCQUVnQixxQkFBTSxLQUFLLENBQUMsR0FBRyxDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUMsWUFBWSxDQUFDLEVBQUE7O3dCQUFsRCxRQUFRLEdBQUcsU0FBdUM7d0JBQ2xELElBQUksR0FBRyxRQUFRLENBQUMsSUFBSSxDQUFDO3dCQUVyQixNQUFNLEdBQUcsSUFBSSxZQUFZLEVBQUUsQ0FBQzt3QkFDbEMsTUFBTSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQzt3QkFDbkMsTUFBTSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQzt3QkFDbkMsTUFBTSxDQUFDLHVCQUF1QixDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQzt3QkFDL0QsTUFBTSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQzt3QkFDbEMsTUFBTSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQzt3QkFDbkMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQzt3QkFDN0IsTUFBTSxDQUFDLHNCQUFzQixDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDO3dCQUNwRSxNQUFNLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsQ0FBQyxDQUFDO3dCQUN6QyxNQUFNLENBQUMsd0JBQXdCLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxDQUFDLENBQUM7d0JBQ25ELE1BQU0sQ0FBQyx1QkFBdUIsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLGlCQUFpQixDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQzt3QkFDdEUsTUFBTSxDQUFDLHNCQUFzQixDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsZUFBZSxDQUFDLENBQUMsQ0FBQyxDQUFDO3dCQUNqRSxNQUFNLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDO3dCQUNuQyxNQUFNLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO3dCQUNsQyxNQUFNLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO3dCQUUzQixJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxHQUFHLEVBQUUsTUFBTSxDQUFDLENBQUM7d0JBQzdCLE9BQU8sQ0FBQyxNQUFNLENBQUMsQ0FBQzs7OzthQUNuQixDQUFDLENBQUM7SUFDUCxDQUFDO0lBQ0wscUJBQUM7QUFBRCxDQUFDLEFBeENELElBd0NDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGxhbmV0c0dhdGV3YXkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJQbGFuZXRzR2F0ZXdheS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLE9BQU8sS0FBNkIsTUFBTSxPQUFPLENBQUM7QUFHbEQsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLDBCQUEwQixDQUFDO0FBRXhEO0lBT0ksd0JBQW1CLE9BQWUsRUFBRSxLQUE2QixFQUFFLE9BQWU7UUFDOUUsSUFBSSxDQUFDLElBQUksR0FBVyxPQUFPLEdBQUcsY0FBYyxDQUFDLFdBQVcsQ0FBQztRQUN6RCxJQUFJLENBQUMsWUFBWSxHQUFHLEVBQUUsT0FBTyxFQUFFLE9BQU8sRUFBRSxDQUFDO1FBQ3pDLElBQUksQ0FBQyxNQUFNLEdBQVMsS0FBSyxDQUFDO0lBQzlCLENBQUM7SUFFTSx1Q0FBYyxHQUFyQixVQUFzQixHQUFXO1FBQWpDLGlCQWlCQztRQWhCRyxPQUFPLElBQUksT0FBTyxDQUFDLFVBQU8sT0FBTyxFQUFFLE1BQU07Ozs7O3dCQUMvQixLQUFLLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQzt3QkFFMUIsSUFBRyxLQUFLLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxFQUFFOzRCQUNULFdBQVMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsQ0FBQzs0QkFDOUIsc0JBQU8sT0FBTyxDQUFDLFFBQU0sQ0FBQyxFQUFDO3lCQUMxQjt3QkFFSyxNQUFNLEdBQUssSUFBSSxDQUFDLFlBQVksQ0FBQzt3QkFDbEIscUJBQU0sS0FBSyxDQUFDLEdBQUcsQ0FBQyxHQUFHLEVBQUUsTUFBTSxDQUFDLEVBQUE7O3dCQUF2QyxRQUFRLEdBQUcsU0FBNEI7d0JBQ3ZDLElBQUksR0FBTyxRQUFRLENBQUMsSUFBSSxDQUFDO3dCQUN6QixNQUFNLEdBQUssY0FBYyxDQUFDLHVCQUF1QixDQUFDLElBQUksQ0FBQyxDQUFDO3dCQUU5RCxLQUFLLENBQUMsR0FBRyxDQUFDLEdBQUcsRUFBRSxNQUFNLENBQUMsQ0FBQzt3QkFDdkIsT0FBTyxDQUFDLE1BQU0sQ0FBQyxDQUFDOzs7O2FBQ25CLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFYyxzQ0FBdUIsR0FBdEMsVUFBdUMsSUFBUztRQUM1QyxJQUFNLE1BQU0sR0FBRyxJQUFJLFlBQVksRUFBRSxDQUFDO1FBRWxDLE1BQU0sQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUM7UUFDbkMsTUFBTSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQztRQUNuQyxNQUFNLENBQUMsdUJBQXVCLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDO1FBQy9ELE1BQU0sQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUM7UUFDbEMsTUFBTSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQztRQUNuQyxNQUFNLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDO1FBQzdCLE1BQU0sQ0FBQyxzQkFBc0IsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLGdCQUFnQixDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQztRQUNwRSxNQUFNLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsQ0FBQyxDQUFDO1FBQ3pDLE1BQU0sQ0FBQyx3QkFBd0IsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQztRQUNuRCxNQUFNLENBQUMsdUJBQXVCLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDdEUsTUFBTSxDQUFDLHNCQUFzQixDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsZUFBZSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ2pFLE1BQU0sQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUM7UUFDbkMsTUFBTSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQztRQUNsQyxNQUFNLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO1FBRTNCLE9BQU8sTUFBTSxDQUFDO0lBQ2xCLENBQUM7SUFsRHVCLDBCQUFXLEdBQUcsVUFBVSxDQUFDO0lBbURyRCxxQkFBQztDQUFBLEFBcERELElBb0RDO1NBcERZLGNBQWMifQ==
