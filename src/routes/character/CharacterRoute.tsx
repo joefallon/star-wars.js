@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
+import { FilmEntity } from '../../entities/FilmEntity';
+import { SpeciesEntity } from '../../entities/SpeciesEntity';
 import CharacterModelFactory from '../../models/CharacterModelFactory';
 import CharacterRouteProps from './CharacterRouteProps';
 import CharacterRouteState from './CharacterRouteState';
@@ -98,35 +100,33 @@ class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRoute
                                 </div>
 
                                 <h3>Films</h3>
-
-                                <div>
-                                    <li key='id' className='films'>
-                                        <Link to={'/film/:id'}>Example Film Name</Link>
-                                    </li>
-                                </div>
+                                <div>{this.getFilms()}</div>
 
                                 <h3>Species</h3>
-
                                 <div>
-                                    <li key='id' className='species'>
-                                        <Link to={'/species/:id'}>Example Species Name</Link>
-                                    </li>
+                                    <ul className='species'>
+                                        <li key=':id' className='species-item'>
+                                            <Link to={'/species/:id'}>Example Species Name</Link>
+                                        </li>
+                                    </ul>
                                 </div>
 
                                 <h3>Vehicles</h3>
-
                                 <div>
-                                    <li key='id' className='vehicles'>
-                                        <Link to={'/vehicle/:id'}>Example Vehicle Name</Link>
-                                    </li>
+                                    <ul className='vehicles'>
+                                        <li key=':id' className='vehicle-item'>
+                                            <Link to={'/vehicle/:id'}>Example Vehicle Name</Link>
+                                        </li>
+                                    </ul>
                                 </div>
 
                                 <h3>Starships</h3>
-
                                 <div>
-                                    <li key='id' className='starships'>
-                                        <Link to={'/starship/:id'}>Example Starship Name</Link>
-                                    </li>
+                                    <ul className='starships'>
+                                        <li key=':id' className='starship-item'>
+                                            <Link to={'/starship/:id'}>Example Starship Name</Link>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -137,11 +137,57 @@ class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRoute
     }
 
     private getPlanetLink = () => {
+        const homeworld = this.state.model.getHomeworld();
+        const parts     = homeworld.getUrl().split('/');
+        const id        = parts[parts.length - 2];
 
-        const name = 'Planet Name';
-        const url  = '/planet/:id';
+        const name = homeworld.getName();
+        const url  = `/planet/${id}`;
 
         return (<Link to={url} className='homeworld'>{name}</Link>);
+    };
+
+    private getFilms = () => {
+        const films = this.state.model.getFilms();
+
+        return (
+            <ul className='films'>
+                {films.map((film: FilmEntity) => {
+                    const title   = film.getTitle();
+                    const filmUrl = film.getUrl();
+                    const parts   = filmUrl.split('/');
+                    const id      = parts[parts.length - 2];
+
+                    return (
+                        <li key={id} className='film-item'>
+                            <Link to={`/film/${id}`}>{title}</Link>
+                        </li>
+                    );
+                })}
+
+            </ul>
+        );
+    };
+
+    private getSpecies = () => {
+        const species = this.state.model.getSpecies();
+
+        // return (
+        //     <ul>
+        //         {species.map((singleSpecies: SpeciesEntity) => {
+        //             const name  = singleSpecies.getName();
+        //             const url   = singleSpecies.getUrl();
+        //             const parts = url.split('/');
+        //             const id    = parts[parts.length - 2];
+        //
+        //             return (
+        //                 <li key={id} className='species-item'>
+        //                     <Link to={`/species/${id}`}>{name}</Link>
+        //                 </li>
+        //             );
+        //         })}
+        //     </ul>
+        // );
     };
 }
 

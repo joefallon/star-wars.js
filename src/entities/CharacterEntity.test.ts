@@ -16,7 +16,7 @@ describe('CharacterEntity', () => {
         char.setMassInKilograms(2);
         char.setName('name');
         char.setSkinColor('white');
-        char.setSpeciesUrl('species1');
+        char.setSpeciesUrls(['species1']);
         char.setStarshipUrls(['starship1']);
         char.setUpdated('2012-12-12 12:12:12');
         char.setUrl('url');
@@ -33,7 +33,7 @@ describe('CharacterEntity', () => {
         assert.strictEqual(char.getMassInKilograms(), 2);
         assert.strictEqual(char.getName(), 'name');
         assert.strictEqual(char.getSkinColor(), 'white');
-        assert.strictEqual(char.getSpeciesUrl(), 'species1');
+        assert.strictEqual(char.getSpeciesUrls()[0], 'species1');
         assert.strictEqual(char.getStarshipUrls()[0], 'starship1');
         assert.strictEqual(char.getUpdated(), '2012-12-12 12:12:12');
         assert.strictEqual(char.getUrl(), 'url');
@@ -54,7 +54,7 @@ describe('CharacterEntity', () => {
         assert.strictEqual(char.getMassInKilograms(), 0);
         assert.strictEqual(char.getName(), '');
         assert.strictEqual(char.getSkinColor(), '');
-        assert.strictEqual(char.getSpeciesUrl(), '');
+        assert.strictEqual(char.getSpeciesUrls().length, 0);
         assert.strictEqual(char.getStarshipUrls().length, 0);
         assert.strictEqual(char.getUpdated(), '');
         assert.strictEqual(char.getUrl(), '');

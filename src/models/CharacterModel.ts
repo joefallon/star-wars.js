@@ -11,10 +11,10 @@ export default class CharacterModel {
 
     private _gateways:  Gateways;
     private _character: CharacterEntity;
-    private _homeworld: PlanetEntity[];
+    private _homeworld: PlanetEntity;
     private _films:     FilmEntity[];
     private _vehicles:  VehicleEntity[];
-    private _species:   SpeciesEntity[];
+    private _species:   SpeciesEntity;
     private _starships: StarshipEntity[];
 
     public constructor(gateways: Gateways) {
@@ -45,10 +45,25 @@ export default class CharacterModel {
         return this._character;
     }
 
-    private loadHomeworld(): PlanetEntity[] {
-        
+    public getHomeworld(): PlanetEntity {
+        return this._homeworld;
+    }
 
-        return undefined;
+    public getFilms(): FilmEntity[] {
+        return this._films;
+    }
+
+    public getSpecies(): SpeciesEntity {
+        return this._species;
+    }
+
+    private async loadHomeworld(): Promise<PlanetEntity> {
+        const character = this._character;
+        const planetUrl = character.getHomePlanetUrl();
+        const planetsGateway = this._gateways.planetsGateway;
+        const planet = await planetsGateway.retrievePlanet(planetUrl);
+
+        return planet;
     }
 
     private async loadFilms(): Promise<FilmEntity[]> {
@@ -71,11 +86,17 @@ export default class CharacterModel {
         return null;
     }
 
-    private loadSpecies() {
-        return null;
+    private async loadSpecies(): Promise<SpeciesEntity> {
+        const character      = this._character;
+        const speciesGateway = this._gateways.speciesGateway;
+        const speciesUrl     = character.getSpeciesUrls();
+        const species        = await speciesGateway.retrieveSpecies(speciesUrl);
+
+        return species;
     }
 
     private loadStarships() {
         return null;
     }
+
 }

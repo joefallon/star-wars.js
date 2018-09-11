@@ -9,7 +9,7 @@ export class CharacterEntity {
     private _birthYear:           string;
     private _gender:              string;
     private _homePlanetUrl:       string;
-    private _speciesUrl:          string;
+    private _speciesUrl:          string[];
     private _filmUrls:            string[];
     private _vehicleUrls:         string[];
     private _starshipUrls:        string[];
@@ -28,7 +28,7 @@ export class CharacterEntity {
         this._massInKilograms     = 0;
         this._name                = '';
         this._skinColor           = '';
-        this._speciesUrl          = '';
+        this._speciesUrl          = [];
         this._starshipUrls        = [];
         this._updated             = '';
         this._url                 = '';
@@ -123,11 +123,11 @@ export class CharacterEntity {
         this._filmUrls = value;
     }
 
-    public getSpeciesUrl(): string {
+    public getSpeciesUrls(): string[] {
         return this._speciesUrl;
     }
 
-    public setSpeciesUrl(value: string) {
+    public setSpeciesUrls(value: string[]) {
         this._speciesUrl = value;
     }
 

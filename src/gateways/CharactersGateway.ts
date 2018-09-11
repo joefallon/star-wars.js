@@ -35,7 +35,7 @@ export class CharactersGateway {
             character.setMassInKilograms(parseInt(data['mass'], 10));
             character.setName(data['name']);
             character.setSkinColor(data['skin_color']);
-            character.setSpeciesUrl(data['species'][0]);
+            character.setSpeciesUrls(data['species'][0]);
             character.setStarshipUrls(data['starships']);
             character.setUpdated(data['edited']);
             character.setUrl(data['url']);
