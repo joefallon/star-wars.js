@@ -1,10 +1,10 @@
-import { CharacterEntity } from '../entities/CharacterEntity';
-import { FilmEntity } from '../entities/FilmEntity';
-import { PlanetEntity } from '../entities/PlanetEntity';
-import { SpeciesEntity } from '../entities/SpeciesEntity';
-import { StarshipEntity } from '../entities/StarshipEntity';
-import { VehicleEntity } from '../entities/VehicleEntity';
-import { Gateways } from '../gateways/Gateways';
+import CharacterEntity from '../entities/CharacterEntity';
+import FilmEntity from '../entities/FilmEntity';
+import PlanetEntity from '../entities/PlanetEntity';
+import SpeciesEntity from '../entities/SpeciesEntity';
+import StarshipEntity from '../entities/StarshipEntity';
+import VehicleEntity from '../entities/VehicleEntity';
+import Gateways from '../gateways/Gateways';
 
 export default class CharacterModel {
     private static readonly BASE_URL = 'https://swapi.co/api/people/';
@@ -14,7 +14,7 @@ export default class CharacterModel {
     private _homeworld: PlanetEntity;
     private _films:     FilmEntity[];
     private _vehicles:  VehicleEntity[];
-    private _species:   SpeciesEntity;
+    private _species:   SpeciesEntity[];
     private _starships: StarshipEntity[];
 
     public constructor(gateways: Gateways) {
@@ -53,7 +53,7 @@ export default class CharacterModel {
         return this._films;
     }
 
-    public getSpecies(): SpeciesEntity {
+    public getSpecies(): SpeciesEntity[] {
         return this._species;
     }
 
@@ -86,13 +86,15 @@ export default class CharacterModel {
         return null;
     }
 
-    private async loadSpecies(): Promise<SpeciesEntity> {
-        const character      = this._character;
-        const speciesGateway = this._gateways.speciesGateway;
-        const speciesUrl     = character.getSpeciesUrls();
-        const species        = await speciesGateway.retrieveSpecies(speciesUrl);
+    private async loadSpecies(): Promise<SpeciesEntity[]> {
+        // const character      = this._character;
+        // const speciesGateway = this._gateways.speciesGateway;
+        // const speciesUrl     = character.getSpeciesUrls();
+        // const species        = await speciesGateway.retrieveSpecies(speciesUrl);
+        //
+        // return species;
 
-        return species;
+        return null;
     }
 
     private loadStarships() {

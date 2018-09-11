@@ -2,13 +2,13 @@ import * as LRU from 'lru-cache';
 
 import main_config from '../config/main_config';
 
-import { Gateways } from './Gateways';
-import { CharactersGateway } from './CharactersGateway';
-import { FilmsGateway } from './FilmsGateway';
-import { PlanetsGateway } from './PlanetsGateway';
-import { SpeciesGateway } from './SpeciesGateway';
-import { StarshipsGateway } from './StarshipsGateway';
-import { VehiclesGateway } from './VehiclesGateway';
+import Gateways from './Gateways';
+import CharactersGateway from './CharactersGateway';
+import FilmsGateway from './FilmsGateway';
+import PlanetsGateway from './PlanetsGateway';
+import SpeciesGateway from './SpeciesGateway';
+import StarshipsGateway from './StarshipsGateway';
+import VehiclesGateway from './VehiclesGateway';
 
 export class GatewaysFactory {
     private static _cache: LRU.Cache<string, any>;

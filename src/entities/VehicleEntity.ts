@@ -1,4 +1,4 @@
-export class VehicleEntity {
+export default class VehicleEntity {
     private _url:     string;
     private _created: string;
     private _updated: string;

@@ -1,9 +1,10 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import * as LRU from 'lru-cache';
-import { FilmEntity } from '../entities/FilmEntity';
+
+import FilmEntity from '../entities/FilmEntity';
 
 
-export class FilmsGateway {
+export default class FilmsGateway {
     private static readonly API_SEGMENT = 'films/';
 
     private readonly _api:         string;

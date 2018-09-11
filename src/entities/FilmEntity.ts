@@ -1,4 +1,4 @@
-export class FilmEntity {
+export default class FilmEntity {
     private _url:           string;
     private _title:         string;
     private _episodeId:     number;

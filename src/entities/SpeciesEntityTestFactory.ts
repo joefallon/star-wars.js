@@ -1,4 +1,4 @@
-import { SpeciesEntity } from './SpeciesEntity';
+import SpeciesEntity from './SpeciesEntity';
 
 export default class SpeciesEntityTestFactory {
     public static create(): SpeciesEntity {

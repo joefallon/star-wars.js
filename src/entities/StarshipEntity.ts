@@ -1,4 +1,4 @@
-export class StarshipEntity {
+export default class StarshipEntity {
     private _url:     string;
     private _created: string;
     private _updated: string;

@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 
-import { VehicleEntity } from './VehicleEntity';
+import VehicleEntity from './VehicleEntity';
 
 describe('VehicleEntity', () => {
     it('has correct getters and setters', async () => {

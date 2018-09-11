@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import Loadable  from 'react-loadable';
 
-import { CharacterRouteProps } from './routes/character/CharacterRouteProps';
+import CharacterRouteProps from './routes/character/CharacterRouteProps';
 import { IndexRouteProps } from './routes/index/IndexRouteProps';
 import { FilmRouteProps } from './routes/film/FilmRouteProps';
 

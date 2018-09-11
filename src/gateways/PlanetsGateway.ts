@@ -1,9 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import * as LRU from 'lru-cache';
 
-import { PlanetEntity } from '../entities/PlanetEntity';
+import PlanetEntity from '../entities/PlanetEntity';
 
-export class PlanetsGateway {
+export default class PlanetsGateway {
     private static readonly API_SEGMENT = 'planets/';
 
     private readonly _api: string;

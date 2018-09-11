@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 
-import { PlanetEntity } from './PlanetEntity';
+import PlanetEntity from './PlanetEntity';
 
 describe('PlanetEntity', () => {
     it('has correct getters and setters', async () => {

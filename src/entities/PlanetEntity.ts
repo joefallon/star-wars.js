@@ -1,4 +1,4 @@
-export class PlanetEntity {
+export default class PlanetEntity {
     private _url: string;
     private _created: string;
     private _updated: string;

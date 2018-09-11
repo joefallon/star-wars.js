@@ -4,7 +4,7 @@ import * as React from 'react';
 import { MemoryRouter, Route, Switch } from 'react-router';
 import sinon from 'sinon';
 
-import { FilmEntity } from '../../entities/FilmEntity';
+import FilmEntity from '../../entities/FilmEntity';
 import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
 import { IndexModel } from '../../models/IndexModel';
 import IndexRoute from './IndexRoute';

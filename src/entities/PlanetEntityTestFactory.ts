@@ -1,4 +1,4 @@
-import { PlanetEntity } from './PlanetEntity';
+import PlanetEntity from './PlanetEntity';
 
 export default class PlanetEntityTestFactory {
     public static create(): PlanetEntity {

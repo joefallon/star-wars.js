@@ -1,10 +1,10 @@
-import { CharacterEntity } from '../entities/CharacterEntity';
-import { FilmEntity } from '../entities/FilmEntity';
-import { PlanetEntity } from '../entities/PlanetEntity';
-import { SpeciesEntity } from '../entities/SpeciesEntity';
-import { StarshipEntity } from '../entities/StarshipEntity';
-import { VehicleEntity } from '../entities/VehicleEntity';
-import { Gateways } from '../gateways/Gateways';
+import CharacterEntity from '../entities/CharacterEntity';
+import FilmEntity from '../entities/FilmEntity';
+import PlanetEntity from '../entities/PlanetEntity';
+import SpeciesEntity from '../entities/SpeciesEntity';
+import StarshipEntity from '../entities/StarshipEntity';
+import VehicleEntity from '../entities/VehicleEntity';
+import Gateways from '../gateways/Gateways';
 
 export class FilmModel {
     private readonly _gateways:   Gateways;

@@ -1,4 +1,4 @@
-export class CharacterEntity {
+export default class CharacterEntity {
     private _url:                 string;
     private _name:                string;
     private _heightInCentimeters: number;

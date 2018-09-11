@@ -1,4 +1,4 @@
-import { CharacterEntity } from './CharacterEntity';
+import CharacterEntity from './CharacterEntity';
 
 export default class CharacterEntityTestFactory {
     public static create(): CharacterEntity {
@@ -14,7 +14,7 @@ export default class CharacterEntityTestFactory {
         char.setMassInKilograms(2);
         char.setName('test name');
         char.setSkinColor('white');
-        char.setSpeciesUrls('https://swapi.co/api/species/3/');
+        char.setSpeciesUrls(['https://swapi.co/api/species/3/']);
         char.setStarshipUrls(['https://swapi.co/api/starships/4/']);
         char.setUpdated('2012-12-12 12:12:12');
         char.setUrl('https://swapi.co/api/people/5/');

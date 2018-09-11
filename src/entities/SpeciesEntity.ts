@@ -1,4 +1,4 @@
-export class SpeciesEntity {
+export default class SpeciesEntity {
     private _url:                        string;
     private _created:                    string;
     private _updated:                    string;

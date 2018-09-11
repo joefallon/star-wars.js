@@ -1,4 +1,4 @@
-import { FilmEntity } from './FilmEntity';
+import FilmEntity from './FilmEntity';
 
 export default class FilmEntityTestFactory {
     public static create(): FilmEntity {

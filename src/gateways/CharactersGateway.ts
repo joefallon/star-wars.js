@@ -1,9 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import * as LRU from 'lru-cache';
 
-import { CharacterEntity } from '../entities/CharacterEntity';
+import CharacterEntity from '../entities/CharacterEntity';
 
-export class CharactersGateway {
+export default class CharactersGateway {
     private static readonly API_SEGMENT = 'characters/';
 
     private readonly _api:         string;

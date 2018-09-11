@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 
-import { FilmEntity } from './FilmEntity';
+import FilmEntity from './FilmEntity';
 
 describe('FilmEntity', () => {
 
