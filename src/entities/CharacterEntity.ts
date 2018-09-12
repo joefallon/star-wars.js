@@ -1,4 +1,6 @@
-export default class CharacterEntity {
+import { AbstractEntity } from './AbstractEntity';
+
+export class CharacterEntity extends AbstractEntity {
     private _url:                 string;
     private _name:                string;
     private _heightInCentimeters: number;
@@ -17,6 +19,7 @@ export default class CharacterEntity {
     private _updated:             string;
 
     public constructor() {
+        super();
         this._birthYear           = '';
         this._created             = '';
         this._eyeColor            = '';
@@ -161,5 +164,9 @@ export default class CharacterEntity {
 
     public setUpdated(value: string) {
         this._updated = value;
+    }
+
+    public getId(): number {
+        return CharacterEntity.getIdFromUrl(this._url);
     }
 }

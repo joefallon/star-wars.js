@@ -3,7 +3,7 @@ import * as React from 'react';
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-import CharacterEntity from '../../entities/CharacterEntity';
+import { CharacterEntity } from '../../entities/CharacterEntity';
 import { FilmModelFactory } from '../../models/FilmModelFactory';
 import { FilmRouteProps } from './FilmRouteProps';
 import { FilmRouteState } from './FilmRouteState';

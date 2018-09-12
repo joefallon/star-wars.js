@@ -1,43 +1,45 @@
 import * as assert from 'assert';
 
-import CharacterEntity from './CharacterEntity';
+import { CharacterEntity } from './CharacterEntity';
 
 describe('CharacterEntity', () => {
+
     it('has correct getters and setters', async () => {
         const char = new CharacterEntity();
         char.setBirthYear('1900');
         char.setCreated('2012-12-12 11:11:11');
-        char.setEyeColor('brown');
-        char.setFilmUrls(['film1']);
-        char.setGender('male');
-        char.setHairColor('green');
-        char.setHeightInCentimeters(1);
-        char.setHomePlanetUrl('planet1');
-        char.setMassInKilograms(2);
-        char.setName('name');
-        char.setSkinColor('white');
-        char.setSpeciesUrls(['species1']);
-        char.setStarshipUrls(['starship1']);
+        char.setEyeColor('test eye color');
+        char.setFilmUrls(['https://swapi.co/api/films/1/']);
+        char.setGender('test gender');
+        char.setHairColor('test hair color');
+        char.setHeightInCentimeters(10);
+        char.setHomePlanetUrl('https://swapi.co/api/planets/2/');
+        char.setMassInKilograms(22);
+        char.setName('test name');
+        char.setSkinColor('test skin color');
+        char.setSpeciesUrls(['https://swapi.co/api/species/3/']);
+        char.setStarshipUrls(['https://swapi.co/api/starships/4/']);
         char.setUpdated('2012-12-12 12:12:12');
-        char.setUrl('url');
-        char.setVehicleUrls(['vehicle1']);
+        char.setUrl('https://swapi.co/api/people/5/');
+        char.setVehicleUrls(['https://swapi.co/api/vehicles/6/']);
 
         assert.strictEqual(char.getBirthYear(), '1900');
         assert.strictEqual(char.getCreated(), '2012-12-12 11:11:11');
-        assert.strictEqual(char.getEyeColor(), 'brown');
-        assert.strictEqual(char.getFilmUrls()[0], 'film1');
-        assert.strictEqual(char.getGender(), 'male');
-        assert.strictEqual(char.getHairColor(), 'green');
-        assert.strictEqual(char.getHeightInCentimeters(), 1);
-        assert.strictEqual(char.getHomePlanetUrl(), 'planet1');
-        assert.strictEqual(char.getMassInKilograms(), 2);
-        assert.strictEqual(char.getName(), 'name');
-        assert.strictEqual(char.getSkinColor(), 'white');
-        assert.strictEqual(char.getSpeciesUrls()[0], 'species1');
-        assert.strictEqual(char.getStarshipUrls()[0], 'starship1');
+        assert.strictEqual(char.getEyeColor(), 'test eye color');
+        assert.strictEqual(char.getFilmUrls()[0], 'https://swapi.co/api/films/1/');
+        assert.strictEqual(char.getGender(), 'test gender');
+        assert.strictEqual(char.getHairColor(), 'test hair color');
+        assert.strictEqual(char.getHeightInCentimeters(), 10);
+        assert.strictEqual(char.getHomePlanetUrl(), 'https://swapi.co/api/planets/2/');
+        assert.strictEqual(char.getMassInKilograms(), 22);
+        assert.strictEqual(char.getName(), 'test name');
+        assert.strictEqual(char.getSkinColor(), 'test skin color');
+        assert.strictEqual(char.getSpeciesUrls()[0], 'https://swapi.co/api/species/3/');
+        assert.strictEqual(char.getStarshipUrls()[0], 'https://swapi.co/api/starships/4/');
         assert.strictEqual(char.getUpdated(), '2012-12-12 12:12:12');
-        assert.strictEqual(char.getUrl(), 'url');
-        assert.strictEqual(char.getVehicleUrls()[0], 'vehicle1');
+        assert.strictEqual(char.getUrl(), 'https://swapi.co/api/people/5/');
+        assert.strictEqual(char.getVehicleUrls()[0], 'https://swapi.co/api/vehicles/6/');
+        assert.strictEqual(char.getId(), 5);
     });
 
     it('initializes correctly', async () => {
@@ -59,5 +61,6 @@ describe('CharacterEntity', () => {
         assert.strictEqual(char.getUpdated(), '');
         assert.strictEqual(char.getUrl(), '');
         assert.strictEqual(char.getVehicleUrls().length, 0);
+        assert.strictEqual(char.getId(), 0);
     });
 });
