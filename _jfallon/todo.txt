@@ -1,7 +1,17 @@
 + add getId to CharacterEntity
     + normalize CE test factory
-- add getId to FilmEntity
+
++ add getId to FilmEntity
+    + normalize FE test factory
+
 - add getId to PlanetEntity
+    - normalize PE test factory
+
 - add getId to SpeciesEntity
+    - normalize SE test factory
+
 - add getId to StarshipEntity
+    - normalize SE test factory
+
 - add getId to VehicleEntity
+    - normalize VE test factory

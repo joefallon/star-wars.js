@@ -1,4 +1,4 @@
-import FilmEntity from '../../entities/FilmEntity';
+import { FilmEntity } from '../../entities/FilmEntity';
 
 export interface IndexRouteState {
     isLoading: boolean,

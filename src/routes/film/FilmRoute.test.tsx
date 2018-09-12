@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import { MemoryRouter, Route, Switch } from 'react-router';
 
 import { CharacterEntity } from '../../entities/CharacterEntity';
-import FilmEntity from '../../entities/FilmEntity';
+import { FilmEntity } from '../../entities/FilmEntity';
 import { FilmModel } from '../../models/FilmModel';
 import FilmRoute from './FilmRoute';
 import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';

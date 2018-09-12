@@ -1,5 +1,5 @@
 import { CharacterEntity } from '../entities/CharacterEntity';
-import FilmEntity from '../entities/FilmEntity';
+import { FilmEntity } from '../entities/FilmEntity';
 import PlanetEntity from '../entities/PlanetEntity';
 import SpeciesEntity from '../entities/SpeciesEntity';
 import StarshipEntity from '../entities/StarshipEntity';

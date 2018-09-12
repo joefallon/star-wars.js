@@ -1,4 +1,6 @@
-export default class FilmEntity {
+import { AbstractEntity } from './AbstractEntity';
+
+export class FilmEntity extends AbstractEntity {
     private _url:           string;
     private _title:         string;
     private _episodeId:     number;
@@ -15,6 +17,7 @@ export default class FilmEntity {
     private _speciesUrls:   string[];
 
     public constructor() {
+        super();
         this._characterUrls = [];
         this._created       = '';
         this._director      = '';
@@ -141,5 +144,9 @@ export default class FilmEntity {
 
     public setSpeciesUrls(value: string[]) {
         this._speciesUrls = value;
+    }
+
+    public getId(): number {
+        return AbstractEntity.getIdFromUrl(this._url);
     }
 }

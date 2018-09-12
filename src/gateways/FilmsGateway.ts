@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import * as LRU from 'lru-cache';
 
-import FilmEntity from '../entities/FilmEntity';
+import { FilmEntity } from '../entities/FilmEntity';
 
 
 export default class FilmsGateway {

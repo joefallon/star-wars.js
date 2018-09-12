@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
-import FilmEntity from '../../entities/FilmEntity';
+import { FilmEntity } from '../../entities/FilmEntity';
 import CharacterModelFactory from '../../models/CharacterModelFactory';
 import CharacterRouteProps from './CharacterRouteProps';
 import CharacterRouteState from './CharacterRouteState';

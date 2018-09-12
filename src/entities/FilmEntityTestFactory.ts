@@ -1,4 +1,4 @@
-import FilmEntity from './FilmEntity';
+import { FilmEntity } from './FilmEntity';
 
 export default class FilmEntityTestFactory {
     public static create(): FilmEntity {
@@ -6,12 +6,12 @@ export default class FilmEntityTestFactory {
 
         film.setCharacterUrls(['https://swapi.co/api/people/20/']);
         film.setCreated('2012-12-12T12:12:12');
-        film.setDirector('director');
+        film.setDirector('test director');
         film.setUpdated('2012-12-12T11:11:11');
         film.setEpisodeId(1);
-        film.setOpeningCrawl('opening crawl');
+        film.setOpeningCrawl('test opening crawl');
         film.setPlanetUrls(['https://swapi.co/api/planets/27/']);
-        film.setProducer('producer');
+        film.setProducer('test producer');
         film.setReleaseDate('2012-11-11');
         film.setSpeciesUrls(['https://swapi.co/api/species/1/']);
         film.setStarshipUrls(['https://swapi.co/api/starships/17/']);
