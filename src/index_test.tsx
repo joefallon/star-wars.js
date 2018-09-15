@@ -1,4 +1,3 @@
-require('@babel/polyfill');
 require('./test_helpers/global_before');
 require('./test_helpers/global_after');
 
