@@ -9,7 +9,7 @@ import { FilmRouteProps } from './FilmRouteProps';
 import { FilmRouteState } from './FilmRouteState';
 import { Header } from '../../components/header/Header';
 import { PlanetEntity } from '../../entities/PlanetEntity';
-import SpeciesEntity from '../../entities/SpeciesEntity';
+import { SpeciesEntity } from '../../entities/SpeciesEntity';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 import StarshipEntity from '../../entities/StarshipEntity';
 import VehicleEntity from '../../entities/VehicleEntity';

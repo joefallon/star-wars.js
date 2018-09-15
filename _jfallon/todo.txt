@@ -7,8 +7,8 @@
 + add getId to PlanetEntity
     + normalize PE test factory
 
-- add getId to SpeciesEntity
-    - normalize SE test factory
++ add getId to SpeciesEntity
+    + normalize SE test factory
 
 - add getId to StarshipEntity
     - normalize SE test factory

@@ -1,8 +1,9 @@
-import SpeciesEntity from './SpeciesEntity';
+import { SpeciesEntity } from './SpeciesEntity';
 
 export default class SpeciesEntityTestFactory {
     public static create(): SpeciesEntity {
         const species = new SpeciesEntity();
+
         species.setAverageHeightInCentimeters(10);
         species.setAverageLifespanInYears(20);
         species.setCharacterUrls(['https://swapi.co/api/people/40/']);
@@ -17,6 +18,7 @@ export default class SpeciesEntityTestFactory {
         species.setSkinColor('test species skin color');
         species.setUpdated('2012-12-12 11:11:11');
         species.setUrl('https://swapi.co/api/species/13/');
+        species.setLanguage('test language');
 
         return species;
     }

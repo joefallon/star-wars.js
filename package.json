@@ -11,7 +11,7 @@
     "karma:run": "karma run",
     "mocha": "./node_modules/mocha/bin/mocha",
     "start": "./node_modules/.bin/webpack-dev-server --config webpack.dev.js --progress",
-    "webpack": "./node_modules/webpack-cli/bin/cli.js"
+    "webpack": "./node_modules/webpack-command/lib/cli.js"
   },
   "repository": {
     "type": "git",

@@ -1,4 +1,6 @@
-export default class SpeciesEntity {
+import { AbstractEntity } from './AbstractEntity';
+
+export class SpeciesEntity extends AbstractEntity {
     private _url:                        string;
     private _created:                    string;
     private _updated:                    string;
@@ -17,6 +19,7 @@ export default class SpeciesEntity {
     private _filmUrls:                   string[];
     
     public constructor() {
+        super();
         this._averageHeightInCentimeters = 0;
         this._averageLifespanInYears     = 0;
         this._characterUrls              = [];
@@ -32,6 +35,10 @@ export default class SpeciesEntity {
         this._skinColor                  = '';
         this._updated                    = '';
         this._url                        = '';
+    }
+
+    public getId(): number {
+        return AbstractEntity.getIdFromUrl(this._url);
     }
 
     public getUrl(): string {
