@@ -4,8 +4,8 @@
 + add getId to FilmEntity
     + normalize FE test factory
 
-- add getId to PlanetEntity
-    - normalize PE test factory
++ add getId to PlanetEntity
+    + normalize PE test factory
 
 - add getId to SpeciesEntity
     - normalize SE test factory

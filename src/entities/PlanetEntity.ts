@@ -1,4 +1,6 @@
-export default class PlanetEntity {
+import { AbstractEntity } from './AbstractEntity';
+
+export class PlanetEntity extends AbstractEntity {
     private _url: string;
     private _created: string;
     private _updated: string;
@@ -16,6 +18,7 @@ export default class PlanetEntity {
     private _filmUrls:              string[];
     
     public constructor() {
+        super();
         this._climate               = '';
         this._created               = '';
         this._diameterInKilometers  = 0;
@@ -30,6 +33,10 @@ export default class PlanetEntity {
         this._terrain               = '';
         this._updated               = '';
         this._url                   = '';
+    }
+
+    public getId(): number {
+        return AbstractEntity.getIdFromUrl(this._url);
     }
 
     public getUrl(): string {

@@ -1,8 +1,10 @@
-import PlanetEntity from './PlanetEntity';
+import { PlanetEntity } from './PlanetEntity';
 
 export default class PlanetEntityTestFactory {
+
     public static create(): PlanetEntity {
         const planet = new PlanetEntity();
+
         planet.setClimate('test climate');
         planet.setCreated('2012-12-12 12:12:21');
         planet.setDiameterInKilometers(100);

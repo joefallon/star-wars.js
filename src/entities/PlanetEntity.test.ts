@@ -1,39 +1,41 @@
 import * as assert from 'assert';
 
-import PlanetEntity from './PlanetEntity';
+import { PlanetEntity } from './PlanetEntity';
 
 describe('PlanetEntity', () => {
     it('has correct getters and setters', async () => {
         const planet = new PlanetEntity();
-        planet.setClimate('climate');
-        planet.setCreated('2012-12-12 12:12:21');
-        planet.setDiameterInKilometers(1);
-        planet.setFilmUrls(['film1']);
-        planet.setGravity('normal');
-        planet.setName('name');
-        planet.setOrbitalPeriodInDays(2);
-        planet.setPopulation(3);
-        planet.setResidentCharacterUrls(['character1']);
-        planet.setRotationPeriodInDays(4);
-        planet.setSurfaceWaterPercent(5);
-        planet.setTerrain('hills');
-        planet.setUpdated('2012-12-12 11:11:11');
-        planet.setUrl('url1');
 
-        assert.strictEqual(planet.getClimate(), 'climate');
+        planet.setClimate('test climate');
+        planet.setCreated('2012-12-12 12:12:21');
+        planet.setDiameterInKilometers(100);
+        planet.setFilmUrls(['https://swapi.co/api/films/6/']);
+        planet.setGravity('test gravity');
+        planet.setName('test planet name');
+        planet.setOrbitalPeriodInDays(200);
+        planet.setPopulation(300);
+        planet.setResidentCharacterUrls(['https://swapi.co/api/people/5/']);
+        planet.setRotationPeriodInDays(400);
+        planet.setSurfaceWaterPercent(500);
+        planet.setTerrain('test terrain');
+        planet.setUpdated('2012-12-12 11:11:11');
+        planet.setUrl('https://swapi.co/api/planets/2/');
+
+        assert.strictEqual(planet.getClimate(), 'test climate');
         assert.strictEqual(planet.getCreated(), '2012-12-12 12:12:21');
-        assert.strictEqual(planet.getDiameterInKilometers(), 1);
-        assert.strictEqual(planet.getFilmUrls()[0], 'film1');
-        assert.strictEqual(planet.getGravity(), 'normal');
-        assert.strictEqual(planet.getName(), 'name');
-        assert.strictEqual(planet.getOrbitalPeriodInDays(), 2);
-        assert.strictEqual(planet.getPopulation(), 3);
-        assert.strictEqual(planet.getResidentCharacterUrls()[0], 'character1');
-        assert.strictEqual(planet.getRotationPeriodInDays(), 4);
-        assert.strictEqual(planet.getSurfaceWaterPercent(), 5);
-        assert.strictEqual(planet.getTerrain(), 'hills');
+        assert.strictEqual(planet.getDiameterInKilometers(), 100);
+        assert.strictEqual(planet.getFilmUrls()[0], 'https://swapi.co/api/films/6/');
+        assert.strictEqual(planet.getGravity(), 'test gravity');
+        assert.strictEqual(planet.getName(), 'test planet name');
+        assert.strictEqual(planet.getOrbitalPeriodInDays(), 200);
+        assert.strictEqual(planet.getPopulation(), 300);
+        assert.strictEqual(planet.getResidentCharacterUrls()[0], 'https://swapi.co/api/people/5/');
+        assert.strictEqual(planet.getRotationPeriodInDays(), 400);
+        assert.strictEqual(planet.getSurfaceWaterPercent(), 500);
+        assert.strictEqual(planet.getTerrain(), 'test terrain');
         assert.strictEqual(planet.getUpdated(), '2012-12-12 11:11:11');
-        assert.strictEqual(planet.getUrl(), 'url1');
+        assert.strictEqual(planet.getUrl(), 'https://swapi.co/api/planets/2/');
+        assert.strictEqual(planet.getId(), 2);
     });
 
     it('initializes correctly', async () => {
@@ -53,5 +55,6 @@ describe('PlanetEntity', () => {
         assert.strictEqual(planet.getTerrain(), '');
         assert.strictEqual(planet.getUpdated(), '');
         assert.strictEqual(planet.getUrl(), '');
+        assert.strictEqual(planet.getId(), 0);
     });
 });

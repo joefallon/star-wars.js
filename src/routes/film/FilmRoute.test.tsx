@@ -10,7 +10,7 @@ import { FilmModel } from '../../models/FilmModel';
 import FilmRoute from './FilmRoute';
 import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
 import VehicleEntity from '../../entities/VehicleEntity';
-import PlanetEntity from '../../entities/PlanetEntity';
+import { PlanetEntity } from '../../entities/PlanetEntity';
 import SpeciesEntity from '../../entities/SpeciesEntity';
 import StarshipEntity from '../../entities/StarshipEntity';
 
