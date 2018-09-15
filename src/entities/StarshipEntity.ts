@@ -1,4 +1,6 @@
-export default class StarshipEntity {
+import { AbstractEntity } from './AbstractEntity';
+
+export class StarshipEntity extends AbstractEntity {
     private _url:     string;
     private _created: string;
     private _updated: string;
@@ -20,6 +22,7 @@ export default class StarshipEntity {
     private _filmUrls:                  string[];
 
     public constructor() {
+        super();
         this._cargoCapacityInKilograms  = 0;
         this._consumables               = '';
         this._costInCredits             = 0;
@@ -182,5 +185,9 @@ export default class StarshipEntity {
 
     public setFilmUrls(value: string[]) {
         this._filmUrls = value;
+    }
+
+    public getId(): number {
+        return AbstractEntity.getIdFromUrl(this._url);
     }
 }

@@ -1,47 +1,49 @@
 import * as assert from 'assert';
 
-import StarshipEntity from './StarshipEntity';
+import { StarshipEntity } from './StarshipEntity';
 
 describe('StarshipEntity', () => {
     it('has correct getters and setters', async () => {
         const starship = new StarshipEntity();
-        starship.setCargoCapacityInKilograms(1);
-        starship.setConsumables('consumables');
-        starship.setCostInCredits(2);
-        starship.setCreated('2012-12-12 12:12:12');
-        starship.setCrewCount(3);
-        starship.setFilmUrls(['film1']);
-        starship.setHyperdriveRating('rating');
-        starship.setLengthInMeters(4);
-        starship.setManufacturer('manufacturer');
-        starship.setMaxAtmospheringSpeedInKPH(5);
-        starship.setMegalightSpeed(5);
-        starship.setModel('model');
-        starship.setName('name');
-        starship.setPassengerCount(6);
-        starship.setPilotCharacterUrls(['pilot1']);
-        starship.setStarshipClass('ship-class');
-        starship.setUpdated('2012-12-12 11:11:11');
-        starship.setUrl('url1');
 
-        assert.strictEqual(starship.getCargoCapacityInKilograms(), 1);
-        assert.strictEqual(starship.getConsumables(), 'consumables');
-        assert.strictEqual(starship.getCostInCredits(), 2);
+        starship.setCargoCapacityInKilograms(1000);
+        starship.setConsumables('test consumables');
+        starship.setCostInCredits(2000);
+        starship.setCreated('2012-12-12 12:12:12');
+        starship.setCrewCount(300);
+        starship.setFilmUrls(['https://swapi.co/api/films/2/']);
+        starship.setHyperdriveRating('test rating');
+        starship.setLengthInMeters(400);
+        starship.setManufacturer('test manufacturer');
+        starship.setMaxAtmospheringSpeedInKPH(5);
+        starship.setMegalightSpeed(6);
+        starship.setModel('test model');
+        starship.setName('test ship name');
+        starship.setPassengerCount(600);
+        starship.setPilotCharacterUrls(['https://swapi.co/api/people/1/']);
+        starship.setStarshipClass('test ship class');
+        starship.setUpdated('2012-12-12 11:11:11');
+        starship.setUrl('https://swapi.co/api/starships/23/');
+
+        assert.strictEqual(starship.getCargoCapacityInKilograms(), 1000);
+        assert.strictEqual(starship.getConsumables(), 'test consumables');
+        assert.strictEqual(starship.getCostInCredits(), 2000);
         assert.strictEqual(starship.getCreated(), '2012-12-12 12:12:12');
-        assert.strictEqual(starship.getCrewCount(), 3);
-        assert.strictEqual(starship.getFilmUrls()[0], 'film1');
-        assert.strictEqual(starship.getHyperdriveRating(), 'rating');
-        assert.strictEqual(starship.getLengthInMeters(), 4);
-        assert.strictEqual(starship.getManufacturer(), 'manufacturer');
+        assert.strictEqual(starship.getCrewCount(), 300);
+        assert.strictEqual(starship.getFilmUrls()[0], 'https://swapi.co/api/films/2/');
+        assert.strictEqual(starship.getHyperdriveRating(), 'test rating');
+        assert.strictEqual(starship.getLengthInMeters(), 400);
+        assert.strictEqual(starship.getManufacturer(), 'test manufacturer');
         assert.strictEqual(starship.getMaxAtmospheringSpeedInKPH(), 5);
-        assert.strictEqual(starship.getMegalightSpeed(), 5);
-        assert.strictEqual(starship.getModel(), 'model');
-        assert.strictEqual(starship.getName(), 'name');
-        assert.strictEqual(starship.getPassengerCount(), 6);
-        assert.strictEqual(starship.getPilotCharacterUrls()[0], 'pilot1');
-        assert.strictEqual(starship.getStarshipClass(), 'ship-class');
+        assert.strictEqual(starship.getMegalightSpeed(), 6);
+        assert.strictEqual(starship.getModel(), 'test model');
+        assert.strictEqual(starship.getName(), 'test ship name');
+        assert.strictEqual(starship.getPassengerCount(), 600);
+        assert.strictEqual(starship.getPilotCharacterUrls()[0], 'https://swapi.co/api/people/1/');
+        assert.strictEqual(starship.getStarshipClass(), 'test ship class');
         assert.strictEqual(starship.getUpdated(), '2012-12-12 11:11:11');
-        assert.strictEqual(starship.getUrl(), 'url1');
+        assert.strictEqual(starship.getUrl(), 'https://swapi.co/api/starships/23/');
+        assert.strictEqual(starship.getId(), 23);
     });
 
     it('initializes correctly', async () => {
@@ -65,5 +67,6 @@ describe('StarshipEntity', () => {
         assert.strictEqual(starship.getStarshipClass(), '');
         assert.strictEqual(starship.getUpdated(), '');
         assert.strictEqual(starship.getUrl(), '');
+        assert.strictEqual(starship.getId(), 0);
     });
 });

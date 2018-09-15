@@ -10,8 +10,8 @@
 + add getId to SpeciesEntity
     + normalize SE test factory
 
-- add getId to StarshipEntity
-    - normalize SE test factory
++ add getId to StarshipEntity
+    + normalize SE test factory
 
 - add getId to VehicleEntity
     - normalize VE test factory

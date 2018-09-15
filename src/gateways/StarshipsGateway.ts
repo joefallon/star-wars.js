@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import * as LRU from 'lru-cache';
 
-import StarshipEntity from '../entities/StarshipEntity';
+import { StarshipEntity } from '../entities/StarshipEntity';
 
 export default class StarshipsGateway {
     private static readonly API_SEGMENT = 'starships/';

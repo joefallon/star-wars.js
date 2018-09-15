@@ -12,7 +12,7 @@ import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
 import VehicleEntity from '../../entities/VehicleEntity';
 import { PlanetEntity } from '../../entities/PlanetEntity';
 import { SpeciesEntity } from '../../entities/SpeciesEntity';
-import StarshipEntity from '../../entities/StarshipEntity';
+import { StarshipEntity } from '../../entities/StarshipEntity';
 
 import { FilmRouteProps } from './FilmRouteProps';
 
