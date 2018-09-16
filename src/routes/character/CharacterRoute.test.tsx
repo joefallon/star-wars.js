@@ -12,75 +12,113 @@ import FilmEntityTestFactory from '../../entities/FilmEntityTestFactory';
 import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
 import PlanetEntityTestFactory from '../../entities/PlanetEntityTestFactory';
 import SpeciesEntityTestFactory from '../../entities/SpeciesEntityTestFactory';
+import { VehicleEntityTestFactory } from '../../entities/VehicleEntityTestFactory';
+import { StarshipEntityTestFactory } from '../../entities/StarshipEntityTestFactory';
 
 describe('CharacterRoute', () => {
     beforeEach(() => {
         document.title = '';
     });
 
-    // it('displays the character information', (done) => {
-    //
-    //     function renderRoute(props: CharacterRouteProps) {
-    //         const gateways = GatewaysTestFactory.create();
-    //
-    //         const char = CharacterEntityTestFactory.create();
-    //         const retrieveCharacterStub = sinon.stub();
-    //         retrieveCharacterStub.returns(char);
-    //         gateways.charactersGateway.retrieveCharacter = retrieveCharacterStub;
-    //
-    //         const film = FilmEntityTestFactory.create();
-    //         const retrieveFilmStub = sinon.stub();
-    //         retrieveFilmStub.returns(film);
-    //         gateways.filmsGateway.retrieveFilm = retrieveFilmStub;
-    //
-    //         const planet = PlanetEntityTestFactory.create();
-    //         const retrievePlanetStub = sinon.stub();
-    //         retrievePlanetStub.returns(planet);
-    //         gateways.planetsGateway.retrievePlanet = retrievePlanetStub;
-    //
-    //         const species = SpeciesEntityTestFactory.create();
-    //         const retrieveSpeciesStub = sinon.stub();
-    //         retrieveSpeciesStub.returns(species);
-    //
-    //         gateways.speciesGateway.retrieveSpecies = retrieveSpeciesStub;
-    //
-    //         props.model = new CharacterModel(gateways);
-    //
-    //         return (<CharacterRoute {...props}/>);
-    //     }
-    //
-    //     const wrapper = mount(
-    //         <MemoryRouter initialEntries={['/character/1']} initialIndex={0}>
-    //             <Switch>
-    //                 <Route exact path='/character/:id' render={(props) => renderRoute(props)}/>
-    //             </Switch>
-    //         </MemoryRouter>
-    //     );
-    //
-    //     setTimeout(() => {
-    //         wrapper.update();
-    //         assert.strictEqual(document.title, 'Character Info | API Explorer');
-    //
-    //         assert.strictEqual(wrapper.find('h2').text(),          'test name');
-    //         assert.strictEqual(wrapper.find('.height').text(),     '1 cm');
-    //         assert.strictEqual(wrapper.find('.mass').text(),       '2 kg');
-    //         assert.strictEqual(wrapper.find('.hair-color').text(), 'green');
-    //         assert.strictEqual(wrapper.find('.skin-color').text(), 'white');
-    //         assert.strictEqual(wrapper.find('.eye-color').text(),  'brown');
-    //         assert.strictEqual(wrapper.find('.birth-year').text(), '1900');
-    //         assert.strictEqual(wrapper.find('.gender').text(),     'male');
-    //
-    //         const homeworldLink = wrapper.find('.homeworld').first();
-    //         assert.strictEqual(homeworldLink.props()['to'], '/planet/2');
-    //         assert.strictEqual(homeworldLink.text(),        'test planet name');
-    //
-    //         const films = wrapper.find('.film-item');
-    //         const filmLink = films.first().find('Link');
-    //         assert.strictEqual(filmLink.props()['to'], '/film/2');
-    //         assert.strictEqual(filmLink.text(),        'test title');
-    //
-    //         assert.fail('not implemented');
-    //         done();
-    //     }, 0);
-    // });
+    it('displays the character information', (done) => {
+
+        function renderRoute(props: CharacterRouteProps) {
+            const gateways = GatewaysTestFactory.create();
+
+            const char = CharacterEntityTestFactory.create();
+            const retrieveCharacterStub = sinon.stub();
+            retrieveCharacterStub.returns(char);
+            gateways.charactersGateway.retrieveCharacter = retrieveCharacterStub;
+
+            const film = FilmEntityTestFactory.create();
+            const retrieveFilmStub = sinon.stub();
+            retrieveFilmStub.returns(film);
+            gateways.filmsGateway.retrieveFilm = retrieveFilmStub;
+
+            const planet = PlanetEntityTestFactory.create();
+            const retrievePlanetStub = sinon.stub();
+            retrievePlanetStub.returns(planet);
+            gateways.planetsGateway.retrievePlanet = retrievePlanetStub;
+
+            const species = SpeciesEntityTestFactory.create();
+            const retrieveSpeciesStub = sinon.stub();
+            retrieveSpeciesStub.returns(species);
+            gateways.speciesGateway.retrieveSpecies = retrieveSpeciesStub;
+
+            const vehicle = VehicleEntityTestFactory.create();
+            const retrieveVehicleStub = sinon.stub();
+            retrieveVehicleStub.returns(vehicle);
+            gateways.vehiclesGateway.retrieveVehicle = retrieveVehicleStub;
+
+            const starship = StarshipEntityTestFactory.create();
+            const retrieveStarshipStub = sinon.stub();
+            retrieveStarshipStub.returns(starship);
+            gateways.starshipsGateway.retrieveStarship = retrieveStarshipStub;
+
+            props.model = new CharacterModel(gateways);
+
+            return (<CharacterRoute {...props}/>);
+        }
+
+        const wrapper = mount(
+            <MemoryRouter initialEntries={['/character/1']} initialIndex={0}>
+                <Switch>
+                    <Route exact path='/character/:id' render={(props) => renderRoute(props)}/>
+                </Switch>
+            </MemoryRouter>
+        );
+
+        setTimeout(() => {
+            wrapper.update();
+            assert.strictEqual(document.title, 'Character Info | API Explorer');
+
+            assert.strictEqual(wrapper.find('h2').text(),          'test name');
+            assert.strictEqual(wrapper.find('.height').text(),     '10 cm');
+            assert.strictEqual(wrapper.find('.mass').text(),       '22 kg');
+            assert.strictEqual(wrapper.find('.hair-color').text(), 'test hair color');
+            assert.strictEqual(wrapper.find('.skin-color').text(), 'test skin color');
+            assert.strictEqual(wrapper.find('.eye-color').text(),  'test eye color');
+            assert.strictEqual(wrapper.find('.birth-year').text(), '1900');
+            assert.strictEqual(wrapper.find('.gender').text(),     'test gender');
+
+            const homeworldLink = wrapper.find('.homeworld').first();
+            assert.strictEqual(homeworldLink.props()['to'], '/planet/2');
+            assert.strictEqual(homeworldLink.text(),        'test planet name');
+
+            const films = wrapper.find('.film-item');
+            assert.strictEqual(films.length, 1);
+
+            const filmLink = films.first().find('Link');
+            assert.strictEqual(filmLink.length, 1);
+            assert.strictEqual(filmLink.props()['to'], '/film/2');
+            assert.strictEqual(filmLink.text(),        'test title');
+
+            const species = wrapper.find('.species-item');
+            assert.strictEqual(species.length, 1);
+
+            const speciesLink = species.first().find('Link');
+            assert.strictEqual(speciesLink.length, 1);
+            assert.strictEqual(speciesLink.props()['to'], '/species/13');
+            assert.strictEqual(speciesLink.text(),        'test species name');
+
+            const vehicles = wrapper.find('.vehicle-item');
+            assert.strictEqual(vehicles.length, 1);
+
+            const vehicleLink = vehicles.first().find('Link');
+            assert.strictEqual(vehicleLink.length, 1);
+            assert.strictEqual(vehicleLink.props()['to'], '/vehicles/20');
+            assert.strictEqual(vehicleLink.text(),        'test vehicle name');
+
+            // todo: test for starships
+            const starships = wrapper.find('.starship-item');
+            assert.strictEqual(starships.length, 1, 'starship-item count');
+
+            const starshipLink = starships.first().find('Link');
+            assert.strictEqual(starshipLink.length, 1, 'starship link count');
+            assert.strictEqual(starshipLink.props()['to'], '/starship/23');
+            assert.strictEqual(starshipLink.text(),        'test ship name');
+
+            done();
+        }, 0);
+    });
 });

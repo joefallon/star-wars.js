@@ -29,7 +29,6 @@ export default class CharactersGateway {
             const response  = await axios.get(url, config);
             const data      = response['data'];
             const character = CharactersGateway.mapResponseDataToEntity(data);
-
             cache.set(url, character);
             resolve(character);
         });
@@ -49,7 +48,7 @@ export default class CharactersGateway {
         character.setMassInKilograms(parseInt(data['mass'], 10));
         character.setName(data['name']);
         character.setSkinColor(data['skin_color']);
-        character.setSpeciesUrls(data['species'][0]);
+        character.setSpeciesUrls(data['species']);
         character.setStarshipUrls(data['starships']);
         character.setUpdated(data['edited']);
         character.setUrl(data['url']);

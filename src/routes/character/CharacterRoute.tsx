@@ -1,3 +1,5 @@
+import { SwapiHelpers } from '../../domain/SwapiHelpers';
+
 require('./CharacterRoute.css');
 import * as React from 'react';
 import { ReactNode } from 'react';
@@ -9,6 +11,9 @@ import { FilmEntity } from '../../entities/FilmEntity';
 import CharacterModelFactory from '../../models/CharacterModelFactory';
 import CharacterRouteProps from './CharacterRouteProps';
 import CharacterRouteState from './CharacterRouteState';
+import { SpeciesEntity } from '../../entities/SpeciesEntity';
+import { VehicleEntity } from '../../entities/VehicleEntity';
+import { StarshipEntity } from '../../entities/StarshipEntity';
 
 class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRouteState> {
     public constructor(props: CharacterRouteProps) {
@@ -95,38 +100,20 @@ class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRoute
                                 </div>
 
                                 <div>
-                                    <strong>Homeworld: </strong> {this.getPlanetLink()}
+                                    <strong>Homeworld: </strong>{this.getPlanetLink()}
                                 </div>
 
                                 <h3>Films</h3>
                                 <div>{this.getFilms()}</div>
 
                                 <h3>Species</h3>
-                                <div>
-                                    <ul className='species'>
-                                        <li key=':id' className='species-item'>
-                                            <Link to={'/species/:id'}>Example Species Name</Link>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <div>{this.getSpecies()}</div>
 
                                 <h3>Vehicles</h3>
-                                <div>
-                                    <ul className='vehicles'>
-                                        <li key=':id' className='vehicle-item'>
-                                            <Link to={'/vehicle/:id'}>Example Vehicle Name</Link>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <div>{this.getVehicles()}</div>
 
                                 <h3>Starships</h3>
-                                <div>
-                                    <ul className='starships'>
-                                        <li key=':id' className='starship-item'>
-                                            <Link to={'/starship/:id'}>Example Starship Name</Link>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <div>{this.getStarships()}</div>
                             </div>
                         </div>
                     </div>
@@ -151,11 +138,9 @@ class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRoute
 
         return (
             <ul className='films'>
-                {films.map((film: FilmEntity) => {
-                    const title   = film.getTitle();
-                    const filmUrl = film.getUrl();
-                    const parts   = filmUrl.split('/');
-                    const id      = parts[parts.length - 2];
+                {films.map((film) => {
+                    const title = film.getTitle();
+                    const id    = film.getId();
 
                     return (
                         <li key={id} className='film-item'>
@@ -171,22 +156,58 @@ class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRoute
     private getSpecies = () => {
         const species = this.state.model.getSpecies();
 
-        // return (
-        //     <ul>
-        //         {species.map((singleSpecies: SpeciesEntity) => {
-        //             const name  = singleSpecies.getName();
-        //             const url   = singleSpecies.getUrl();
-        //             const parts = url.split('/');
-        //             const id    = parts[parts.length - 2];
-        //
-        //             return (
-        //                 <li key={id} className='species-item'>
-        //                     <Link to={`/species/${id}`}>{name}</Link>
-        //                 </li>
-        //             );
-        //         })}
-        //     </ul>
-        // );
+        return (
+            <ul className='species'>
+                {species.map((singleSpecies: SpeciesEntity) => {
+                    const name = singleSpecies.getName();
+                    const id   = singleSpecies.getId();
+
+                    return (
+                        <li key=':id' className='species-item'>
+                            <Link to={`/species/${id}`}>{name}</Link>
+                        </li>
+                    );
+                })}
+            </ul>
+        );
+    };
+
+    private getVehicles = () => {
+        const vehicles = this.state.model.getVehicles();
+
+        return (
+            <ul className='vehicles'>
+                {vehicles.map((vehicle: VehicleEntity) => {
+                    const name = vehicle.getName();
+                    const id   = vehicle.getId();
+
+                    return (
+                        <li key={id} className='vehicle-item'>
+                            <Link to={`/vehicles/${id}`}>{name}</Link>
+                        </li>
+                    );
+                })}
+            </ul>
+        );
+    };
+
+    private getStarships = () => {
+        const starships = this.state.model.getStarships();
+
+        return (
+            <ul className='starships'>
+                {starships.map((starship: StarshipEntity) => {
+                    const name = starship.getName();
+                    const id   = starship.getId();
+
+                    return (
+                        <li key={id} className='starship-item'>
+                            <Link to={`/starship/${id}`}>{name}</Link>
+                        </li>
+                    );
+                })}
+            </ul>
+        );
     };
 }
 

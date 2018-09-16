@@ -36,23 +36,21 @@ export default class FilmsGateway {
         return films;
     }
 
-    public retrieveFilm(filmUrl: string): Promise<FilmEntity> {
-        return new Promise(async (resolve, reject) => {
-            const cache = this._cache;
+    public async retrieveFilm(filmUrl: string): Promise<FilmEntity> {
+        const cache = this._cache;
 
-            if(cache.has(filmUrl)) {
-                const film = cache.get(filmUrl);
-                return resolve(film);
-            }
+        if(cache.has(filmUrl)) {
+            const film = cache.get(filmUrl);
+            return film;
+        }
 
-            const config   = this._axiosConfig;
-            const response = await axios.get(filmUrl, config);
-            const filmData = <any[]>response.data;
-            const film     = FilmsGateway.mapToFilmEntity(filmData);
+        const config   = this._axiosConfig;
+        const response = await axios.get(filmUrl, config);
+        const filmData = <any[]>response.data;
+        const film     = FilmsGateway.mapToFilmEntity(filmData);
+        cache.set(filmUrl, film);
 
-            cache.set(filmUrl, film);
-            resolve(film);
-        });
+        return film;
     }
 
     private static mapToFilmEntity(filmData: any[]): FilmEntity {

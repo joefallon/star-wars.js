@@ -1,4 +1,4 @@
-require("core-js");
+// require("core-js");
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';

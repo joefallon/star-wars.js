@@ -1,17 +1,8 @@
-+ add getId to CharacterEntity
-    + normalize CE test factory
-
-+ add getId to FilmEntity
-    + normalize FE test factory
-
-+ add getId to PlanetEntity
-    + normalize PE test factory
-
-+ add getId to SpeciesEntity
-    + normalize SE test factory
-
-+ add getId to StarshipEntity
-    + normalize SE test factory
-
-- add getId to VehicleEntity
-    - normalize VE test factory
+* complete the character page
+    * complete the character route
+    * complete the character model
+                            <ul className='vehicles'>
+                                        <li key=':id' className='vehicle-item'>
+                                            <Link to={'/vehicle/:id'}>Example Vehicle Name</Link>
+                                        </li>
+                                    </ul>

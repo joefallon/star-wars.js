@@ -70,35 +70,71 @@ export default class CharacterModel {
         const character    = this._character;
         const filmsGateway = this._gateways.filmsGateway;
         const filmUrls     = character.getFilmUrls();
-        const films        = [];
+        let films          = [];
 
         filmUrls.map((url: string) => {
             const filmPromise = filmsGateway.retrieveFilm(url);
             films.push(filmPromise);
         });
 
-        await Promise.all(films);
+        films = await Promise.all(films);
 
         return films;
     }
 
-    private loadVehicles()  {
-        return null;
+    private async loadVehicles(): Promise<VehicleEntity[]> {
+        const character       = this._character;
+        const vehicleUrls     = character.getVehicleUrls();
+        const vehiclesGateway = this._gateways.vehiclesGateway;
+        let vehicles        = [];
+
+        vehicleUrls.map((url: string) => {
+            const promise = vehiclesGateway.retrieveVehicle(url);
+            vehicles.push(promise);
+        });
+
+        vehicles = await Promise.all(vehicles);
+
+        return vehicles;
     }
 
     private async loadSpecies(): Promise<SpeciesEntity[]> {
-        // const character      = this._character;
-        // const speciesGateway = this._gateways.speciesGateway;
-        // const speciesUrl     = character.getSpeciesUrls();
-        // const species        = await speciesGateway.retrieveSpecies(speciesUrl);
-        //
-        // return species;
+        const character      = this._character;
+        const speciesGateway = this._gateways.speciesGateway;
+        const speciesUrls    = character.getSpeciesUrls();
+        let species          = [];
 
-        return null;
+        speciesUrls.map((url: string) => {
+            const speciesPromise = speciesGateway.retrieveSpecies(url);
+            species.push(speciesPromise);
+        });
+
+        species = await Promise.all(species);
+
+        return species;
     }
 
-    private loadStarships() {
-        return null;
+    private async loadStarships(): Promise<StarshipEntity[]> {
+        const character        = this._character;
+        const starshipsGateway = this._gateways.starshipsGateway;
+        const starshipUrls     = character.getStarshipUrls();
+        let   starships        = [];
+
+        starshipUrls.map((url: string) => {
+            const promise = starshipsGateway.retrieveStarship(url);
+            starships.push(promise);
+        });
+
+        starships = await Promise.all(starships);
+
+        return starships;
     }
 
+    public getVehicles(): VehicleEntity[] {
+        return this._vehicles;
+    }
+
+    public getStarships(): StarshipEntity[] {
+        return this._starships;
+    }
 }
