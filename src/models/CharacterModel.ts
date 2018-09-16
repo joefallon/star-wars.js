@@ -3,7 +3,7 @@ import { FilmEntity } from '../entities/FilmEntity';
 import { PlanetEntity } from '../entities/PlanetEntity';
 import { SpeciesEntity } from '../entities/SpeciesEntity';
 import { StarshipEntity } from '../entities/StarshipEntity';
-import VehicleEntity from '../entities/VehicleEntity';
+import { VehicleEntity } from '../entities/VehicleEntity';
 import Gateways from '../gateways/Gateways';
 
 export default class CharacterModel {

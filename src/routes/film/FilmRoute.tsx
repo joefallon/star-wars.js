@@ -12,7 +12,7 @@ import { PlanetEntity } from '../../entities/PlanetEntity';
 import { SpeciesEntity } from '../../entities/SpeciesEntity';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 import { StarshipEntity } from '../../entities/StarshipEntity';
-import VehicleEntity from '../../entities/VehicleEntity';
+import { VehicleEntity } from '../../entities/VehicleEntity';
 
 class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
 
