@@ -9,7 +9,7 @@ import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 import { FilmEntity } from '../../entities/FilmEntity';
 import CharacterModelFactory from '../../models/CharacterModelFactory';
-import CharacterRouteProps from './CharacterRouteProps';
+import { CharacterRouteProps } from './CharacterRouteProps';
 import CharacterRouteState from './CharacterRouteState';
 import { SpeciesEntity } from '../../entities/SpeciesEntity';
 import { VehicleEntity } from '../../entities/VehicleEntity';

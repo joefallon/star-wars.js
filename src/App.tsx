@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import Loadable  from 'react-loadable';
 
-import CharacterRouteProps from './routes/character/CharacterRouteProps';
+import { CharacterRouteProps } from './routes/character/CharacterRouteProps';
 import { IndexRouteProps } from './routes/index/IndexRouteProps';
 import { FilmRouteProps } from './routes/film/FilmRouteProps';
 
@@ -16,6 +16,12 @@ export class App extends React.Component {
     }
 
     public render(): JSX.Element {
+        // todo: - complete /planet/:id route
+        // todo: - complete /species/:id route
+        // todo: - complete /vehicle/:id route
+        // todo: - complete /starship/:id route
+        // todo: - NaN should display "unknown"
+
         return (
             <Switch>
                 <Route exact path='/'              render={(props) => this.renderIndex(props)}/>
@@ -29,8 +35,7 @@ export class App extends React.Component {
 
     private renderIndex = (props: IndexRouteProps): JSX.Element => {
         const LoadableIndexRoute = Loadable({
-            loader: () => import(/* webpackChunkName: "index-route" */
-                                 './routes/index/IndexRoute'),
+            loader: () => import(/* webpackChunkName: "index-route" */ './routes/index/IndexRoute'),
             loading: () => { return null; },
             delay: 300,
             timeout: 10000
@@ -41,8 +46,7 @@ export class App extends React.Component {
 
     private renderFilm = (props: FilmRouteProps): JSX.Element => {
         const LoadableFilmRoute = Loadable({
-            loader: () => import(/* webpackChunkName: "film-route" */
-                                 './routes/film/FilmRoute'),
+            loader: () => import(/* webpackChunkName: "film-route" */ './routes/film/FilmRoute'),
             loading: () => { return null; },
             delay: 300,
             timeout: 10000

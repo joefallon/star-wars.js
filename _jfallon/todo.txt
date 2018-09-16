@@ -1,8 +1,1 @@
-* complete the character page
-    * complete the character route
-    * complete the character model
-                            <ul className='vehicles'>
-                                        <li key=':id' className='vehicle-item'>
-                                            <Link to={'/vehicle/:id'}>Example Vehicle Name</Link>
-                                        </li>
-                                    </ul>
+keep

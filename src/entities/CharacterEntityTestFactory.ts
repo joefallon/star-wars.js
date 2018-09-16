@@ -1,6 +1,6 @@
 import { CharacterEntity } from './CharacterEntity';
 
-export default class CharacterEntityTestFactory {
+export class CharacterEntityTestFactory {
 
     public static create(): CharacterEntity {
         const char = new CharacterEntity();

@@ -1,6 +1,6 @@
 import { SpeciesEntity } from './SpeciesEntity';
 
-export default class SpeciesEntityTestFactory {
+export class SpeciesEntityTestFactory {
     public static create(): SpeciesEntity {
         const species = new SpeciesEntity();
 

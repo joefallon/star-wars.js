@@ -1,6 +1,6 @@
 import { FilmEntity } from './FilmEntity';
 
-export default class FilmEntityTestFactory {
+export class FilmEntityTestFactory {
     public static create(): FilmEntity {
         const film = new FilmEntity();
 

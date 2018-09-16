@@ -1,6 +1,6 @@
 import { PlanetEntity } from './PlanetEntity';
 
-export default class PlanetEntityTestFactory {
+export class PlanetEntityTestFactory {
 
     public static create(): PlanetEntity {
         const planet = new PlanetEntity();

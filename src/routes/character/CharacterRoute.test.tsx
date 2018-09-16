@@ -4,14 +4,14 @@ import * as React from 'react';
 import { MemoryRouter, Route, Switch } from 'react-router';
 import sinon from 'sinon';
 
-import CharacterEntityTestFactory from '../../entities/CharacterEntityTestFactory';
-import CharacterModel from '../../models/CharacterModel';
+import { CharacterEntityTestFactory } from '../../entities/CharacterEntityTestFactory';
+import { CharacterModel } from '../../models/CharacterModel';
 import CharacterRoute from './CharacterRoute';
-import CharacterRouteProps from './CharacterRouteProps';
-import FilmEntityTestFactory from '../../entities/FilmEntityTestFactory';
+import { CharacterRouteProps } from './CharacterRouteProps';
+import { FilmEntityTestFactory } from '../../entities/FilmEntityTestFactory';
 import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
-import PlanetEntityTestFactory from '../../entities/PlanetEntityTestFactory';
-import SpeciesEntityTestFactory from '../../entities/SpeciesEntityTestFactory';
+import { PlanetEntityTestFactory } from '../../entities/PlanetEntityTestFactory';
+import { SpeciesEntityTestFactory } from '../../entities/SpeciesEntityTestFactory';
 import { VehicleEntityTestFactory } from '../../entities/VehicleEntityTestFactory';
 import { StarshipEntityTestFactory } from '../../entities/StarshipEntityTestFactory';
 
@@ -109,7 +109,6 @@ describe('CharacterRoute', () => {
             assert.strictEqual(vehicleLink.props()['to'], '/vehicles/20');
             assert.strictEqual(vehicleLink.text(),        'test vehicle name');
 
-            // todo: test for starships
             const starships = wrapper.find('.starship-item');
             assert.strictEqual(starships.length, 1, 'starship-item count');
 

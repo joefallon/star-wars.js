@@ -6,7 +6,7 @@ import { StarshipEntity } from '../entities/StarshipEntity';
 import { VehicleEntity } from '../entities/VehicleEntity';
 import Gateways from '../gateways/Gateways';
 
-export default class CharacterModel {
+export class CharacterModel {
     private static readonly BASE_URL = 'https://swapi.co/api/people/';
 
     private _gateways:  Gateways;
