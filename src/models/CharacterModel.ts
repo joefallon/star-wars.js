@@ -4,7 +4,7 @@ import { PlanetEntity } from '../entities/PlanetEntity';
 import { SpeciesEntity } from '../entities/SpeciesEntity';
 import { StarshipEntity } from '../entities/StarshipEntity';
 import { VehicleEntity } from '../entities/VehicleEntity';
-import Gateways from '../gateways/Gateways';
+import { Gateways } from '../gateways/Gateways';
 
 export class CharacterModel {
     private static readonly BASE_URL = 'https://swapi.co/api/people/';

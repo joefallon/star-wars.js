@@ -1,10 +1,10 @@
-import CharactersGateway from './CharactersGateway';
-import FilmsGateway from './FilmsGateway';
-import Gateways from './Gateways';
-import PlanetsGateway from './PlanetsGateway';
-import SpeciesGateway from './SpeciesGateway';
-import StarshipsGateway from './StarshipsGateway';
-import VehiclesGateway from './VehiclesGateway';
+import { CharactersGateway } from './CharactersGateway';
+import { FilmsGateway } from './FilmsGateway';
+import { Gateways } from './Gateways';
+import { PlanetsGateway } from './PlanetsGateway';
+import { SpeciesGateway } from './SpeciesGateway';
+import { StarshipsGateway } from './StarshipsGateway';
+import { VehiclesGateway } from './VehiclesGateway';
 
 export class GatewaysTestFactory {
     public static create(): Gateways {

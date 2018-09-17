@@ -1,6 +1,6 @@
-import CharacterModel from '../../models/CharacterModel';
+import { CharacterModel } from '../../models/CharacterModel';
 
-export default interface CharacterRouteState {
+export interface CharacterRouteState {
     isLoading: boolean,
     id:        number
     model:     CharacterModel

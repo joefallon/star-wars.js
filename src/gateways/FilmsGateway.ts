@@ -4,7 +4,7 @@ import * as LRU from 'lru-cache';
 import { FilmEntity } from '../entities/FilmEntity';
 
 
-export default class FilmsGateway {
+export class FilmsGateway {
     private static readonly API_SEGMENT = 'films/';
 
     private readonly _api:         string;

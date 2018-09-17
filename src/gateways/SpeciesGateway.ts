@@ -3,7 +3,7 @@ import * as LRU from 'lru-cache';
 
 import { SpeciesEntity } from '../entities/SpeciesEntity';
 
-export default class SpeciesGateway {
+export class SpeciesGateway {
     private static readonly API_SEGMENT = 'species/';
 
     private readonly _api:         string;

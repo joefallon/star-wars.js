@@ -3,7 +3,7 @@ import * as LRU from 'lru-cache';
 
 import { VehicleEntity } from '../entities/VehicleEntity';
 
-export default class VehiclesGateway {
+export class VehiclesGateway {
     private static readonly API_SEGMENT = 'vehicles/';
 
     private readonly _api:         string;

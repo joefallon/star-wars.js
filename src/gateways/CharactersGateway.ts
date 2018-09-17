@@ -3,7 +3,7 @@ import * as LRU from 'lru-cache';
 
 import { CharacterEntity } from '../entities/CharacterEntity';
 
-export default class CharactersGateway {
+export class CharactersGateway {
     private static readonly API_SEGMENT = 'characters/';
 
     private readonly _api:         string;

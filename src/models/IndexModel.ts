@@ -1,5 +1,5 @@
 import { FilmEntity } from '../entities/FilmEntity';
-import Gateways from '../gateways/Gateways';
+import { Gateways } from '../gateways/Gateways';
 
 export class IndexModel {
     private _gateways: Gateways;

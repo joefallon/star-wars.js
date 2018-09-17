@@ -3,7 +3,7 @@ import * as LRU from 'lru-cache';
 
 import { PlanetEntity } from '../entities/PlanetEntity';
 
-export default class PlanetsGateway {
+export class PlanetsGateway {
     private static readonly API_SEGMENT = 'planets/';
 
     private readonly _api: string;

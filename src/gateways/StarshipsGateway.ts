@@ -3,7 +3,7 @@ import * as LRU from 'lru-cache';
 
 import { StarshipEntity } from '../entities/StarshipEntity';
 
-export default class StarshipsGateway {
+export class StarshipsGateway {
     private static readonly API_SEGMENT = 'starships/';
 
     private readonly _api:         string;
