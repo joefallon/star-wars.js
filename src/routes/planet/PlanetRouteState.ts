@@ -1,1 +1,3 @@
-/* PlanetRouteState.ts */
+export interface PlanetRouteState {
+
+}

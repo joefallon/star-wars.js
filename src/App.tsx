@@ -7,6 +7,7 @@ import Loadable  from 'react-loadable';
 import { CharacterRouteProps } from './routes/character/CharacterRouteProps';
 import { IndexRouteProps } from './routes/index/IndexRouteProps';
 import { FilmRouteProps } from './routes/film/FilmRouteProps';
+import { PlanetRouteProps } from './routes/planet/PlanetRouteProps';
 
 
 export class App extends React.Component {
@@ -27,7 +28,7 @@ export class App extends React.Component {
                 <Route exact path='/'              render={(props) => this.renderIndex(props)}/>
                 <Route exact path='/film/:id'      render={(props) => this.renderFilm(props)}/>
                 <Route exact path='/character/:id' render={(props) => this.renderCharacter(props)}/>
-                {/*<Route exact path='/route-3' render={(props) => this.renderRoute3(props)}/>*/}
+                <Route exact path='/planet/:id'    render={(props) => this.renderPlanet(props)}/>
                 <Route path='*'              render={(props) => this.renderNotFound(props)} />
             </Switch>
         );
@@ -57,16 +58,27 @@ export class App extends React.Component {
 
     private renderCharacter = (props: CharacterRouteProps): JSX.Element => {
         const LoadableCharacterRoute = Loadable({
-            loader: () => import(/* webpackChunkName: "character-route" */
-                                 './routes/character/CharacterRoute'),
+            loader:  () => import(/* webpackChunkName: "character-route" */
+                                  './routes/character/CharacterRoute'),
             loading: () => { return null; },
-            delay: 300,
+            delay:   300,
             timeout: 10000
         });
 
         return (<LoadableCharacterRoute {...props} />);
     };
 
+    private renderPlanet = (props: PlanetRouteProps): JSX.Element => {
+        const LoadablePlanetRoute = Loadable({
+            loader:  () => import(/* webpackChunkName: "planet-route" */
+                                  './routes/planet/PlanetRoute'),
+            loading: () => { return null; },
+            delay:   300,
+            timeout: 10000
+        });
+
+        return (<LoadablePlanetRoute {...props} />);
+    };
 
     // private renderRoute2 = (props: Route2Props): JSX.Element => {
     //     const LoadableRoute2 = Loadable({
