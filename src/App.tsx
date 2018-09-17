@@ -4,8 +4,8 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import Loadable  from 'react-loadable';
 
-import { CharacterRouteProps } from './routes/character/CharacterRouteProps';
 import { IndexRouteProps } from './routes/index/IndexRouteProps';
+import { CharacterRouteProps } from './routes/character/CharacterRouteProps';
 import { FilmRouteProps } from './routes/film/FilmRouteProps';
 import { PlanetRouteProps } from './routes/planet/PlanetRouteProps';
 
@@ -17,11 +17,10 @@ export class App extends React.Component {
     }
 
     public render(): JSX.Element {
-        // todo: - complete /planet/:id route
         // todo: - complete /species/:id route
         // todo: - complete /vehicle/:id route
         // todo: - complete /starship/:id route
-        // todo: - NaN should display "unknown"
+        // todo: * NaN should display "unknown"
 
         return (
             <Switch>
