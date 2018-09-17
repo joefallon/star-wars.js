@@ -8,6 +8,7 @@ import { IndexRouteProps } from './routes/index/IndexRouteProps';
 import { CharacterRouteProps } from './routes/character/CharacterRouteProps';
 import { FilmRouteProps } from './routes/film/FilmRouteProps';
 import { PlanetRouteProps } from './routes/planet/PlanetRouteProps';
+import { SpeciesRouteProps } from './routes/species/SpeciesRouteProps';
 
 
 export class App extends React.Component {
@@ -17,7 +18,7 @@ export class App extends React.Component {
     }
 
     public render(): JSX.Element {
-        // todo: - complete /species/:id route
+        // todo: * complete /species/:id route
         // todo: - complete /vehicle/:id route
         // todo: - complete /starship/:id route
         // todo: * NaN should display "unknown"
@@ -28,6 +29,7 @@ export class App extends React.Component {
                 <Route exact path='/film/:id'      render={(props) => this.renderFilm(props)}/>
                 <Route exact path='/character/:id' render={(props) => this.renderCharacter(props)}/>
                 <Route exact path='/planet/:id'    render={(props) => this.renderPlanet(props)}/>
+                <Route exact path='/species/:id'    render={(props) => this.renderSpecies(props)}/>
                 <Route path='*'              render={(props) => this.renderNotFound(props)} />
             </Switch>
         );
@@ -77,6 +79,18 @@ export class App extends React.Component {
         });
 
         return (<LoadablePlanetRoute {...props} />);
+    };
+
+    private renderSpecies = (props: SpeciesRouteProps): JSX.Element => {
+        const LoadableSpeciesRoute = Loadable({
+            loader:  () => import(/* webpackChunkName: "species-route" */
+                                  './routes/species/SpeciesRoute'),
+            loading: () => { return null; },
+            delay:   300,
+            timeout: 10000
+        });
+
+        return (<LoadableSpeciesRoute {...props} />);
     };
 
     // private renderRoute2 = (props: Route2Props): JSX.Element => {
