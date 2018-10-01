@@ -1,1 +1,15 @@
 /* SpeciesRoute.scss */
+@import "../../../static/styles/variables";
+
+.SpeciesRoute {
+    ul {
+        margin: 0 0 0 16px;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+}

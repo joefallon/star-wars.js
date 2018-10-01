@@ -29,8 +29,8 @@ export class App extends React.Component {
                 <Route exact path='/film/:id'      render={(props) => this.renderFilm(props)}/>
                 <Route exact path='/character/:id' render={(props) => this.renderCharacter(props)}/>
                 <Route exact path='/planet/:id'    render={(props) => this.renderPlanet(props)}/>
-                <Route exact path='/species/:id'    render={(props) => this.renderSpecies(props)}/>
-                <Route path='*'              render={(props) => this.renderNotFound(props)} />
+                <Route exact path='/species/:id'   render={(props) => this.renderSpecies(props)}/>
+                <Route path='*'                    render={(props) => this.renderNotFound(props)} />
             </Switch>
         );
     }

@@ -74,19 +74,19 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
                             </div>
                             <div className='card-body'>
                                 <div>
-                                    <strong>Episode:</strong>
+                                    <strong>Episode: </strong>
                                     <span className='episode-id'>{film.getEpisodeId()}</span>
                                 </div>
                                 <div>
-                                    <strong>Release Date:</strong>
+                                    <strong>Release Date: </strong>
                                     <span className='release-date'>{film.getReleaseDate()}</span>
                                 </div>
                                 <div>
-                                    <strong>Director:</strong>
+                                    <strong>Director: </strong>
                                     <span className='director'>{film.getDirector()}</span>
                                 </div>
                                 <div>
-                                    <strong>Producer:</strong>
+                                    <strong>Producer: </strong>
                                     <span className='producer'>{film.getProducer()}</span>
                                 </div>
 

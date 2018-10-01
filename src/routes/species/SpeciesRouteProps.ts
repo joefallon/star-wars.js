@@ -1,5 +1,7 @@
 import { RouteComponentProps } from 'react-router';
 
-export interface SpeciesRouteProps extends RouteComponentProps<any> {
+import { SpeciesModel } from '../../models/SpeciesModel';
 
+export interface SpeciesRouteProps extends RouteComponentProps<any> {
+    model?: SpeciesModel;
 }
