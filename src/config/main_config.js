@@ -1,6 +1,0 @@
-export default {
-    api_url: __API__,
-    api_timeout: 15000,
-    cache_items_max: 5000
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbl9jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJtYWluX2NvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQSxlQUFlO0lBQ1gsT0FBTyxFQUFVLE9BQU87SUFDeEIsV0FBVyxFQUFNLEtBQUs7SUFDdEIsZUFBZSxFQUFFLElBQUk7Q0FDeEIsQ0FBQyJ9

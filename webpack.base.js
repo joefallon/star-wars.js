@@ -8,8 +8,7 @@ const webpack = require('webpack');
 
 module.exports = {
     entry: {
-        app: './src/index.js',
-        // vendor: ['react', 'react-router', 'react-router-dom']
+        app: './src/index.tsx'
     },
     output: {
         path: path.resolve(__dirname, 'public'),
@@ -17,8 +16,19 @@ module.exports = {
         filename: 'js/[name].[chunkhash:6].js',
         chunkFilename: 'js/[name].[chunkhash:6].js'
     },
+    resolve: {
+        extensions: [".ts", ".tsx", ".js"]
+    },
     module: {
         rules: [
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                exclude: /node_modules/,
+                options: {
+                    transpileOnly: true
+                }
+            },
             {
                 test: /\.worker\.ts$/,
                 use: {

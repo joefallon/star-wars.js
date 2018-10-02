@@ -6,7 +6,7 @@ const path                 = require('path');
 const __API__ = JSON.stringify('https://swapi.co/api/');
 
 module.exports = {
-    entry: './src/index_test.js',
+    entry: './src/index_test.tsx',
 
     output: {
         path: path.resolve(__dirname, 'public'),
@@ -26,6 +26,14 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                exclude: /node_modules/,
+                options: {
+                    transpileOnly: true
+                }
+            },
+            {
                 test: /\.worker\.js$/,
                 use: {
                     loader: 'worker-loader',
@@ -44,7 +52,9 @@ module.exports = {
             }
         ]
     },
-
+    resolve: {
+        extensions: [".ts", ".tsx", ".js"]
+    },
     plugins: [
         new MiniCssExtractPlugin({ filename: "styles/[name].[hash:6].css" }),
         new webpack.DefinePlugin({__API__: __API__}),
