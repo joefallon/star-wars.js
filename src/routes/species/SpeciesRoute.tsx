@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 
 import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
+
+import { CharacterEntity } from '../../entities/CharacterEntity';
+import { FilmEntity } from '../../entities/FilmEntity';
 import { SpeciesModelFactory } from '../../models/SpeciesModelFactory';
 import { SpeciesRouteProps } from './SpeciesRouteProps';
 import { SpeciesRouteState } from './SpeciesRouteState';
@@ -110,14 +113,39 @@ class SpeciesRoute extends React.Component<SpeciesRouteProps, SpeciesRouteState>
     }
 
     private getCharacters() {
-        const species       = this.state.model.getSpecies();
-        const characterUrls = species.getCharacterUrls();
+        const characters = this.state.model.getCharacters();
 
-        return (null);
+        return (
+            <ul>
+                {characters.map((character: CharacterEntity) => {
+                    const id   = character.getId();
+                    const name = character.getName();
+
+                    return (
+                        <li key={id} className='character-item'>
+                            <Link to={`/character/${id}`}>{name}</Link>
+                        </li>
+                    );
+                })}
+            </ul>
+        );
     }
 
     private getFilms() {
-        return (null);
+        const films = this.state.model.getFilms();
+
+        return (
+            <ul>
+                {films.map((film: FilmEntity) => {
+                    const id   = film.getId();
+                    const name = film.getTitle();
+
+                    return (
+                        <li key={id} className='film-item'>test</li>
+                    );
+                })}
+            </ul>
+        );
     }
 }
 

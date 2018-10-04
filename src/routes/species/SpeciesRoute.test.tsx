@@ -3,6 +3,8 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { MemoryRouter, Route, Switch } from 'react-router';
 import sinon from 'sinon';
+import { CharacterEntity } from '../../entities/CharacterEntity';
+import { FilmEntity } from '../../entities/FilmEntity';
 
 import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
 import { SpeciesEntity } from '../../entities/SpeciesEntity';
@@ -28,10 +30,28 @@ describe('SpeciesRoute', () => {
             species.setSkinColor('test skin colors');
             species.setHairColor('test hair colors');
             species.setEyeColor('test eye colors');
+            species.setCharacterUrls(['https://swapi.co/api/people/1/']);
+            species.setFilmUrls(['https://swapi.co/api/films/2/']);
 
             const retrieveSpeciesStub = sinon.stub();
             retrieveSpeciesStub.returns(species);
             gateways.speciesGateway.retrieveSpecies = retrieveSpeciesStub;
+
+            const character = new CharacterEntity();
+            character.setName('test character name');
+            character.setUrl('https://swapi.co/api/people/1/');
+
+            const retrieveCharacterStub = sinon.stub();
+            retrieveCharacterStub.returns(character);
+            gateways.charactersGateway.retrieveCharacter = retrieveCharacterStub;
+
+            const film = new FilmEntity();
+            film.setUrl('https://swapi.co/api/films/2/');
+            film.setTitle('test film title');
+
+            const retrieveFilmStub = sinon.stub();
+            retrieveFilmStub.returns(film);
+            gateways.filmsGateway.retrieveFilm = retrieveFilmStub;
 
             props.model = new SpeciesModel(gateways);
 
@@ -73,6 +93,15 @@ describe('SpeciesRoute', () => {
 
             const characters = wrapper.find('.character-item');
             assert.strictEqual(characters.length, 1, 'character items not found');
+
+            const characterLink = characters.first().find('Link');
+            assert.strictEqual(characterLink.length, 1, 'character link not found');
+            assert.strictEqual(characterLink.text(), 'test character name');
+            assert.strictEqual(characterLink.prop('to'), '/character/1');
+
+            const films = wrapper.find('.film-item');
+            assert.strictEqual(films.length, 1, 'film items not found');
+
 
 
             assert.fail('not implemented');
