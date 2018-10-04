@@ -4,7 +4,7 @@
     "alwaysStrict": true,
     "downlevelIteration": true,
     "importHelpers": false,
-    "inlineSourceMap": true,
+    "sourceMap": true,
     "jsx": "react",
     "module": "esnext",
     "moduleResolution": "node",
