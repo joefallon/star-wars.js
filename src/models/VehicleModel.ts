@@ -1,1 +1,3 @@
-/* VehicleModel.ts */
+export class VehicleModel {
+
+}

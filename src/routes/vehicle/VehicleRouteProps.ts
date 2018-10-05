@@ -1,5 +1,7 @@
 import { RouteComponentProps } from 'react-router';
 
-export interface VehicleRouteProps extends RouteComponentProps<any> {
+import { VehicleModel } from '../../models/VehicleModel';
 
+export interface VehicleRouteProps extends RouteComponentProps<any> {
+    model?: VehicleModel
 }

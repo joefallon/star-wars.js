@@ -11,6 +11,7 @@ class VehicleRoute extends React.Component<VehicleRouteProps, VehicleRouteState>
 
     public constructor(props: VehicleRouteProps) {
         super(props);
+        document.title = 'Vehicle Info | API Explorer';
         this.state = {
             isLoading: true
         };
