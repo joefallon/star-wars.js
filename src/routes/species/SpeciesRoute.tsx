@@ -86,17 +86,19 @@ class SpeciesRoute extends React.Component<SpeciesRouteProps, SpeciesRouteState>
 
                                 <div>
                                     <strong>Average Lifespan: </strong>
-                                    <span className='average-lifespan'>average-lifespan</span>
+                                    <span className='average-lifespan'>
+                                        {species.getAverageLifespanInYears()} years
+                                    </span>
                                 </div>
 
                                 <div>
                                     <strong>Language: </strong>
-                                    <span className='language'>language</span>
+                                    <span className='language'>{species.getLanguage()}</span>
                                 </div>
 
                                 <div>
                                     <strong>Homeworld: </strong>
-                                    <Link to='/planet/:id'>homeworld</Link>
+                                    {this.getHomeWorldLink()}
                                 </div>
 
                                 <h3>Characters</h3>
@@ -141,10 +143,27 @@ class SpeciesRoute extends React.Component<SpeciesRouteProps, SpeciesRouteState>
                     const name = film.getTitle();
 
                     return (
-                        <li key={id} className='film-item'>test</li>
+                        <li key={id} className='film-item'>
+                            <Link to={`/film/${id}`}>{name}</Link>
+                        </li>
                     );
                 })}
             </ul>
+        );
+    }
+
+    private getHomeWorldLink() {
+        const homeworld = this.state.model.getHomeworld();
+
+        if(homeworld == null) {
+            return (<>none</>);
+        }
+
+        const id   = homeworld.getId();
+        const name = homeworld.getName();
+
+        return (
+            <Link to={`/planet/${id}`} className='homeworld'>{name}</Link>
         );
     }
 }

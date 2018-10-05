@@ -5,6 +5,7 @@ import { MemoryRouter, Route, Switch } from 'react-router';
 import sinon from 'sinon';
 import { CharacterEntity } from '../../entities/CharacterEntity';
 import { FilmEntity } from '../../entities/FilmEntity';
+import { PlanetEntity } from '../../entities/PlanetEntity';
 
 import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
 import { SpeciesEntity } from '../../entities/SpeciesEntity';
@@ -30,6 +31,8 @@ describe('SpeciesRoute', () => {
             species.setSkinColor('test skin colors');
             species.setHairColor('test hair colors');
             species.setEyeColor('test eye colors');
+            species.setLanguage('test language name');
+            species.setAverageLifespanInYears(100);
             species.setCharacterUrls(['https://swapi.co/api/people/1/']);
             species.setFilmUrls(['https://swapi.co/api/films/2/']);
 
@@ -52,6 +55,14 @@ describe('SpeciesRoute', () => {
             const retrieveFilmStub = sinon.stub();
             retrieveFilmStub.returns(film);
             gateways.filmsGateway.retrieveFilm = retrieveFilmStub;
+
+            const planet = new PlanetEntity();
+            planet.setUrl('https://swapi.co/api/planets/2/');
+            planet.setName('test homeworld name');
+
+            const retrievePlanetStub = sinon.stub();
+            retrievePlanetStub.returns(planet);
+            gateways.planetsGateway.retrievePlanet = retrievePlanetStub;
 
             props.model = new SpeciesModel(gateways);
 
@@ -91,6 +102,12 @@ describe('SpeciesRoute', () => {
             const eyeColors = wrapper.find('.eye-colors');
             assert.strictEqual(eyeColors.text(), 'test eye colors');
 
+            const language = wrapper.find('.language');
+            assert.strictEqual(language.text(), 'test language name');
+
+            const lifespan = wrapper.find('.average-lifespan');
+            assert.strictEqual(lifespan.text(), '100 years');
+
             const characters = wrapper.find('.character-item');
             assert.strictEqual(characters.length, 1, 'character items not found');
 
@@ -102,9 +119,16 @@ describe('SpeciesRoute', () => {
             const films = wrapper.find('.film-item');
             assert.strictEqual(films.length, 1, 'film items not found');
 
+            const filmLink = films.first().find('Link');
+            assert.strictEqual(filmLink.length, 1, 'film link not found');
+            assert.strictEqual(filmLink.text(), 'test film title');
+            assert.strictEqual(filmLink.prop('to'), '/film/2');
 
+            const homeworld = wrapper.find('.homeworld').find('Link');
+            assert.strictEqual(homeworld.length, 1, `homeworld.length is not 1`);
+            assert.strictEqual(homeworld.text(), 'test homeworld name');
+            assert.strictEqual(homeworld.prop('to'), '/planet/2');
 
-            assert.fail('not implemented');
             done();
         });
     });

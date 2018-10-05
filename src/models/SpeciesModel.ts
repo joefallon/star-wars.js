@@ -1,13 +1,15 @@
 import { CharacterEntity } from '../entities/CharacterEntity';
 import { FilmEntity } from '../entities/FilmEntity';
-import { SpeciesEntity } from '../entities/SpeciesEntity';
 import { Gateways } from '../gateways/Gateways';
+import { PlanetEntity } from '../entities/PlanetEntity';
+import { SpeciesEntity } from '../entities/SpeciesEntity';
 
 export class SpeciesModel {
     private _gateways:   Gateways;
     private _species:    SpeciesEntity;
     private _characters: CharacterEntity[];
     private _films:      FilmEntity[];
+    private _homeworld:  PlanetEntity;
 
     public constructor(gateways: Gateways) {
         this._gateways = gateways;
@@ -17,7 +19,7 @@ export class SpeciesModel {
         const speciesGateway = this._gateways.speciesGateway;
         this._species        = await speciesGateway.retrieveSpecies(`https://swapi.co/api/species/${id}/`);
 
-        await Promise.all([ this.loadCharacters(), this.loadFilms() ]);
+        await Promise.all([ this.loadCharacters(), this.loadFilms(), this.loadHomeworld() ]);
     }
 
     public getSpecies(): SpeciesEntity {
@@ -58,5 +60,23 @@ export class SpeciesModel {
         });
 
         this._films = await Promise.all(filmPromises);
+    }
+
+    public getHomeworld() {
+        return this._homeworld;
+    }
+
+    private async loadHomeworld() {
+        const species   = this._species;
+        const planetUrl = species.getHomePlanetUrl();
+
+        if(planetUrl == null) {
+            this._homeworld = null;
+            return;
+        }
+
+        const gateway   = this._gateways.planetsGateway;
+        const planet    = await gateway.retrievePlanet(planetUrl);
+        this._homeworld = planet;
     }
 }

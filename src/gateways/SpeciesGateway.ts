@@ -44,7 +44,7 @@ export class SpeciesGateway {
         species.setCreated(data['created']);
         species.setDesignation(data['designation']);
         species.setEyeColor(data['eye_colors']);
-        species.setFilmUrls(data['']);
+        species.setFilmUrls(data['films']);
         species.setHairColor(data['hair_colors']);
         species.setHomePlanetUrl(data['homeworld']);
         species.setName(data['name']);
