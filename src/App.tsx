@@ -4,12 +4,12 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import Loadable  from 'react-loadable';
 
-import { IndexRouteProps } from './routes/index/IndexRouteProps';
 import { CharacterRouteProps } from './routes/character/CharacterRouteProps';
+import { IndexRouteProps } from './routes/index/IndexRouteProps';
 import { FilmRouteProps } from './routes/film/FilmRouteProps';
 import { PlanetRouteProps } from './routes/planet/PlanetRouteProps';
 import { SpeciesRouteProps } from './routes/species/SpeciesRouteProps';
-
+import { VehicleRouteProps } from './routes/vehicle/VehicleRouteProps';
 
 export class App extends React.Component {
 
@@ -18,11 +18,6 @@ export class App extends React.Component {
     }
 
     public render(): JSX.Element {
-        // todo: * complete /species/:id route
-        // todo: - complete /vehicle/:id route
-        // todo: - complete /starship/:id route
-        // todo: * NaN should display "unknown"
-
         return (
             <Switch>
                 <Route exact path='/'              render={(props) => this.renderIndex(props)}/>
@@ -30,6 +25,7 @@ export class App extends React.Component {
                 <Route exact path='/character/:id' render={(props) => this.renderCharacter(props)}/>
                 <Route exact path='/planet/:id'    render={(props) => this.renderPlanet(props)}/>
                 <Route exact path='/species/:id'   render={(props) => this.renderSpecies(props)}/>
+                <Route exact path='/vehicle/:id'   render={(props) => this.renderVehicle(props)}/>
                 <Route path='*'                    render={(props) => this.renderNotFound(props)} />
             </Switch>
         );
@@ -93,27 +89,17 @@ export class App extends React.Component {
         return (<LoadableSpeciesRoute {...props} />);
     };
 
-    // private renderRoute2 = (props: Route2Props): JSX.Element => {
-    //     const LoadableRoute2 = Loadable({
-    //         loader: () => import(/* webpackChunkName: "route-2" */'./routes/route-2/Route2'),
-    //         loading: () => { return <div>Loading...</div>; },
-    //         delay: 300,
-    //         timeout: 10000
-    //     });
-    //
-    //     return (<LoadableRoute2 {...props} />);
-    // };
+    private renderVehicle = (props: VehicleRouteProps): JSX.Element => {
+        const LoadableVehicleRoute = Loadable({
+            loader:  () => import(/* webpackChunkName: "vehicle-route" */
+                                  './routes/vehicle/VehicleRoute'),
+            loading: () => { return null; },
+            delay:   300,
+            timeout: 10000
+        });
 
-    // private renderRoute3 = (props: Route3Props): JSX.Element => {
-    //     const LoadableRoute3 = Loadable({
-    //         loader: () => import(/* webpackChunkName: "route-3" */'./routes/route-3/Route3'),
-    //         loading: () => { return <div>Loading...</div>; },
-    //         delay: 300,
-    //         timeout: 10000
-    //     });
-    //
-    //     return (<LoadableRoute3 {...props} />);
-    // };
+        return (<LoadableVehicleRoute {...props} />);
+    };
 
     private renderNotFound = (props: any): JSX.Element => {
         return (

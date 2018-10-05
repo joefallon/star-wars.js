@@ -106,7 +106,7 @@ describe('CharacterRoute', () => {
 
             const vehicleLink = vehicles.first().find('Link');
             assert.strictEqual(vehicleLink.length, 1);
-            assert.strictEqual(vehicleLink.props()['to'], '/vehicles/20');
+            assert.strictEqual(vehicleLink.props()['to'], '/vehicle/20');
             assert.strictEqual(vehicleLink.text(),        'test vehicle name');
 
             const starships = wrapper.find('.starship-item');

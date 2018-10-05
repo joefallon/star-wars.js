@@ -181,7 +181,7 @@ class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRoute
 
                     return (
                         <li key={id} className='vehicle-item'>
-                            <Link to={`/vehicles/${id}`}>{name}</Link>
+                            <Link to={`/vehicle/${id}`}>{name}</Link>
                         </li>
                     );
                 })}
