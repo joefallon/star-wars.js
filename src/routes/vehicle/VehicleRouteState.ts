@@ -1,3 +1,7 @@
+import { VehicleModel } from '../../models/VehicleModel';
+
 export interface VehicleRouteState {
-    isLoading: boolean
+    isLoading: boolean,
+    id:        number,
+    model:     VehicleModel
 }
