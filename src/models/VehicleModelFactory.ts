@@ -1,8 +1,12 @@
+import { GatewaysFactory } from '../gateways/GatewaysFactory';
 import { VehicleModel } from './VehicleModel';
 
 export class VehicleModelFactory {
 
     public static create(): VehicleModel {
-        return new VehicleModel();
+        const gateways = GatewaysFactory.create();
+        const model    = new VehicleModel(gateways);
+
+        return model;
     }
 }

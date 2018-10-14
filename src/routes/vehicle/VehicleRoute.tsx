@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 
+import { CharacterEntity } from '../../entities/CharacterEntity';
+import { FilmEntity } from '../../entities/FilmEntity';
+
 import { VehicleModelFactory } from '../../models/VehicleModelFactory';
 import { VehicleRouteProps } from './VehicleRouteProps';
 import { VehicleRouteState } from './VehicleRouteState';
@@ -99,22 +102,10 @@ class VehicleRoute extends React.Component<VehicleRouteProps, VehicleRouteState>
                                 </div>
 
                                 <h3>Pilots</h3>
-                                <div>
-                                    <ul>
-                                        <li>
-                                            <Link key={null} to='#' className='pilot-item'>pilot 1</Link>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <div>{this.getPilots()}</div>
 
                                 <h3>Films</h3>
-                                <div>
-                                    <ul>
-                                        <li>
-                                            <Link key={null} to='#' className='film-item'>film 1</Link>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <div>{this.getFilms()}</div>
                             </div>
                         </div>
                     </div>
@@ -122,6 +113,44 @@ class VehicleRoute extends React.Component<VehicleRouteProps, VehicleRouteState>
             </div>
         );
     }
+
+    private getPilots = () => {
+        const pilots = this.state.model.getPilots();
+
+        return (
+            <ul>
+                {pilots.map((pilot: CharacterEntity) => {
+                    const id   = pilot.getId();
+                    const name = pilot.getName();
+
+                    return (
+                        <li key={id}>
+                            <Link to={`/character/${id}`} className='pilot-item'>{name}</Link>
+                        </li>
+                    );
+                })}
+            </ul>
+        );
+    };
+
+    private getFilms = () => {
+        const films = this.state.model.getFilms();
+
+        return (
+            <ul>
+                {films.map((film: FilmEntity) => {
+                    const id    = film.getId();
+                    const title = film.getTitle();
+
+                    return (
+                        <li key={id}>
+                            <Link to={`/film/${id}`} className='film-item'>{title}</Link>
+                        </li>
+                    );
+                })}
+            </ul>
+        );
+    };
 }
 
 export default VehicleRoute;

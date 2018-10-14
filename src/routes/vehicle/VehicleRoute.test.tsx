@@ -4,7 +4,10 @@ import { mount } from 'enzyme';
 import { MemoryRouter, Route, Switch } from 'react-router';
 import sinon from 'sinon';
 
+import { CharacterEntity } from '../../entities/CharacterEntity';
+import { FilmEntity } from '../../entities/FilmEntity';
 import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
+
 import VehicleRoute from './VehicleRoute';
 import { VehicleEntity } from '../../entities/VehicleEntity';
 import { VehicleModel } from '../../models/VehicleModel';
@@ -31,15 +34,28 @@ describe('VehicleRoute', () => {
             vehicle.setCargoCapacityInKilograms(20);
             vehicle.setConsumables('test consumables');
             vehicle.setVehicleClass('test class');
+            vehicle.setPilotCharacterUrls(['https://swapi.co/api/people/1/']);
+            vehicle.setFilmUrls(['https://swapi.co/api/films/1/']);
 
             const retrieveVehicleStub = sinon.stub();
             retrieveVehicleStub.returns(vehicle);
-
-            // todo: set pilots
-            // todo: set films
-
             gateways.vehiclesGateway.retrieveVehicle = retrieveVehicleStub;
 
+            const pilot = new CharacterEntity();
+            pilot.setUrl('https://swapi.co/api/people/2/');
+            pilot.setName('test pilot name');
+
+            const retrieveCharacterStub = sinon.stub();
+            retrieveCharacterStub.returns(pilot);
+            gateways.charactersGateway.retrieveCharacter = retrieveCharacterStub;
+
+            const film = new FilmEntity();
+            film.setUrl('https://swapi.co/api/films/2/');
+            film.setTitle('test film title');
+
+            const retrieveFilmStub = sinon.stub();
+            retrieveFilmStub.returns(film);
+            gateways.filmsGateway.retrieveFilm = retrieveFilmStub;
 
             props.model = new VehicleModel(gateways);
 
@@ -91,7 +107,18 @@ describe('VehicleRoute', () => {
             const vehicleClass = wrapper.find('.vehicle-class');
             assert.strictEqual(vehicleClass.text(), 'test class');
 
-            assert.fail('not implemented');
+            const pilots    = wrapper.find('.pilot-item');
+            const pilotLink = pilots.find('Link');
+            assert.strictEqual(pilotLink.length, 1, 'pilot Link not found');
+            assert.strictEqual(pilotLink.prop('to'), '/character/2');
+            assert.strictEqual(pilotLink.text(),     'test pilot name');
+
+            const films    = wrapper.find('.film-item');
+            const filmLink = films.find('Link');
+            assert.strictEqual(filmLink.length, 1, 'film link not found');
+            assert.strictEqual(filmLink.prop('to'), '/film/2');
+            assert.strictEqual(filmLink.text(),     'test film title');
+
             done();
         });
     });

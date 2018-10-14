@@ -31,7 +31,7 @@ module.exports = {
     mode: 'development',
 
     watchOptions: {
-        aggregateTimeout: 500,
+        aggregateTimeout: 250,
         poll: true,
         ignored: [ /node_modules/, "src/**/*.tsx", "src/**/*.ts", "src/**/*.scss", "src/**/*.css" ]
     },
