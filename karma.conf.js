@@ -17,7 +17,7 @@ module.exports = function(config) {
         exclude: [
         ],
 
-        autoWatchBatchDelay: 500,
+        autoWatchBatchDelay: 0,
 
         // test results reporter to use
         // possible values: 'dots', 'progress', 'mocha'

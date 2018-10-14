@@ -1,8 +1,8 @@
 'use strict';
-const webpack = require('webpack');
 const common  = require('./webpack.base.js');
 const merge   = require('webpack-merge');
 const path    = require('path');
+const webpack = require('webpack');
 
 const __API__ = JSON.stringify('https://swapi.co/api/');
 
@@ -12,7 +12,7 @@ module.exports = merge(common, {
         filename: 'js/[name].[chunkhash:6].js'
     },
 
-    devtool: 'inline-source-map',
+    devtool: 'inline-cheap-module-source-map',
 
     mode: 'development',
 

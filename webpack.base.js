@@ -2,8 +2,7 @@
 const CopyWebpackPlugin    = require('copy-webpack-plugin');
 const HtmlWebpackPlugin    = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const path    = require('path');
-const webpack = require('webpack');
+const path = require('path');
 
 
 module.exports = {
@@ -56,7 +55,7 @@ module.exports = {
     optimization: {
         // runtimeChunk: 'single',  // creates runtime.js
         runtimeChunk: {
-            name: 'vendor'  // places webpack runtime in vendor.js
+            name: 'manifest'  // places webpack runtime in manifest.js
         },
         splitChunks: {
             cacheGroups: {

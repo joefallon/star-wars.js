@@ -1,9 +1,10 @@
 'use strict';
-const webpack                 = require('webpack');
-const UglifyJSPlugin          = require('uglifyjs-webpack-plugin');
+const common  = require('./webpack.base.js');
+const merge   = require('webpack-merge');
+const path    = require('path');
+const webpack = require('webpack');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const merge                   = require('webpack-merge');
-const common                  = require('./webpack.base.js');
+const UglifyJSPlugin          = require('uglifyjs-webpack-plugin');
 
 const __API__ = JSON.stringify('https://swapi.co/api/');
 
@@ -14,6 +15,10 @@ const NODE_ENV = {
 };
 
 module.exports = merge(common, {
+    output: {
+        path: path.resolve(__dirname, 'public'),
+        filename: 'js/[name].[chunkhash:6].js'
+    },
 
     mode: 'production',
 
@@ -27,7 +32,7 @@ module.exports = merge(common, {
     },
 
     plugins: [
-        new UglifyJSPlugin(),
+        new UglifyJSPlugin({uglifyOptions: {ie8: false}}),
         new webpack.DefinePlugin(NODE_ENV),
         new webpack.DefinePlugin({__API__: __API__})
     ]

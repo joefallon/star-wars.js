@@ -3,7 +3,7 @@
     "allowSyntheticDefaultImports": true,
     "alwaysStrict": true,
     "downlevelIteration": true,
-    "importHelpers": false,
+    "importHelpers": true,
     "sourceMap": true,
     "jsx": "react",
     "module": "esnext",
