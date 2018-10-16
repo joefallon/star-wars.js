@@ -3,15 +3,15 @@ require('./VehicleRoute.css');
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
+import { VehicleModelFactory } from '../../models/VehicleModelFactory';
+import { VehicleRouteProps } from './VehicleRouteProps';
+import { VehicleRouteState } from './VehicleRouteState';
+
 import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 
 import { CharacterEntity } from '../../entities/CharacterEntity';
 import { FilmEntity } from '../../entities/FilmEntity';
-
-import { VehicleModelFactory } from '../../models/VehicleModelFactory';
-import { VehicleRouteProps } from './VehicleRouteProps';
-import { VehicleRouteState } from './VehicleRouteState';
 
 class VehicleRoute extends React.Component<VehicleRouteProps, VehicleRouteState> {
 

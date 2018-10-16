@@ -3,14 +3,16 @@ import * as React from 'react';
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-import { CharacterEntity } from '../../entities/CharacterEntity';
 import { FilmModelFactory } from '../../models/FilmModelFactory';
 import { FilmRouteProps } from './FilmRouteProps';
 import { FilmRouteState } from './FilmRouteState';
+
 import { Header } from '../../components/header/Header';
+import { SpinLoader } from '../../components/spin-loader/SpinLoader';
+
+import { CharacterEntity } from '../../entities/CharacterEntity';
 import { PlanetEntity } from '../../entities/PlanetEntity';
 import { SpeciesEntity } from '../../entities/SpeciesEntity';
-import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 import { StarshipEntity } from '../../entities/StarshipEntity';
 import { VehicleEntity } from '../../entities/VehicleEntity';
 

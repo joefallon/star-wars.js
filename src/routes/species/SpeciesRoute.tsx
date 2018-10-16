@@ -3,14 +3,15 @@ require('./SpeciesRoute.css');
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
+import { SpeciesModelFactory } from '../../models/SpeciesModelFactory';
+import { SpeciesRouteProps } from './SpeciesRouteProps';
+import { SpeciesRouteState } from './SpeciesRouteState';
+
 import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 
 import { CharacterEntity } from '../../entities/CharacterEntity';
 import { FilmEntity } from '../../entities/FilmEntity';
-import { SpeciesModelFactory } from '../../models/SpeciesModelFactory';
-import { SpeciesRouteProps } from './SpeciesRouteProps';
-import { SpeciesRouteState } from './SpeciesRouteState';
 
 class SpeciesRoute extends React.Component<SpeciesRouteProps, SpeciesRouteState> {
 

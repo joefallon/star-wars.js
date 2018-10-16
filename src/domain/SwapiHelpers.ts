@@ -1,4 +1,3 @@
-
 export class SwapiHelpers {
 
     public static getIdFromUrl(url: string): number {

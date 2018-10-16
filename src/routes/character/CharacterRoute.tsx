@@ -4,11 +4,13 @@ import * as React from 'react';
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Header } from '../../components/header/Header';
-import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 import { CharacterModelFactory } from '../../models/CharacterModelFactory';
 import { CharacterRouteProps } from './CharacterRouteProps';
 import { CharacterRouteState } from './CharacterRouteState';
+
+import { Header } from '../../components/header/Header';
+import { SpinLoader } from '../../components/spin-loader/SpinLoader';
+
 import { SpeciesEntity } from '../../entities/SpeciesEntity';
 import { StarshipEntity } from '../../entities/StarshipEntity';
 import { VehicleEntity } from '../../entities/VehicleEntity';

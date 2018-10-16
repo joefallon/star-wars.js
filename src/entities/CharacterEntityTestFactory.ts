@@ -14,7 +14,7 @@ export class CharacterEntityTestFactory {
         char.setHeightInCentimeters(10);
         char.setHomePlanetUrl('https://swapi.co/api/planets/2/');
         char.setMassInKilograms(22);
-        char.setName('test name');
+        char.setName('test character name');
         char.setSkinColor('test skin color');
         char.setSpeciesUrls(['https://swapi.co/api/species/3/']);
         char.setStarshipUrls(['https://swapi.co/api/starships/4/']);

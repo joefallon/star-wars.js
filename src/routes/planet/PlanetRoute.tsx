@@ -3,14 +3,15 @@ require('./PlanetRoute.css');
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
+import { PlanetModelFactory } from '../../models/PlanetModelFactory';
+import { PlanetRouteProps } from './PlanetRouteProps';
+import { PlanetRouteState } from './PlanetRouteState';
+
 import { Header } from '../../components/header/Header';
 import { SpinLoader } from '../../components/spin-loader/SpinLoader';
 
 import { CharacterEntity } from '../../entities/CharacterEntity';
 import { FilmEntity } from '../../entities/FilmEntity';
-import { PlanetModelFactory } from '../../models/PlanetModelFactory';
-import { PlanetRouteProps } from './PlanetRouteProps';
-import { PlanetRouteState } from './PlanetRouteState';
 
 class PlanetRoute extends React.Component<PlanetRouteProps, PlanetRouteState>{
 

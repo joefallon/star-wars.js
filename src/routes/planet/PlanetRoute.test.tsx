@@ -4,14 +4,14 @@ import { MemoryRouter, Route, Switch } from 'react-router';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 
-import { CharacterEntityTestFactory } from '../../entities/CharacterEntityTestFactory';
-import { FilmEntityTestFactory } from '../../entities/FilmEntityTestFactory';
-import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
-import { PlanetEntityTestFactory } from '../../entities/PlanetEntityTestFactory';
-import { PlanetModel } from '../../models/PlanetModel';
 import PlanetRoute from './PlanetRoute';
 import { PlanetRouteProps } from './PlanetRouteProps';
+import { PlanetModel } from '../../models/PlanetModel';
 
+import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
+import { CharacterEntityTestFactory } from '../../entities/CharacterEntityTestFactory';
+import { FilmEntityTestFactory } from '../../entities/FilmEntityTestFactory';
+import { PlanetEntityTestFactory } from '../../entities/PlanetEntityTestFactory';
 
 describe('PlanetRoute', () => {
     beforeEach(() => {
@@ -93,7 +93,7 @@ describe('PlanetRoute', () => {
             const residentLink = residents.first().find('Link');
             assert.strictEqual(residentLink.length, 1);
             assert.strictEqual(residentLink.props()['to'], '/character/5');
-            assert.strictEqual(residentLink.text(), 'test name');
+            assert.strictEqual(residentLink.text(), 'test character name');
 
             done();
         });

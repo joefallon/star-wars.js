@@ -4,12 +4,13 @@ import * as React from 'react';
 import { MemoryRouter, Route, Switch } from 'react-router';
 import sinon from 'sinon';
 
-import { FilmEntity } from '../../entities/FilmEntity';
-import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
-import { IndexModel } from '../../models/IndexModel';
 import IndexRoute from './IndexRoute';
 import { IndexRouteProps } from './IndexRouteProps';
+import { IndexModel } from '../../models/IndexModel';
 
+import { GatewaysTestFactory } from '../../gateways/GatewaysTestFactory';
+import { FilmEntity } from '../../entities/FilmEntity';
+import { FilmEntityTestFactory } from '../../entities/FilmEntityTestFactory';
 
 describe('IndexRoute', () => {
     beforeEach(() => {
@@ -19,22 +20,7 @@ describe('IndexRoute', () => {
     it('displays the list of films', (done) => {
 
         function renderRoute(props: IndexRouteProps) {
-            const film = new FilmEntity();
-            film.setCharacterUrls(['character1']);
-            film.setCreated('2012-12-12T12:12:12');
-            film.setDirector('director');
-            film.setUpdated('2012-12-12T11:11:11');
-            film.setEpisodeId(1);
-            film.setOpeningCrawl('opening crawl');
-            film.setPlanetUrls(['planet1']);
-            film.setProducer('producer');
-            film.setReleaseDate('2012-12-12');
-            film.setSpeciesUrls(['species1']);
-            film.setStarshipUrls(['starship1']);
-            film.setTitle('title');
-            film.setUrl('url');
-            film.setVehicleUrls(['vehicle1']);
-
+            const film = FilmEntityTestFactory.create();
             const films: FilmEntity[] = [ film ];
 
             var retrieveAllFilmsStub = sinon.stub();
@@ -63,9 +49,9 @@ describe('IndexRoute', () => {
 
             const row = wrapper.find('IndexRoute').instance().state['tableData'][0];
             assert.strictEqual(row['episodeId'], 1);
-            assert.strictEqual(row['title'],     'title');
-            assert.strictEqual(row['year'],      2012);
-            assert.strictEqual(row['filmUrl'],   'url');
+            assert.strictEqual(row['title'], 'test title');
+            assert.strictEqual(row['year'], 2012);
+            assert.strictEqual(row['filmUrl'], 'https://swapi.co/api/films/2/');
 
             done();
         }, 0);

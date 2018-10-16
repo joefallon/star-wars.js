@@ -5,14 +5,15 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import ReactTable, { Column } from 'react-table';
 
-import { Header } from '../../components/header/Header';
-import { SpinLoader } from '../../components/spin-loader/SpinLoader';
-import { FilmEntity } from '../../entities/FilmEntity';
 import { IndexModel } from '../../models/IndexModel';
 import { IndexModelFactory } from '../../models/IndexModelFactory';
-
 import { IndexRouteProps } from './IndexRouteProps';
 import { IndexRouteState } from './IndexRouteState';
+
+import { Header } from '../../components/header/Header';
+import { SpinLoader } from '../../components/spin-loader/SpinLoader';
+
+import { FilmEntity } from '../../entities/FilmEntity';
 
 class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
     private _model: IndexModel;

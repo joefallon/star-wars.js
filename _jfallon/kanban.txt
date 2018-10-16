@@ -1,8 +1,5 @@
 - NaN's should display a human readable value.
-* complete /vehicle/:id route
-- complete /starship/:id route
+* complete /starship/:id route
 - Add breadcrumbs.
 - Add "None" when collections are empty.
-- Add title to vehicle route page.
-
 - fix nans on http://localhost:8080/planet/61
