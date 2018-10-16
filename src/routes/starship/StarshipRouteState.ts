@@ -1,3 +1,6 @@
+import { StarshipModel } from '../../models/StarshipModel';
+
 export interface StarshipRouteState {
-    isLoading: boolean
+    isLoading: boolean,
+    model:     StarshipModel
 }

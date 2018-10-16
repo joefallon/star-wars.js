@@ -38,6 +38,9 @@ class VehicleRoute extends React.Component<VehicleRouteProps, VehicleRouteState>
         const model   = this.state.model;
         const vehicle = model.getVehicle();
 
+        const cost = vehicle.getCostInCredits();
+        const formattedCost = isNaN(cost) ? 'unknown' : cost + ' credits';
+
         return (
             <div className='container VehicleRoute'>
                 <Header />
@@ -46,6 +49,7 @@ class VehicleRoute extends React.Component<VehicleRouteProps, VehicleRouteState>
                     <div className='md-offset-3 md-6'>
                         <div className='card'>
                             <div className='card-header'>
+                                &lt; <Link to={'/'}>Back to All Films</Link>
                                 <h2>{vehicle.getName()}</h2>
                             </div>
                             <div className='card-body'>
@@ -61,7 +65,7 @@ class VehicleRoute extends React.Component<VehicleRouteProps, VehicleRouteState>
 
                                 <div>
                                     <strong>Cost: </strong>
-                                    <span className='cost'>{vehicle.getCostInCredits()} credits</span>
+                                    <span className='cost'>{formattedCost}</span>
                                 </div>
 
                                 <div>
@@ -119,6 +123,10 @@ class VehicleRoute extends React.Component<VehicleRouteProps, VehicleRouteState>
     private getPilots = () => {
         const pilots = this.state.model.getPilots();
 
+        if(pilots.length == 0) {
+            return (<>None</>);
+        }
+
         return (
             <ul className='link-list'>
                 {pilots.map((pilot: CharacterEntity) => {
@@ -137,6 +145,10 @@ class VehicleRoute extends React.Component<VehicleRouteProps, VehicleRouteState>
 
     private getFilms = () => {
         const films = this.state.model.getFilms();
+
+        if(films.length == 0) {
+            return (<>None</>);
+        }
 
         return (
             <ul className='link-list'>

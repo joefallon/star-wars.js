@@ -54,6 +54,7 @@ class PlanetRoute extends React.Component<PlanetRouteProps, PlanetRouteState>{
                     <div className='md-offset-3 md-6'>
                         <div className='card'>
                             <div className='card-header'>
+                                &lt; <Link to={'/'}>Back to All Films</Link>
                                 <h2>{planet.getName()}</h2>
                             </div>
                             <div className='card-body'>
@@ -119,6 +120,10 @@ class PlanetRoute extends React.Component<PlanetRouteProps, PlanetRouteState>{
     private getFilms = () => {
         const films = this.state.model.getFilms();
 
+        if(films.length == 0) {
+            return (<>None</>);
+        }
+
         return (
             <ul className='films link-list'>
                 {films.map((film: FilmEntity) => {
@@ -137,6 +142,10 @@ class PlanetRoute extends React.Component<PlanetRouteProps, PlanetRouteState>{
 
     private getResidents = () => {
         const residents = this.state.model.getResidents();
+
+        if(residents.length == 0) {
+            return (<>None</>);
+        }
 
         return (
             <ul className='residents link-list'>

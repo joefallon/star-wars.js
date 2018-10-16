@@ -42,6 +42,9 @@ class SpeciesRoute extends React.Component<SpeciesRouteProps, SpeciesRouteState>
         const model   = this.state.model;
         const species = model.getSpecies();
 
+        const lifespan = species.getAverageLifespanInYears();
+        const formattedLifespan = isNaN(lifespan) ? 'unknown' : lifespan + ' years';
+
         return (
             <div className='container SpeciesRoute'>
                 <Header/>
@@ -50,6 +53,7 @@ class SpeciesRoute extends React.Component<SpeciesRouteProps, SpeciesRouteState>
                     <div className='md-offset-3 md-6'>
                         <div className='card'>
                             <div className='card-header'>
+                                &lt; <Link to={'/'}>Back to All Films</Link>
                                 <h2>{species.getName()}</h2>
                             </div>
                             <div className='card-body'>
@@ -87,9 +91,7 @@ class SpeciesRoute extends React.Component<SpeciesRouteProps, SpeciesRouteState>
 
                                 <div>
                                     <strong>Average Lifespan: </strong>
-                                    <span className='average-lifespan'>
-                                        {species.getAverageLifespanInYears()} years
-                                    </span>
+                                    <span className='average-lifespan'>{formattedLifespan}</span>
                                 </div>
 
                                 <div>
@@ -118,6 +120,10 @@ class SpeciesRoute extends React.Component<SpeciesRouteProps, SpeciesRouteState>
     private getCharacters() {
         const characters = this.state.model.getCharacters();
 
+        if(characters.length == 0) {
+            return (<>None</>);
+        }
+
         return (
             <ul className='link-list'>
                 {characters.map((character: CharacterEntity) => {
@@ -136,6 +142,10 @@ class SpeciesRoute extends React.Component<SpeciesRouteProps, SpeciesRouteState>
 
     private getFilms() {
         const films = this.state.model.getFilms();
+
+        if(films.length == 0) {
+            return (<>None</>);
+        }
 
         return (
             <ul className='link-list'>

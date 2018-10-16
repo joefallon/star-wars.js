@@ -53,6 +53,9 @@ class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRoute
         const model     = this.state.model;
         const character = model.getCharacter();
 
+        const mass = character.getMassInKilograms();
+        const formattedMass = isNaN(mass) ? 'unknown' : mass + ' kg';
+
         return (
             <div className='container CharacterRoute'>
                 <Header />
@@ -61,6 +64,7 @@ class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRoute
                     <div className='md-offset-3 md-6'>
                         <div className='card'>
                             <div className='card-header'>
+                                &lt; <Link to={'/'}>Back to All Films</Link>
                                 <h2>{character.getName()}</h2>
                             </div>
                             <div className='card-body'>
@@ -71,7 +75,7 @@ class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRoute
 
                                 <div>
                                     <strong>Mass: </strong>
-                                    <span className='mass'>{character.getMassInKilograms()} kg</span>
+                                    <span className='mass'>{formattedMass}</span>
                                 </div>
 
                                 <div>
@@ -136,6 +140,10 @@ class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRoute
     private getFilms = () => {
         const films = this.state.model.getFilms();
 
+        if(films.length == 0) {
+            return (<>None</>);
+        }
+
         return (
             <ul className='films'>
                 {films.map((film) => {
@@ -156,6 +164,10 @@ class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRoute
     private getSpecies = () => {
         const species = this.state.model.getSpecies();
 
+        if(species.length == 0) {
+            return (<>None</>);
+        }
+
         return (
             <ul className='species'>
                 {species.map((singleSpecies: SpeciesEntity) => {
@@ -175,6 +187,10 @@ class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRoute
     private getVehicles = () => {
         const vehicles = this.state.model.getVehicles();
 
+        if(vehicles.length == 0) {
+            return (<>None</>);
+        }
+
         return (
             <ul className='vehicles'>
                 {vehicles.map((vehicle: VehicleEntity) => {
@@ -193,6 +209,10 @@ class CharacterRoute extends React.Component<CharacterRouteProps, CharacterRoute
 
     private getStarships = () => {
         const starships = this.state.model.getStarships();
+
+        if(starships.length == 0) {
+            return (<>None</>);
+        }
 
         return (
             <ul className='starships'>

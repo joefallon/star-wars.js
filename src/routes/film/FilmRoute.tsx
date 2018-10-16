@@ -72,6 +72,7 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
                     <div className='md-offset-3 md-6'>
                         <div className='card'>
                             <div className='card-header'>
+                                &lt; <Link to={'/'}>Back to All Films</Link>
                                 <h2>{film.getTitle()}</h2>
                             </div>
                             <div className='card-body'>
@@ -121,6 +122,10 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
     private getCharacters = (): ReactNode => {
         const characters = this.state.characters;
 
+        if(characters.length == 0) {
+            return (<>None</>);
+        }
+
         return (
               <ul className='link-list'>
                   {characters.map((character: CharacterEntity) => {
@@ -139,6 +144,10 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
 
     private getPlanets(): ReactNode {
         const planets = this.state.planets;
+
+        if(planets.length == 0) {
+            return (<>None</>);
+        }
 
         return (
             <ul className='link-list'>
@@ -159,6 +168,10 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
     private getStarships(): ReactNode {
         const starships = this.state.starships;
 
+        if(starships.length == 0) {
+            return (<>None</>);
+        }
+
         return (
             <ul className='link-list'>
                 {starships.map((starship: StarshipEntity) => {
@@ -178,6 +191,10 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
     private getVehicles(): ReactNode {
         const vehicles = this.state.vehicles;
 
+        if(vehicles.length == 0) {
+            return (<>None</>);
+        }
+
         return (
             <ul className='link-list'>
                 {vehicles.map((vehicle: VehicleEntity) => {
@@ -196,6 +213,10 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
 
     private getSpecies(): ReactNode {
         const species = this.state.species;
+
+        if(species.length == 0) {
+            return (<>None</>);
+        }
 
         return (
             <ul className='link-list'>
