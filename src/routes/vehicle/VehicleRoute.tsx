@@ -1,3 +1,5 @@
+require('./VehicleRoute.css');
+
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -118,13 +120,13 @@ class VehicleRoute extends React.Component<VehicleRouteProps, VehicleRouteState>
         const pilots = this.state.model.getPilots();
 
         return (
-            <ul>
+            <ul className='link-list'>
                 {pilots.map((pilot: CharacterEntity) => {
                     const id   = pilot.getId();
                     const name = pilot.getName();
 
                     return (
-                        <li key={id}>
+                        <li key={id} className='link-list-item'>
                             <Link to={`/character/${id}`} className='pilot-item'>{name}</Link>
                         </li>
                     );
@@ -137,13 +139,13 @@ class VehicleRoute extends React.Component<VehicleRouteProps, VehicleRouteState>
         const films = this.state.model.getFilms();
 
         return (
-            <ul>
+            <ul className='link-list'>
                 {films.map((film: FilmEntity) => {
                     const id    = film.getId();
                     const title = film.getTitle();
 
                     return (
-                        <li key={id}>
+                        <li key={id} className='link-list-item'>
                             <Link to={`/film/${id}`} className='film-item'>{title}</Link>
                         </li>
                     );

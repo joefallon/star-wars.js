@@ -4,3 +4,5 @@
 - Add breadcrumbs.
 - Add "None" when collections are empty.
 - Add title to vehicle route page.
+
+- fix nans on http://localhost:8080/planet/61

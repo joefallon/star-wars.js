@@ -118,13 +118,13 @@ class SpeciesRoute extends React.Component<SpeciesRouteProps, SpeciesRouteState>
         const characters = this.state.model.getCharacters();
 
         return (
-            <ul>
+            <ul className='link-list'>
                 {characters.map((character: CharacterEntity) => {
                     const id   = character.getId();
                     const name = character.getName();
 
                     return (
-                        <li key={id} className='character-item'>
+                        <li key={id} className='link-list-item character-item'>
                             <Link to={`/character/${id}`}>{name}</Link>
                         </li>
                     );
@@ -137,13 +137,13 @@ class SpeciesRoute extends React.Component<SpeciesRouteProps, SpeciesRouteState>
         const films = this.state.model.getFilms();
 
         return (
-            <ul>
+            <ul className='link-list'>
                 {films.map((film: FilmEntity) => {
                     const id   = film.getId();
                     const name = film.getTitle();
 
                     return (
-                        <li key={id} className='film-item'>
+                        <li key={id} className='link-list-item film-item'>
                             <Link to={`/film/${id}`}>{name}</Link>
                         </li>
                     );

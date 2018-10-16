@@ -119,13 +119,13 @@ class PlanetRoute extends React.Component<PlanetRouteProps, PlanetRouteState>{
         const films = this.state.model.getFilms();
 
         return (
-            <ul className='films'>
+            <ul className='films link-list'>
                 {films.map((film: FilmEntity) => {
                     const name = film.getTitle();
                     const id   = film.getId();
 
                     return (
-                        <li key={id} className='film-item'>
+                        <li key={id} className='film-item link-list-item'>
                             <Link to={`/film/${id}`}>{name}</Link>
                         </li>
                     );
@@ -138,13 +138,13 @@ class PlanetRoute extends React.Component<PlanetRouteProps, PlanetRouteState>{
         const residents = this.state.model.getResidents();
 
         return (
-            <ul className='residents'>
+            <ul className='residents link-list'>
                 {residents.map((resident: CharacterEntity) => {
                     const name = resident.getName();
                     const id   = resident.getId();
 
                     return (
-                        <li key={id} className='resident-item'>
+                        <li key={id} className='resident-item link-list-item'>
                             <Link to={`/character/${id}`}>{name}</Link>
                         </li>
                     );

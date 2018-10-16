@@ -120,13 +120,13 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
         const characters = this.state.characters;
 
         return (
-              <ul>
+              <ul className='link-list'>
                   {characters.map((character: CharacterEntity) => {
                       const url = character.getUrl();
                       const id  = FilmRoute.getIdFromUrl(url);
 
                       return (
-                          <li key={id} className='characters'>
+                          <li key={id} className='link-list-item characters'>
                               <Link to={'/character/' + id}>{character.getName()}</Link>
                           </li>
                       );
@@ -139,13 +139,13 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
         const planets = this.state.planets;
 
         return (
-            <ul>
+            <ul className='link-list'>
                 {planets.map((planet: PlanetEntity) => {
                     const url = planet.getUrl();
                     const id  = FilmRoute.getIdFromUrl(url);
 
                     return (
-                        <li key={id} className='planets'>
+                        <li key={id} className='link-list-item planets'>
                             <Link to={'/planet/' + id}>{planet.getName()}</Link>
                         </li>
                     );
@@ -158,13 +158,13 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
         const starships = this.state.starships;
 
         return (
-            <ul>
+            <ul className='link-list'>
                 {starships.map((starship: StarshipEntity) => {
                     const url = starship.getUrl();
                     const id  = FilmRoute.getIdFromUrl(url);
 
                     return (
-                        <li key={id} className='starships'>
+                        <li key={id} className='link-list-item starships'>
                             <Link to={'/starship/' + id}>{starship.getName()}</Link>
                         </li>
                     );
@@ -177,13 +177,13 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
         const vehicles = this.state.vehicles;
 
         return (
-            <ul>
+            <ul className='link-list'>
                 {vehicles.map((vehicle: VehicleEntity) => {
                     const url = vehicle.getUrl();
                     const id  = FilmRoute.getIdFromUrl(url);
 
                     return (
-                        <li key={id} className='vehicles'>
+                        <li key={id} className='link-list-item vehicles'>
                             <Link to={'/vehicle/' + id}>{vehicle.getName()}</Link>
                         </li>
                     );
@@ -196,13 +196,13 @@ class FilmRoute extends React.Component<FilmRouteProps, FilmRouteState> {
         const species = this.state.species;
 
         return (
-            <ul>
+            <ul className='link-list'>
                 {species.map((singleSpecies: SpeciesEntity) => {
                     const url = singleSpecies.getUrl();
                     const id  = FilmRoute.getIdFromUrl(url);
 
                     return (
-                        <li key={id} className='species'>
+                        <li key={id} className='link-list-item species'>
                             <Link to={'/species/' + id}>{singleSpecies.getName()}</Link>
                         </li>
                     );
