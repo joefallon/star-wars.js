@@ -53,6 +53,7 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
             const year        = releaseDate.getFullYear();
 
             data.push({
+                'id':        film.getId(),
                 'episodeId': episodeId,
                 'title':     title,
                 'year':      year,
@@ -78,7 +79,7 @@ class IndexRoute extends React.Component<IndexRouteProps, IndexRouteState> {
             }, {
                 Header:   'Title',
                 accessor: 'title',
-                Cell:     row => (<Link to={'/film/' + row['original']['episodeId']}>{row['value']}</Link>)
+                Cell:     row => (<Link to={'/film/' + row['original']['id']}>{row['value']}</Link>)
             }, {
                 Header:   'Year',
                 accessor: 'year',
