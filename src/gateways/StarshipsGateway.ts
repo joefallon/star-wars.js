@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import * as LRU from 'lru-cache';
 
 import { StarshipEntity } from '../entities/StarshipEntity';
+import { CachedGateway } from './CachedGateway';
 
 export class StarshipsGateway {
     private static readonly API_SEGMENT = 'starships/';
@@ -9,11 +10,13 @@ export class StarshipsGateway {
     private readonly _api:         string;
     private readonly _axiosConfig: AxiosRequestConfig;
     private readonly _cache:       LRU.Cache<string, any>;
+    private _cachedGateway:        CachedGateway;
 
     public constructor(baseApi: string, cache: LRU.Cache<string, any>, timeout: number) {
-        this._api         = baseApi + StarshipsGateway.API_SEGMENT;
-        this._axiosConfig = { timeout: timeout };
-        this._cache       = cache;
+        this._api           = baseApi + StarshipsGateway.API_SEGMENT;
+        this._axiosConfig   = { timeout: timeout };
+        this._cache         = cache;
+        this._cachedGateway = new CachedGateway(timeout);
     }
 
     public async retrieveStarship(url: string): Promise<StarshipEntity> {
@@ -24,8 +27,7 @@ export class StarshipsGateway {
             return starship;
         }
 
-        const config   = this._axiosConfig;
-        const response = await axios.get(url, config);
+        const response = await this._cachedGateway.getRequest(url);
         const data     = response.data;
         const starship = StarshipsGateway.mapResponseDataToStarship(data);
         cache.set(url, starship);

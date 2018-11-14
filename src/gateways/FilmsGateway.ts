@@ -2,6 +2,8 @@ import axios, { AxiosRequestConfig } from 'axios';
 import * as LRU from 'lru-cache';
 
 import { FilmEntity } from '../entities/FilmEntity';
+import { IronDB } from 'iron-db';
+import { CachedGateway } from './CachedGateway';
 
 
 export class FilmsGateway {
@@ -10,11 +12,13 @@ export class FilmsGateway {
     private readonly _api:         string;
     private readonly _axiosConfig: AxiosRequestConfig;
     private readonly _cache:       LRU.Cache<string, any>;
+    private _cachedGateway:        CachedGateway;
 
     public constructor(baseApi: string, cache: LRU.Cache<string, any>, timeout: number) {
-        this._api         = baseApi + FilmsGateway.API_SEGMENT;
-        this._axiosConfig = { timeout: timeout };
-        this._cache       = cache;
+        this._api           = baseApi + FilmsGateway.API_SEGMENT;
+        this._axiosConfig   = { timeout: timeout };
+        this._cache         = cache;
+        this._cachedGateway = new CachedGateway(timeout);
     }
 
     public async retrieveAllFilms(): Promise<FilmEntity[]> {
@@ -22,7 +26,7 @@ export class FilmsGateway {
             return this._cache.get(this._api);
         }
 
-        const response = await axios.get(this._api, this._axiosConfig);
+        const response = await this._cachedGateway.getRequest(this._api);
         const filmData = <any[]>response.data['results'];
         const films    = <FilmEntity[]>[];
 
@@ -44,8 +48,7 @@ export class FilmsGateway {
             return film;
         }
 
-        const config   = this._axiosConfig;
-        const response = await axios.get(filmUrl, config);
+        const response = await this._cachedGateway.getRequest(filmUrl);
         const filmData = <any[]>response.data;
         const film     = FilmsGateway.mapToFilmEntity(filmData);
         cache.set(filmUrl, film);

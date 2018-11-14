@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { CachedGateway } from './CachedGateway';
 import * as LRU from 'lru-cache';
 
 import { PlanetEntity } from '../entities/PlanetEntity';
@@ -6,14 +7,16 @@ import { PlanetEntity } from '../entities/PlanetEntity';
 export class PlanetsGateway {
     private static readonly API_SEGMENT = 'planets/';
 
-    private readonly _api: string;
+    private readonly _api:         string;
     private readonly _axiosConfig: AxiosRequestConfig;
-    private readonly _cache: LRU.Cache<string, any>;
+    private readonly _cache:       LRU.Cache<string, any>;
+    private _cachedGateway:        CachedGateway;
 
     public constructor(baseApi: string, cache: LRU.Cache<string, any>, timeout: number) {
-        this._api         = baseApi + PlanetsGateway.API_SEGMENT;
-        this._axiosConfig = { timeout: timeout };
-        this._cache       = cache;
+        this._api           = baseApi + PlanetsGateway.API_SEGMENT;
+        this._axiosConfig   = { timeout: timeout };
+        this._cache         = cache;
+        this._cachedGateway = new CachedGateway(timeout);
     }
 
     public retrievePlanet(url: string): Promise<PlanetEntity> {
@@ -25,8 +28,7 @@ export class PlanetsGateway {
                 return resolve(planet);
             }
 
-            const config   = this._axiosConfig;
-            const response = await axios.get(url, config);
+            const response = await this._cachedGateway.getRequest(url);
             const data     = response.data;
             const planet   = PlanetsGateway.mapResponseDataToEntity(data);
 

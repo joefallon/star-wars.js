@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import { CachedGateway } from './CachedGateway';
 import * as LRU from 'lru-cache';
 
 import { CharacterEntity } from '../entities/CharacterEntity';
@@ -7,13 +7,13 @@ export class CharactersGateway {
     private static readonly API_SEGMENT = 'characters/';
 
     private readonly _api:         string;
-    private readonly _axiosConfig: AxiosRequestConfig;
     private readonly _cache:       LRU.Cache<string, any>;
+    private _cachedGateway:        CachedGateway;
 
     public constructor(baseApi: string, cache: LRU.Cache<string, any>, timeout: number) {
-        this._api         = baseApi + CharactersGateway.API_SEGMENT;
-        this._axiosConfig = { timeout: timeout };
-        this._cache       = cache;
+        this._api           = baseApi + CharactersGateway.API_SEGMENT;
+        this._cache         = cache;
+        this._cachedGateway = new CachedGateway(timeout);
     }
 
     public retrieveCharacter(url: string): Promise<CharacterEntity> {
@@ -25,8 +25,7 @@ export class CharactersGateway {
                 return resolve(character);
             }
 
-            const config    = this._axiosConfig;
-            const response  = await axios.get(url, config);
+            const response  = await this._cachedGateway.getRequest(url);
             const data      = response['data'];
             const character = CharactersGateway.mapResponseDataToEntity(data);
             cache.set(url, character);

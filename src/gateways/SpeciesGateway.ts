@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { CachedGateway } from './CachedGateway';
 import * as LRU from 'lru-cache';
 
 import { SpeciesEntity } from '../entities/SpeciesEntity';
@@ -9,11 +10,13 @@ export class SpeciesGateway {
     private readonly _api:         string;
     private readonly _axiosConfig: AxiosRequestConfig;
     private readonly _cache:       LRU.Cache<string, any>;
+    private _cachedGateway:        CachedGateway;
 
     public constructor(baseApi: string, cache: LRU.Cache<string, any>, timeout: number) {
-        this._api         = baseApi + SpeciesGateway.API_SEGMENT;
-        this._axiosConfig = { timeout: timeout };
-        this._cache       = cache;
+        this._api           = baseApi + SpeciesGateway.API_SEGMENT;
+        this._axiosConfig   = { timeout: timeout };
+        this._cache         = cache;
+        this._cachedGateway = new CachedGateway(timeout);
     }
 
     public retrieveSpecies(url: string): Promise<SpeciesEntity> {
@@ -24,8 +27,7 @@ export class SpeciesGateway {
                 return resolve(cache.get(url));
             }
 
-            const config   = this._axiosConfig;
-            const response = await axios.get(url, config);
+            const response = await this._cachedGateway.getRequest(url);
             const data     = response.data;
             const species  = SpeciesGateway.mapResponseDataToSpecies(data);
 
